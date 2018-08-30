@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"ver",
+				"vertexShader"
+			],
+			[
+				"str",
+				"string\tstandard header"
+			],
+			[
 				"le",
 				"LevelNumber\tproperty"
 			],
@@ -272,7 +280,7 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 1599,
+				"buffer_size": 4324,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -463,6 +471,7 @@
 	],
 	"file_history":
 	[
+		"/Users/collin/Desktop/cpp/tutorial/deps/glfw/deps/glad/glad.h",
 		"/Users/collin/Desktop/c",
 		"/Users/collin/Desktop/cpp/gcc/Makefile",
 		"/Users/collin/Downloads/test/Makefile",
@@ -589,12 +598,11 @@
 		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_4_5.json",
 		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_5_1.json",
 		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_5_2.json",
-		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_5_3.json",
-		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_5_4.json"
+		"/Users/duolikun/Desktop/wordscapeScript/json/base_level_group_5_3.json"
 	],
 	"find":
 	{
-		"height": 30.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -608,6 +616,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"message",
+			"ERROR",
+			"!status",
+			"vertex",
+			"VERTEX",
+			"vertex",
+			"VERTEX",
+			"vertex"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -647,7 +663,9 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -662,15 +680,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1599,
+						"buffer_size": 4324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								477,
-								477
+								3934,
+								3943
 							]
 						],
 						"settings":
@@ -680,7 +698,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 299.0,
+						"translation.y": 730.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
