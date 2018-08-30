@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+            "file_include_patterns":
+            [
+                "*.c",
+                "*.cpp",
+                "*.h",
+                "*.hpp",
+                "Makefile"
+            ],
+            "folder_exclude_patterns":
+            [
+                "backup"
+            ],
+			"path": "."
+		}
+	]
+}
