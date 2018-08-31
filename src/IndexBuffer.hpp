@@ -11,7 +11,7 @@ public:
     ~IndexBuffer();
 
     void bind() const;
-    void unBind() const;
+    void unbind() const;
 
     inline unsigned int getCount() const { return m_Count; }
 };

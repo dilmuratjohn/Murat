@@ -11,7 +11,7 @@ public:
     ~VertexBuffer();
 
     void bind() const;
-    void unBind() const;
+    void unbind() const;
 };
 
 #endif

@@ -18,32 +18,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 //settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
 const float vertices[] = {
-     0.00f,  0.50f,  1.00f,  1.00f,
-    -0.50f,  0.00f,  1.00f,  1.00f,
-     0.50f,  0.00f,  1.00f,  1.00f,
-    -0.25f,  0.00f,  1.00f,  1.00f,
-    -0.25f, -0.25f,  1.00f,  1.00f,
-     0.25f,  0.00f,  1.00f,  1.00f,
-     0.25f, -0.25f,  1.00f,  1.00f,
-};
-const unsigned int indices[] = {
-    0, 1, 2,
-    3, 4, 5,
-    4, 5, 6
-};
-const float verticesAndTexture[] = {
      // positions                  // colors           // texture coords
      0.50f,  0.50f, 1.00f, 1.00f,  1.0f, 0.0f, 0.0f,   1.0f, 1.0f, 
      0.50f, -0.50f, 1.00f, 1.00f,  0.0f, 1.0f, 0.0f,   1.0f, 0.0f, 
     -0.50f, -0.50f, 1.00f, 1.00f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f, 
     -0.50f,  0.50f, 1.00f, 1.00f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f  
 };
-const unsigned int recIndices[] = {
-    // 0, 1, 2,
-    // 2, 3, 0,
-     0, 1, 3,
-    1, 2, 3,
+const unsigned int indices[] = {
+     0, 1, 2,
+     2, 3, 0,
+
 };
 
 int main()
@@ -78,14 +64,14 @@ int main()
     //shader
     Shader shader("res/Basic.shader");
     shader.bind();
-    Texture texture("res/wall.jpg");
+    Texture texture("res/wall.png");
     texture.bind();
     shader.setUniform1i("u_Texture", 0);
 
     //vertex
     VertexArray va;
-    VertexBuffer vb(verticesAndTexture, sizeof(verticesAndTexture));
-    IndexBuffer ib(recIndices, sizeof(recIndices));
+    VertexBuffer vb(vertices, sizeof(vertices));
+    IndexBuffer ib(indices, sizeof(indices));
     VertexBufferLayout layout;
     layout.push<float>(4);
     layout.push<float>(3);
