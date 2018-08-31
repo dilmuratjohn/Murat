@@ -6,6 +6,8 @@
 
 #include <glad/glad.h>
 
+#include "glm/glm.hpp"
+
 #include "GLCall.hpp"
 
 struct ShaderProgramSource {
@@ -28,6 +30,7 @@ public:
     void setUniform1i(const std::string& name, int value);
     void setUniform1f(const std::string& name, float value);
     void setUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
+    void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
 private:
     ShaderProgramSource parseShader(const std::string& filePath);

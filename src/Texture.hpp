@@ -12,7 +12,7 @@ private:
     unsigned char* m_LocalBuffer;
     int m_Width, m_Height, m_BPP;
 public:
-    Texture(const std::string& path);
+    Texture(const std::string& path, GLint internalFormat, GLenum format);
     ~Texture();
 
     void bind(unsigned int solt = 0) const;

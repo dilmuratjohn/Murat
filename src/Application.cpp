@@ -3,6 +3,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+
 #include "GLCall.hpp"
 #include "Shader.hpp"
 #include "Render.hpp"
@@ -61,12 +65,28 @@ int main()
         return -1;
     }
 
+
+    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     //shader
-    Shader shader("res/Basic.shader");
+    Shader shader("res/shader/Basic.shader");
     shader.bind();
-    Texture texture("res/wall.png");
-    texture.bind();
-    shader.setUniform1i("u_Texture", 0);
+    Texture texture2("res/pic/face.png", GL_RGB, GL_RGBA);
+    Texture texture1("res/pic/wall.png", GL_RGB, GL_RGB);
+    texture1.bind(0);
+    texture2.bind(1);
+    shader.setUniform1i("u_Texture0", 0);
+    shader.setUniform1i("u_Texture1", 1);
+
+
+    glm::mat4 transform = glm::mat4(1.0f);
+
+    transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+    transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+    transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5)); 
+
+
+    shader.setUniformMat4f("transform", transform);
+
 
     //vertex
     VertexArray va;

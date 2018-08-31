@@ -1,5 +1,5 @@
 #include "Render.hpp"
-#include <stdio.h>
+
 
 void Render::clear(){
     GLCall(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
