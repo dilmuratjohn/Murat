@@ -1,5 +1,5 @@
 #include "Render.hpp"
-
+#include <stdio.h>
 
 void Render::clear(){
     GLCall(glClearColor(0.2f, 0.3f, 0.3f, 1.0f));
@@ -10,5 +10,7 @@ void Render::draw(const VertexArray& va, const IndexBuffer& ib, const Shader& sh
     shader.bind();
     va.bind();
     ib.bind();
-    GLCall(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
+    printf("---%d\n", ib.getCount());
+    GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+    // GLCall(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
 }

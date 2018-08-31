@@ -5,10 +5,10 @@
 Prog = app/Application
 CXX = g++
 CC = gcc
-Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o GLCall.o glad.o
+Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o GLCall.o glad.o
 Source_Dir = src
-CFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps
-CPPFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -std=c++11
+CFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor
+CPPFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor -std=c++11
 Lib_GLFW = -Ldeps/glfw/bin/src -lglfw3 -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
 
@@ -17,7 +17,7 @@ Lib_GLFW = -Ldeps/glfw/bin/src -lglfw3 -framework OpenGL -framework Cocoa -frame
 $(Prog) : $(Objs)
 	$(CXX) $(Lib_GLFW) -o $(Prog) bin/*.o
 
-Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o GLCall.o glad.o
+Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o GLCall.o glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Application.cpp -o bin/Application.o
 
 Render.o: VertexArray.o IndexBuffer.o Shader.o GLCall.o glad.o
@@ -37,6 +37,12 @@ IndexBuffer.o : GLCall.o
 
 VertexBufferLayout.o : GLCall.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/VertexBufferLayout.cpp -o bin/VertexBufferLayout.o
+
+Texture.o : stb_image.o GLCall.o
+	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Texture.cpp -o bin/Texture.o
+
+stb_image.o : 
+	$(CXX) $(CPPFLAG) -c $(Source_Dir)/vendor/stb_image/stb_image.cpp -o bin/stb_image.o
 
 GLCall.o : glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
