@@ -3,35 +3,30 @@
 
 #include <iostream>
 
+#include "GLCall.hpp"
+#include "Shader.hpp"
+#include "Render.hpp"
+#include "IndexBuffer.hpp"
+#include "VertexArray.hpp"
+#include "VertexBufferLayout.hpp"
+#include "VertexBuffer.hpp"
+
 //settings
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec2 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, 1.0, 1.0);\n"
-    "}\0";
-
-const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\n\0";
-
-const float position[] = {
-     0.00f,  0.50f,
-    -0.50f,  0.00f,
-     0.50f,  0.00f,
-    -0.25f,  0.00f,
-    -0.25f, -0.25f,
-     0.25f,  0.00f,
-     0.25f, -0.25f
+const float vertices[] = {
+     0.00f,  0.50f,  1.00f,  1.00f,
+    -0.50f,  0.00f,  1.00f,  1.00f,
+     0.50f,  0.00f,  1.00f,  1.00f,
+    -0.25f,  0.00f,  1.00f,  1.00f,
+    -0.25f, -0.25f,  1.00f,  1.00f,
+     0.25f,  0.00f,  1.00f,  1.00f,
+     0.25f, -0.25f,  1.00f,  1.00f,
 };
 
 const unsigned int indices[] = {
@@ -68,86 +63,26 @@ int main()
     }
 
     //shader
-    int status;
-    unsigned int vs = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vs, 1, &vertexShaderSource, NULL);
-    glCompileShader(vs);
-    glGetShaderiv(vs, GL_COMPILE_STATUS, &status);
+    Shader shader("res/Basic.shader");
+    shader.bind();
+    //vertex
+    VertexArray va;
+    VertexBuffer vb(vertices, sizeof(vertices));
+    IndexBuffer ib(indices, sizeof(indices));
+    VertexBufferLayout layout;
+    layout.push<float>(4);
+    va.addBuffer(vb, layout);
 
-    if(GL_FALSE == status){
-        int length;
-        glGetShaderiv(vs, GL_INFO_LOG_LENGTH, &length);
-        char* info = (char*)alloca(length * sizeof(char));
-        glGetShaderInfoLog(vs, length, &length, info);
-
-        std::cout << "Failed to compile vertex shader" << std::endl;
-        std::cout << info << std::endl;
-    }
-
-    unsigned int fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fs, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fs);
-    glGetShaderiv(fs, GL_COMPILE_STATUS, &status);
-
-    if(GL_FALSE == status){
-        int length;
-        glGetShaderiv(fs, GL_INFO_LOG_LENGTH, &length);
-        char* info = (char*)alloca(length * sizeof(char));
-        glGetShaderInfoLog(fs, length, &length, info);
-
-        std::cout << "Failed to compile fragment shader" << std::endl;
-        std::cout << info << std::endl;
-    }
-
-    //program
-    unsigned int shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vs);
-    glAttachShader(shaderProgram, fs);
-    glLinkProgram(shaderProgram);
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
-
-    if(GL_FALSE == status) {
-        int length;
-        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &length);
-        char* info = (char*)alloca(length * sizeof(char));
-        glGetProgramInfoLog(shaderProgram, 512, NULL, info);
-        std::cout << "Failed to compile shader program" << std::endl;
-        std::cout << info << std::endl;
-    }
-
-    glValidateProgram(shaderProgram);
-    glUseProgram(shaderProgram);
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-
-    //vertex 
-    unsigned int va, vb, ib;
-
-    glGenVertexArrays(1, &va);
-    glGenBuffers(1, &vb);
-    glGenBuffers(1, &ib);
-    glBindVertexArray(va);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vb);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(position), position, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+    glfwSetKeyCallback(window, key_callback);
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        Render::clear();
+        Render::draw(va, ib, shader);
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -160,6 +95,16 @@ void processInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_P && action == GLFW_PRESS)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    if (key == GLFW_KEY_L && action == GLFW_PRESS)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    if (key == GLFW_KEY_F && action == GLFW_PRESS)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

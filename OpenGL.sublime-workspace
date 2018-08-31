@@ -280,7 +280,16 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 4324,
+				"buffer_size": 4696,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Shader.hpp",
+			"settings":
+			{
+				"buffer_size": 2653,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -330,15 +339,23 @@
 		"selected_items":
 		[
 			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pacl",
+				"Package Control: List Packages"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
 				"syc",
 				"Set Syntax: C"
 			],
 			[
 				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"pack",
 				"Package Control: Install Package"
 			],
 			[
@@ -388,10 +405,6 @@
 			[
 				"md",
 				"Markdown Preview: Preview in Browser"
-			],
-			[
-				"ins",
-				"Package Control: Install Package"
 			],
 			[
 				"inst",
@@ -602,7 +615,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -641,7 +654,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -671,7 +684,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -680,15 +693,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4324,
+						"buffer_size": 4696,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3934,
-								3943
+								4414,
+								4414
 							]
 						],
 						"settings":
@@ -698,7 +711,37 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 730.0,
+						"translation.y": 97.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Shader.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2653,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2156,
+								2156
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 635.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
