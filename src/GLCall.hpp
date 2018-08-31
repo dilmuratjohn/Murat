@@ -1,8 +1,10 @@
 #ifndef GLCall_hpp
 #define GLCall_hpp
 
-#include <glad/glad.h>
 #include <iostream>
+
+#include <glad/glad.h>
+
 
 #ifdef _WIN32
 #define ASSERT(function) if (!(function)) __debugbreak();

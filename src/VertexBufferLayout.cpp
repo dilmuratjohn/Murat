@@ -1,5 +1,6 @@
 #include "VertexBufferLayout.hpp"
 
+
 VertexBufferLayout::VertexBufferLayout()
     : m_Stride(0){}
 

@@ -1,14 +1,15 @@
 #ifndef Render_hpp
 #define Render_hpp
 
-#include <glad/glad.h>
-
 #include <iostream>
+
+#include <glad/glad.h>
 
 #include "VertexArray.hpp"
 #include "IndexBuffer.hpp"
 #include "Shader.hpp"
 #include "GLCall.hpp"
+
 
 namespace Render{
     void clear();

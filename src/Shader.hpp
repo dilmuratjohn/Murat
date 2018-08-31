@@ -1,10 +1,10 @@
 #ifndef Renderer_hpp
 #define Renderer_hpp
 
-#include <glad/glad.h>
-
 #include <string>
 #include <unordered_map>
+
+#include <glad/glad.h>
 
 #include "GLCall.hpp"
 

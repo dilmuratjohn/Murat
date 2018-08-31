@@ -1,7 +1,7 @@
+#include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-#include <iostream>
 
 #include "GLCall.hpp"
 #include "Shader.hpp"
@@ -11,14 +11,13 @@
 #include "VertexBufferLayout.hpp"
 #include "VertexBuffer.hpp"
 
-//settings
+//event
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
+//settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
 const float vertices[] = {
      0.00f,  0.50f,  1.00f,  1.00f,
     -0.50f,  0.00f,  1.00f,  1.00f,
@@ -28,7 +27,6 @@ const float vertices[] = {
      0.25f,  0.00f,  1.00f,  1.00f,
      0.25f, -0.25f,  1.00f,  1.00f,
 };
-
 const unsigned int indices[] = {
     0, 1, 2,
     3, 4, 5,
@@ -47,12 +45,14 @@ int main()
 #endif
     
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Thu Aug 30 2018", NULL, NULL);
+
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
+
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
@@ -65,6 +65,7 @@ int main()
     //shader
     Shader shader("res/Basic.shader");
     shader.bind();
+
     //vertex
     VertexArray va;
     VertexBuffer vb(vertices, sizeof(vertices));
@@ -73,15 +74,16 @@ int main()
     layout.push<float>(4);
     va.addBuffer(vb, layout);
 
+    //key input
     glfwSetKeyCallback(window, key_callback);
+
+    //loop
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
 
-
         Render::clear();
         Render::draw(va, ib, shader);
-
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -1,9 +1,9 @@
 #ifndef VertexArray_hpp
 #define VertexArray_hpp
 
-
 #include "VertexBuffer.hpp"
 #include "VertexBufferLayout.hpp"
+
 
 class VertexArray
 {
