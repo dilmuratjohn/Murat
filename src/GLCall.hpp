@@ -10,7 +10,10 @@
 #define ASSERT(function) if (!(function)) __debugbreak();
 #elif __APPLE__
 #define ASSERT(function) if (!(function)) std::cin.get();
+#elif __linux__
+#define ASSERT(function) if (!(function)) std::cin.get();
 #endif
+
 
 #define GLCall(function) GLClearError(); function; ASSERT(GLLogCall(#function, __FILE__, __LINE__))
 

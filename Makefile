@@ -9,13 +9,23 @@ Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.
 Source_Dir = src
 CFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor
 CPPFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor -std=c++11
-Lib_GLFW = -Ldeps/glfw/bin/src -lglfw3 -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
 
+GLFW_FLAG = bin/*.o deps/glfw/bin/src/libglfw3.a 
+GLAD_FLAG = deps/glfw/deps
+
+Platform = ${shell uname}
+
+ifeq ($(Platform), Linux)
+	GLFW_FLAG += -lGL -lGLU  -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl
+endif
+ifeq ($(Platform), Darwin)
+	GLFW_FLAG += -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+endif
 
 
 $(Prog) : $(Objs)
-	$(CXX) $(Lib_GLFW) -o $(Prog) bin/*.o
+	$(CXX) $(Lib_GLFW) -o $(Prog)  $(GLFW_FLAG)
 
 Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o GLCall.o glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Application.cpp -o bin/Application.o
@@ -48,14 +58,13 @@ GLCall.o : glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
 
 glad.o :
-	$(CC) $(CFLAG) -c deps/glfw/deps/glad.c -o bin/glad.o
+	$(CC) $(CFLAG) -c ${GLAD_FLAG}/glad.c -o bin/glad.o
 
 
 
 
 init:
-	mkdir deps/glfw/bin && cd deps/glfw/bin && cmake ../. && make && cd - && mkdir -p {bin,app}
+	mkdir deps/glfw/bin && cd deps/glfw/bin && cmake ../. && make && cd - && mkdir -p bin app
 
 clean:
 	rm -rf deps/glfw/bin && rm -rf bin && rm -rf app
-
