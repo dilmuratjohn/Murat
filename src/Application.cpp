@@ -13,7 +13,6 @@
 
 //event
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 //settings
 const unsigned int SCR_WIDTH = 800;
@@ -80,7 +79,6 @@ int main()
     //loop
     while (!glfwWindowShouldClose(window))
     {
-        processInput(window);
 
         Render::clear();
         Render::draw(va, ib, shader);
@@ -93,14 +91,13 @@ int main()
     return 0;
 }
 
-void processInput(GLFWwindow *window)
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+    //close window
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+    //polygon mode
     if (key == GLFW_KEY_P && action == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
     if (key == GLFW_KEY_L && action == GLFW_PRESS)
