@@ -80,7 +80,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Thu Aug 30 2018", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Sat Sep 1 2018", NULL, NULL);
 
     if (window == NULL)
     {
@@ -122,6 +122,8 @@ int main()
     layout.push<float>(2);
 
 
+
+
     va.addBuffer(vb, layout);
 
     //transformation
@@ -151,9 +153,16 @@ int main()
         glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
+    float radius = 10.0f;
+    float camX, camZ = 0.0f;
+
     //loop
     while (!glfwWindowShouldClose(window))
     {
+        camX = sin(glfwGetTime()) * radius;
+        camZ = cos(glfwGetTime()) * radius;
+        view = glm::mat4(1.0f);
+        view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 
         Render::clear();
         for (unsigned int i = 0; i < 10; i++)
