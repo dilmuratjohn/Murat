@@ -10,7 +10,8 @@
 
 #include "GLCall.hpp"
 
-struct ShaderProgramSource {
+struct ShaderProgramSource
+{
     std::string VertexSource;
     std::string FragmentSource;
 };

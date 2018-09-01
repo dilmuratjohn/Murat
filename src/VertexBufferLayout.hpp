@@ -12,7 +12,8 @@ struct VertexBufferElement
     unsigned int type;
     unsigned char normalized;
 
-    static unsigned int getSizeOfType(unsigned int type) {
+    static unsigned int getSizeOfType(unsigned int type)
+    {
         switch (type)
         {
             case GL_FLOAT:          return sizeof(GLfloat);
