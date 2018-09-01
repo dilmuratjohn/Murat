@@ -5,7 +5,7 @@
 Prog = app/Application
 CXX = g++
 CC = gcc
-Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o GLCall.o glad.o
+Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
 Source_Dir = src
 CFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor
 CPPFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor -std=c++11
@@ -27,7 +27,7 @@ endif
 $(Prog) : $(Objs)
 	$(CXX) $(Lib_GLFW) -o $(Prog)  $(GLFW_FLAG)
 
-Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o GLCall.o glad.o
+Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Application.cpp -o bin/Application.o
 
 Render.o: VertexArray.o IndexBuffer.o Shader.o GLCall.o glad.o
@@ -53,6 +53,9 @@ Texture.o : stb_image.o GLCall.o
 
 stb_image.o : 
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/vendor/stb_image/stb_image.cpp -o bin/stb_image.o
+
+Camera.o : glad.o
+	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Camera.cpp -o bin/Camera.o
 
 GLCall.o : glad.o
 	$(CXX) $(CPPFLAG) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
