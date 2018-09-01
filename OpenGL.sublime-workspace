@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"sh",
+				"shader_l"
+			],
+			[
+				"en",
+				"endl"
+			],
+			[
+				"shader_",
+				"shader_obj"
+			],
+			[
 				"elemnt",
 				"element"
 			],
@@ -291,7 +303,7 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 6819,
+				"buffer_size": 8726,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -341,12 +353,12 @@
 		"selected_items":
 		[
 			[
-				"packi",
-				"Package Control: Install Package"
-			],
-			[
 				"snc",
 				"Set Syntax: C"
+			],
+			[
+				"packi",
+				"Package Control: Install Package"
 			],
 			[
 				"remov",
@@ -493,17 +505,22 @@
 		"/Users/collin/Desktop/cpp/tutorial/res",
 		"/Users/collin/Desktop/cpp/tutorial/res/pic",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader",
-		"/Users/collin/Desktop/cpp/tutorial/src",
-		"/Users/collin/Desktop/cpp/tutorial/src/vendor"
+		"/Users/collin/Desktop/cpp/tutorial/src"
 	],
 	"file_history":
 	[
+		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/obj.shader",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/light.shader",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/Basic.shader",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/Makefile",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/res/shader/Basic.shader",
-		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Shader.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Texture.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Texture.hpp",
@@ -515,7 +532,6 @@
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.hpp",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/TypeScriptReact.sublime-settings",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/SublimeAStyleFormatter.sublime-settings",
-		"/Users/collin/Desktop/cpp/tutorial/Makefile",
 		"/Users/collin/Desktop/cpp/tutorial/src/Render.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Render.hpp",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
@@ -527,7 +543,6 @@
 		"/Users/collin/Desktop/cpp/tutorial/deps/stb_image.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Input.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Input.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/OpenGL.sublime-project",
 		"/Users/collin/Desktop/cpp/tutorial/res/Basic.shader.c",
 		"/Users/collin/Desktop/cpp/tutorial/deps/glfw/deps/glad/glad.h",
@@ -621,11 +636,7 @@
 		"/Users/duolikun/Desktop/testDataSet.js",
 		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Base/UI/DialogManager.js.meta",
 		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Data/DailyChallengeData.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/Bonus/bonusGoldCoinLight.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/DailyChallenge/DailyChallengeManager.js",
-		"/Users/duolikun/Library/Application Support/Sublime Text 3/Packages/Javascript Beautify/Default (OSX).sublime-keymap",
-		"/Users/duolikun/Desktop/testbeautifier.js",
-		"/Users/duolikun/Desktop/WDATA.bak"
+		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/Bonus/bonusGoldCoinLight.js"
 	],
 	"find":
 	{
@@ -644,6 +655,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"shader",
+			"layout_l",
+			"vb_l",
+			"va_l",
+			"layout",
+			"vb",
+			"va",
+			"shader_l",
+			"_l",
+			"obj",
+			"light",
+			"obj",
+			"layout",
+			"vb",
+			"va",
+			"layout",
+			"vb",
+			"va",
+			"FOV",
+			"Camera_Movement::",
+			"ZOOm",
+			"GLCall",
+			"FORWARD",
+			"//",
+			"Fov",
+			"Zoom",
+			"ZOOM",
+			"Zoom",
+			"ZOOM",
+			"Zoom",
+			"ZOOM",
 			"        shader.setUniformMat4f(\"projection\", projection);\n        shader.setUniformMat4f(\"view\", view);\n        shader.setUniformMat4f(\"model\", model);",
 			"trans",
 			"vec",
@@ -718,15 +760,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6819,
+						"buffer_size": 8726,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5776,
-								5776
+								4919,
+								4919
 							]
 						],
 						"settings":
@@ -736,7 +778,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2585.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -809,6 +851,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"m",
+				"Makefile"
+			],
 			[
 				"mian",
 				"assets/Script/MainPlayground.ts"

@@ -125,42 +125,32 @@ int main()
     GLCall(glfwSetKeyCallback(window, key_callback));
 
     /* shader */
-    Shader shader("res/shader/Basic.shader");
-    shader.bind();
-    Texture texture2("res/pic/face.png", GL_RGB, GL_RGBA);
-    Texture texture1("res/pic/wall.png", GL_RGB, GL_RGB);
-    texture1.bind(0);
-    texture2.bind(1);
-    shader.setUniform1i("u_Texture0", 0);
-    shader.setUniform1i("u_Texture1", 1);
+    Shader shader_light("res/shader/light.shader");
+    Shader shader_obj("res/shader/obj.shader");
 
     /* vertex */
-    VertexArray va;
-    VertexBuffer vb(vertices, sizeof(vertices));
-    VertexBufferLayout layout;
-    layout.push<float>(4);
-    layout.push<float>(3);
-    layout.push<float>(2);
-    va.addBuffer(vb, layout);
+    VertexArray va_obj;
+    VertexBuffer vb_obj(vertices, sizeof(vertices));
+    VertexBufferLayout layout_obj;
+    layout_obj.push<float>(4);
+    layout_obj.push<float>(3);
+    layout_obj.push<float>(2);
+    va_obj.addBuffer(vb_obj, layout_obj);
+
+    VertexArray va_light;
+    VertexBuffer vb_light(vertices, sizeof(vertices));
+    VertexBufferLayout layout_light;
+    layout_light.push<float>(4);
+    layout_light.push<float>(3);
+    layout_light.push<float>(2);
+    va_light.addBuffer(vb_light, layout_light);
 
     /* transformation initialization */
     glm::mat4 transform = glm::mat4(1.0f);
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    glm::vec3 cubePositions[] =
-    {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-        glm::vec3( 2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3( 1.3f, -2.0f, -2.5f),
-        glm::vec3( 1.5f,  2.0f, -2.5f),
-        glm::vec3( 1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
+    glm::vec3 lightPos(1.0f, 1.0f, 1.0f);
 
     /* loop */
     while (!glfwWindowShouldClose(window))
@@ -176,15 +166,27 @@ int main()
 
         Render::clear();
 
-        for (unsigned int i = 0; i < 10; i++)
-        {
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-            transform = projection * view * model;
-            shader.setUniformMat4f("transform", transform);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        // light
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos);
+        model = glm::scale(model, glm::vec3(0.2f));
+        transform = projection * view * model;
+
+        shader_light.bind();
+        shader_light.setUniformMat4f("transform", transform);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        shader_light.unbind();
+
+        // object
+        model = glm::mat4(1.0f);
+        transform = projection * view * model;
+
+        shader_obj.bind();
+        shader_obj.setUniformMat4f("transform", transform);
+        shader_obj.setUniform4f("objectColor", 1.0f, 0.5f, 0.3f, 1.0f);
+        shader_obj.setUniform4f("lightColor",  1.0f, 1.0f, 1.0f, 1.0f);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        shader_obj.unbind();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
