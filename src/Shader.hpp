@@ -28,9 +28,13 @@ public:
 
     void bind() const;
     void unbind() const;
-    void setUniform1i(const std::string& name, int value);
-    void setUniform1f(const std::string& name, float value);
+    void setUniform1i(const std::string& name, int v);
+    void setUniform1f(const std::string& name, float v);
+    void setUniform2f(const std::string& name, float v0, float v1);
+    void setUniform3f(const std::string& name, float v0, float v1, float v2);
     void setUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
+    void setUniformMat2f(const std::string& name, const glm::mat2& matrix);
+    void setUniformMat3f(const std::string& name, const glm::mat3& matrix);
     void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
 private:

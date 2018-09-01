@@ -169,6 +169,9 @@ int main()
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f));
+        lightPos.x = 1.0f + sin(glfwGetTime()) * 2.0f;
+        lightPos.z = 1.0f + cos(glfwGetTime()) * 2.0f;
+
         transform = projection * view * model;
 
         shader_light.bind();
@@ -176,16 +179,19 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         shader_light.unbind();
 
+
+
         // object
         model = glm::mat4(1.0f);
-        transform = projection * view * model;
 
         shader_obj.bind();
+        shader_obj.setUniformMat4f("projection", projection);
+        shader_obj.setUniformMat4f("view", view);
         shader_obj.setUniformMat4f("model", model);
-        shader_obj.setUniformMat4f("transform", transform);
         shader_obj.setUniform4f("objectColor", 1.0f, 0.5f, 0.3f, 1.0f);
         shader_obj.setUniform4f("lightColor",  1.0f, 1.0f, 1.0f, 1.0f);
         shader_obj.setUniform4f("lightPos", lightPos.x, lightPos.y, lightPos.z, 1.0f);
+        shader_obj.setUniform4f("viewPos", camera.Position.x, camera.Position.y, camera.Position.z, 1.0f);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         shader_obj.unbind();
 
