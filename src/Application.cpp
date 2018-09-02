@@ -24,8 +24,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 /* settings */
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1024;
+const unsigned int SCR_HEIGHT = 768;
 const float vertices[] =
 {
     -0.5f, -0.5f, -0.5f,  1.00f,   1.0f, 0.0f, 0.0f,   0.0f, 0.0f,
@@ -127,12 +127,9 @@ int main()
     /* shader */
     Shader shader("res/shader/Basic.shader");
     shader.bind();
-    Texture texture2("res/pic/face.png", GL_RGB, GL_RGBA);
     Texture texture1("res/pic/wall.png", GL_RGB, GL_RGB);
     texture1.bind(0);
-    texture2.bind(1);
-    shader.setUniform1i("u_Texture0", 0);
-    shader.setUniform1i("u_Texture1", 1);
+    shader.setUniform1i("u_Texture", 0);
 
     /* vertex */
     VertexArray va;
@@ -150,16 +147,44 @@ int main()
     glm::mat4 projection = glm::mat4(1.0f);
     glm::vec3 cubePositions[] =
     {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-        glm::vec3( 2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3( 1.3f, -2.0f, -2.5f),
-        glm::vec3( 1.5f,  2.0f, -2.5f),
-        glm::vec3( 1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
+        glm::vec3( -1.0f,  0.0f,  0.0f),
+        glm::vec3( -2.0f,  0.0f,  0.0f),
+        glm::vec3( -3.0f,  0.0f,  0.0f),
+        glm::vec3( -4.0f,  0.0f,  0.0f),
+        glm::vec3( -5.0f,  0.0f,  0.0f),
+        glm::vec3( -6.0f,  0.0f,  0.0f),
+        glm::vec3( -7.0f,  0.0f,  0.0f),
+        glm::vec3( -8.0f,  0.0f,  0.0f),
+        glm::vec3( -9.0f,  0.0f,  0.0f),
+        glm::vec3(  0.0f,  0.0f,  0.0f),
+        glm::vec3(  1.0f,  0.0f,  0.0f),
+        glm::vec3(  2.0f,  0.0f,  0.0f),
+        glm::vec3(  3.0f,  0.0f,  0.0f),
+        glm::vec3(  4.0f,  0.0f,  0.0f),
+        glm::vec3(  5.0f,  0.0f,  0.0f),
+        glm::vec3(  6.0f,  0.0f,  0.0f),
+        glm::vec3(  7.0f,  0.0f,  0.0f),
+        glm::vec3(  8.0f,  0.0f,  0.0f),
+        glm::vec3(  9.0f,  0.0f,  0.0f),
+        glm::vec3( -1.0f,  1.0f,  0.0f),
+        glm::vec3( -2.0f,  1.0f,  0.0f),
+        glm::vec3( -3.0f,  1.0f,  0.0f),
+        glm::vec3( -4.0f,  1.0f,  0.0f),
+        glm::vec3( -5.0f,  1.0f,  0.0f),
+        glm::vec3( -6.0f,  1.0f,  0.0f),
+        glm::vec3( -7.0f,  1.0f,  0.0f),
+        glm::vec3( -8.0f,  1.0f,  0.0f),
+        glm::vec3( -9.0f,  1.0f,  0.0f),
+        glm::vec3(  0.0f,  1.0f,  0.0f),
+        glm::vec3(  1.0f,  1.0f,  0.0f),
+        glm::vec3(  2.0f,  1.0f,  0.0f),
+        glm::vec3(  3.0f,  1.0f,  0.0f),
+        glm::vec3(  4.0f,  1.0f,  0.0f),
+        glm::vec3(  5.0f,  1.0f,  0.0f),
+        glm::vec3(  6.0f,  1.0f,  0.0f),
+        glm::vec3(  7.0f,  1.0f,  0.0f),
+        glm::vec3(  8.0f,  1.0f,  0.0f),
+        glm::vec3(  9.0f,  1.0f,  0.0f),
     };
 
     /* loop */
@@ -176,11 +201,11 @@ int main()
 
         Render::clear();
 
-        for (unsigned int i = 0; i < 10; i++)
+        for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(cubePositions[0]); i++)
         {
             model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+
             transform = projection * view * model;
             shader.setUniformMat4f("transform", transform);
             glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -217,6 +242,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
     if (key == GLFW_KEY_D && action == GLFW_PRESS)
         camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::UP, deltaTime);
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::DOWN, deltaTime);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
