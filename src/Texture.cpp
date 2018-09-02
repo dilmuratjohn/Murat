@@ -21,7 +21,7 @@ Texture::Texture(const std::string& path, GLint internalFormat, GLenum format)
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
 
     GLCall(glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, m_Width, m_Height, 0, format, GL_UNSIGNED_BYTE, m_LocalBuffer));
-    //GLCall(glGenerateMipmap(GL_TEXTURE_2D));
+    GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 
@@ -29,12 +29,10 @@ Texture::Texture(const std::string& path, GLint internalFormat, GLenum format)
         stbi_image_free(m_LocalBuffer);
 }
 
-
 Texture::~Texture()
 {
     GLCall(glDeleteTextures(1, &m_RendererID));
 }
-
 
 void Texture::bind(unsigned int slot) const
 {
@@ -44,5 +42,4 @@ void Texture::bind(unsigned int slot) const
 void Texture::unbind() const
 {
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
-
 }

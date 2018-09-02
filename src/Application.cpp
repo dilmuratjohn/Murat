@@ -82,6 +82,7 @@ bool firstMouse = true;
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
+
 int main()
 {
     /* glfw: initialize and configure */
@@ -119,17 +120,17 @@ int main()
     GLCall(glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED));
     GLCall(glfwSetCursorPosCallback(window, mouse_callback));
     GLCall(glfwSetScrollCallback(window, scroll_callback));
+    GLCall(glfwSetKeyCallback(window, key_callback));
     GLCall(glfwSwapInterval(1));
     GLCall(glEnable(GL_DEPTH_TEST));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-    GLCall(glfwSetKeyCallback(window, key_callback));
 
     /* shader */
     Shader shader("res/shader/Basic.shader");
     shader.bind();
-    Texture texture1("res/pic/wall.png", GL_RGB, GL_RGB);
-    texture1.bind(0);
-    shader.setUniform1i("u_Texture", 0);
+    Texture wall("res/pic/wall.png", GL_RGB, GL_RGB);
+    wall.bind(0);
+    shader.setUniform1i("u_Texture_wall", 0);
 
     /* vertex */
     VertexArray va;
@@ -196,8 +197,8 @@ int main()
         lastFrame = currentFrame;
 
         /* pass projection matrix to shader (note that in this case it could change every frame) */
-        projection = glm::perspective(glm::radians(camera.Fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        view = camera.GetViewMatrix();
+        projection = glm::perspective(glm::radians(camera.getFov()), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        view = camera.getViewMatrix();
 
         Render::clear();
 
@@ -205,7 +206,6 @@ int main()
         {
             model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
-
             transform = projection * view * model;
             shader.setUniformMat4f("transform", transform);
             glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -235,17 +235,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
     /* camera */
     if (key == GLFW_KEY_W && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
+        camera.processKeyboard(Camera_Movement::FORWARD, deltaTime);
     if (key == GLFW_KEY_S && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
+        camera.processKeyboard(Camera_Movement::BACKWARD, deltaTime);
     if (key == GLFW_KEY_A && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
+        camera.processKeyboard(Camera_Movement::LEFT, deltaTime);
     if (key == GLFW_KEY_D && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
+        camera.processKeyboard(Camera_Movement::RIGHT, deltaTime);
     if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::UP, deltaTime);
+        camera.processKeyboard(Camera_Movement::UP, deltaTime);
     if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::DOWN, deltaTime);
+        camera.processKeyboard(Camera_Movement::DOWN, deltaTime);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -268,10 +268,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.processMouseMovement(xoffset, yoffset);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(yoffset);
+    camera.processMouseScroll(yoffset);
 }

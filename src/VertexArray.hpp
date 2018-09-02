@@ -18,7 +18,4 @@ public:
     void unbind() const;
 };
 
-
-
-
 #endif
