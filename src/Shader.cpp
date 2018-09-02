@@ -10,7 +10,7 @@ Shader::Shader(const std::string& filePath)
     : m_RendererID(0), m_FilePath(filePath)
 {
     ShaderProgramSource source = parseShader(filePath);
-    m_RendererID = createShader(source.VertexSource, source.FragmentSource);
+    m_RendererID = createShader(source.vertexSource, source.fragmentSource, source.geometrySource);
 }
 
 Shader::~Shader()
@@ -24,11 +24,11 @@ ShaderProgramSource Shader::parseShader(const std::string& filePath)
 
     enum class ShaderType
     {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
+        NONE = -1, VERTEX = 0, FRAGMENT = 1, GEOMETRY = 2
     };
 
     std::string line;
-    std::stringstream ss[2];
+    std::stringstream ss[3];
 
     ShaderType type = ShaderType::NONE;
 
@@ -40,13 +40,16 @@ ShaderProgramSource Shader::parseShader(const std::string& filePath)
                 type = ShaderType::VERTEX;
             if (line.find("fragment") != std::string::npos)
                 type = ShaderType::FRAGMENT;
+            if (line.find("geometry") != std::string::npos)
+                type = ShaderType::GEOMETRY;
+
         }
         else
         {
             ss[(int)type] << line << '\n';
         }
     }
-    return { ss[0].str(), ss[1].str() };
+    return { ss[0].str(), ss[1].str(), ss[2].str() };
 }
 
 unsigned int Shader::compileShader(unsigned int type, const std::string & source)
@@ -74,20 +77,23 @@ unsigned int Shader::compileShader(unsigned int type, const std::string & source
     return id;
 }
 
-unsigned int Shader::createShader(const std::string& vertexShader, const std::string& fragmentShader)
+unsigned int Shader::createShader(const std::string& vertexShader, const std::string& fragmentShader, const std::string& geometryShader)
 {
     GLCall(unsigned int program = glCreateProgram());
     unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
     unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    unsigned int gs = compileShader(GL_GEOMETRY_SHADER, geometryShader);
 
     GLCall(glAttachShader(program, vs));
     GLCall(glAttachShader(program, fs));
+    //GLCall(glAttachShader(program, gs));
 
     GLCall(glLinkProgram(program));
     GLCall(glValidateProgram(program));
 
     GLCall(glDeleteShader(vs));
     GLCall(glDeleteShader(fs));
+    GLCall(glDeleteShader(gs));
 
     return program;
 }
@@ -103,19 +109,44 @@ void Shader::unbind() const
     GLCall(glUseProgram(0));
 }
 
-void Shader::setUniform1i(const std::string& name, int value)
+void Shader::setUniform1i(const std::string& name, int x)
 {
-    GLCall(glUniform1i(getUniformLocation(name), value));
+    GLCall(glUniform1i(getUniformLocation(name), x));
 }
 
-void Shader::setUniform1f(const std::string& name, float value)
+void Shader::setUniform1f(const std::string& name, float x)
 {
-    GLCall(glUniform1f(getUniformLocation(name), value));
+    GLCall(glUniform1f(getUniformLocation(name), x));
 }
 
-void Shader::setUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
+void Shader::setUniform2f(const std::string& name, float x, float y)
 {
-    GLCall(glUniform4f(getUniformLocation(name), v0, v1, v2, v3));
+    GLCall(glUniform2f(getUniformLocation(name), x, y));
+}
+
+void Shader::setUniform2f(const std::string& name, const glm::vec2 &matrix)
+{
+    GLCall(glUniform2f(getUniformLocation(name), matrix.x, matrix.y));
+}
+
+void Shader::setUniform3f(const std::string& name, float x, float y, float z)
+{
+    GLCall(glUniform3f(getUniformLocation(name), x, y, z));
+}
+
+void Shader::setUniform3f(const std::string& name, const glm::vec3 &matrix)
+{
+    GLCall(glUniform3f(getUniformLocation(name), matrix.x, matrix.y, matrix.z));
+}
+
+void Shader::setUniform4f(const std::string& name, float x, float y, float z, float w)
+{
+    GLCall(glUniform4f(getUniformLocation(name), x, y, z, w));
+}
+
+void Shader::setUniform4f(const std::string& name, const glm::vec4 &matrix)
+{
+    GLCall(glUniform4f(getUniformLocation(name), matrix.x, matrix.y, matrix.z, matrix.w));
 }
 
 void Shader::setUniformMat4f(const std::string & name, const glm::mat4 &matrix)

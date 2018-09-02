@@ -8,13 +8,17 @@
 
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_Fov(FOV)
+    :
+    m_Front(glm::vec3(0.0f, 0.0f, -1.0f)),
+    m_MovementSpeed(SPEED),
+    m_MouseSensitivity(SENSITIVITY),
+    m_Fov(FOV)
 {
     m_Position = position;
     m_WorldUp = up;
     m_Yaw = yaw;
     m_Pitch = pitch;
-    updateCameraVectors();
+    this -> updateCameraVectors();
 }
 
 Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
@@ -24,7 +28,7 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
     m_WorldUp = glm::vec3(upX, upY, upZ);
     m_Yaw = yaw;
     m_Pitch = pitch;
-    updateCameraVectors();
+    this -> updateCameraVectors();
 }
 
 glm::mat4 Camera::getViewMatrix()
@@ -68,7 +72,7 @@ void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constr
     }
 
     /* Update Front, Right and Up Vectors using the updated Euler angles */
-    updateCameraVectors();
+    this -> updateCameraVectors();
 }
 
 void Camera::processMouseScroll(float yoffset)
