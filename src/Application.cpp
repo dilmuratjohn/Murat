@@ -128,7 +128,7 @@ int main()
     /* shader */
     Shader shader("res/shader/Basic.shader");
     shader.bind();
-    Texture wall("res/pic/wall.png", GL_RGB, GL_RGB);
+    Texture::Texture2D wall("res/pic/wall.png", GL_RGB, GL_RGB);
     wall.bind(0);
     shader.setUniform1i("u_Texture_wall", 0);
 

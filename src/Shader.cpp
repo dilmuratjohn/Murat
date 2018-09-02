@@ -80,6 +80,7 @@ unsigned int Shader::compileShader(unsigned int type, const std::string & source
 unsigned int Shader::createShader(const std::string& vertexShader, const std::string& fragmentShader, const std::string& geometryShader)
 {
     GLCall(unsigned int program = glCreateProgram());
+
     unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
     unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
     unsigned int gs = compileShader(GL_GEOMETRY_SHADER, geometryShader);

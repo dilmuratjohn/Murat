@@ -3,7 +3,7 @@
 #include "Texture.hpp"
 
 
-Texture::Texture(const std::string& filePath, unsigned int internalFormat, unsigned int imageFormat)
+Texture::Texture2D::Texture2D(const std::string& filePath, unsigned int internalFormat, unsigned int imageFormat)
     :
     m_FilePath(filePath),
     m_RendererID(0),
@@ -37,17 +37,17 @@ Texture::Texture(const std::string& filePath, unsigned int internalFormat, unsig
         stbi_image_free(m_LocalBuffer);
 }
 
-Texture::~Texture()
+Texture::Texture2D::~Texture2D()
 {
     GLCall(glDeleteTextures(1, &m_RendererID));
 }
 
-void Texture::bind(unsigned int slot) const
+void Texture::Texture2D::bind(unsigned int slot) const
 {
     GLCall(glActiveTexture(GL_TEXTURE0 + slot));
     GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 }
-void Texture::unbind() const
+void Texture::Texture2D::unbind() const
 {
     GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
