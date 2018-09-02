@@ -3,17 +3,17 @@
 #include "Texture.hpp"
 
 
-Texture::Texture2D::Texture2D(const std::string& filePath, unsigned int internalFormat, unsigned int imageFormat)
+Texture::Texture2D::Texture2D(const std::string& filePath, bool transparency)
     :
     m_FilePath(filePath),
     m_RendererID(0),
-    m_InternalFormat(internalFormat),
-    m_ImageFormat(imageFormat),
+    m_Transparency(transparency),
     m_LocalBuffer(nullptr),
     m_Width(0),
     m_Height(0),
     m_BPP(0)
 {
+    m_InternalFormat = m_ImageFormat = m_Transparency ? GL_RGBA : GL_RGB;
     stbi_set_flip_vertically_on_load(1);
     m_LocalBuffer = stbi_load(m_FilePath.c_str(), &m_Width, &m_Height, &m_BPP, 0);
 

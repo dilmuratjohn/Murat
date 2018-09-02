@@ -12,6 +12,7 @@ namespace Texture
     private:
         std::string    m_FilePath;
         unsigned int   m_RendererID;
+        bool           m_Transparency;
         unsigned int   m_InternalFormat;
         unsigned int   m_ImageFormat;
         unsigned char* m_LocalBuffer;
@@ -20,7 +21,7 @@ namespace Texture
                        m_BPP;
 
     public:
-        Texture2D(const std::string& filePath, unsigned int internalFormat, unsigned int imageFormat);
+        Texture2D(const std::string& filePath, bool transparency);
         ~Texture2D();
 
         void bind(unsigned int solt = 0) const;
