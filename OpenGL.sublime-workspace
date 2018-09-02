@@ -4,16 +4,52 @@
 		"selected_items":
 		[
 			[
+				"shad",
+				"shader_lamp"
+			],
+			[
+				"sha",
+				"shader_box"
+			],
+			[
+				"shader_",
+				"shader_box"
+			],
+			[
+				"box",
+				"shader_box"
+			],
+			[
+				"un",
+				"unbind"
+			],
+			[
+				"m_",
+				"m_State"
+			],
+			[
+				"pri",
+				"private"
+			],
+			[
+				"sk",
+				"skyboxVertices"
+			],
+			[
+				"sh",
+				"shader_l"
+			],
+			[
+				"en",
+				"endl"
+			],
+			[
 				"elemnt",
 				"element"
 			],
 			[
 				"Po",
 				"Position"
-			],
-			[
-				"m_",
-				"m_LocalBuffer"
 			],
 			[
 				"in",
@@ -291,7 +327,34 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 6819,
+				"buffer_size": 9549,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 287 files for \"material.diffuse\"\n\n/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader.c:\n   55  {\n   56      /* ambient */\n   57:     vec4 ambient = u_light.ambient * texture(u_material.diffuse, v_TexCoord);\n   58  \n   59      /* diffuse */\n   ..\n   61      vec4 lightDir = normalize(u_light.position - v_FragPosition);\n   62      float diff = max(dot(norm, lightDir), 0.0);\n   63:     vec4 diffuse = u_light.diffuse * diff * texture(u_material.diffuse, v_TexCoord);\n   64  \n   65      /* specular */\n\n/Users/collin/Desktop/cpp/tutorial/src/Application.cpp:\n  194      };\n  195      shader_box.bind();\n  196:     shader_box.setUniform1i(\"material.diffuse\", 0);\n  197      shader_box.unbind();\n  198      /* loop */\n  ...\n  220              shader_box.setUniform4f(\"u_light.diffuse\", 0.5f, 0.5f, 0.5f, 1.0f);\n  221              shader_box.setUniform4f(\"u_light.specular\", 1.0f, 1.0f, 1.0f, 1.0f);\n  222:             shader_box.setUniform1i(\"u_material.diffuse\", 0);\n  223              shader_box.setUniform4f(\"u_material.specular\", 0.5f, 0.5f, 0.5f, 1.0f);\n  224              shader_box.setUniform1f(\"u_material.shininess\", 64.0f);\n\n/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/detail/dummy.cpp:\n  150  \t\t\treturn Color;\n  151  \t\tif(Material.isDiffuse())\n  152: \t\t\tColor += Light.color() * Material.diffuse * Diffuse;\n  153  \t\tif(Material.isSpecular())\n  154  \t\t{\n\n5 matches across 3 files\n\n\nSearching 287 files for \"u_view\"\n\n/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader.c:\n   11  \n   12  uniform mat4 u_model;\n   13: uniform mat4 u_view;\n   14  uniform mat4 u_projection;\n   15  \n   ..\n   47  \n   48  \n   49: uniform vec4 u_viewPosition;\n   50  uniform Material u_material;\n   51  uniform Light u_light;\n   ..\n   64  \n   65      /* specular */\n   66:     vec4 viewDir = normalize(u_viewPosition - v_FragPosition);\n   67      vec4 reflectDir = reflect(-lightDir, norm);\n   68      float spec = pow(max(dot(viewDir, reflectDir), 0.0), u_material.shininess);\n\n/Users/collin/Desktop/cpp/tutorial/res/shader/lamp.shader.c:\n    4  \n    5  uniform mat4 u_model;\n    6: uniform mat4 u_view;\n    7  uniform mat4 u_projection;\n    8  \n    9  void main()\n   10  {\n   11:     gl_Position = u_projection * u_view * u_model * Position;\n   12  }\n   13  \n\n/Users/collin/Desktop/cpp/tutorial/src/Application.cpp:\n  215              model = glm::translate(model, cubePositions[i]);\n  216              shader_box.bind();\n  217:             shader_box.setUniform4f(\"u_viewPosition\", camera.getPosition());\n  218              shader_box.setUniform4f(\"u_light.position\", lightPosition);\n  219              shader_box.setUniform4f(\"u_light.ambient\", 0.2f, 0.2f, 0.2f, 1.0f);\n  ...\n  224              shader_box.setUniform1f(\"u_material.shininess\", 64.0f);\n  225              shader_box.setUniformMat4f(\"u_model\", model);\n  226:             shader_box.setUniformMat4f(\"u_view\", view);\n  227              shader_box.setUniformMat4f(\"u_projection\", projection);\n  228              glDrawArrays(GL_TRIANGLES, 0, 36);\n  ...\n  236          shader_lamp.bind();\n  237          shader_lamp.setUniformMat4f(\"u_model\", model);\n  238:         shader_lamp.setUniformMat4f(\"u_view\", view);\n  239          shader_lamp.setUniformMat4f(\"u_projection\", projection);\n  240          shader_lamp.unbind();\n\n8 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 3319,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/vendor/glm/gtc/matrix_transform.hpp",
+			"settings":
+			{
+				"buffer_size": 45555,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "res/shader/box.shader.c",
+			"settings":
+			{
+				"buffer_size": 1499,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -341,12 +404,12 @@
 		"selected_items":
 		[
 			[
-				"packi",
-				"Package Control: Install Package"
-			],
-			[
 				"snc",
 				"Set Syntax: C"
+			],
+			[
+				"packi",
+				"Package Control: Install Package"
 			],
 			[
 				"remov",
@@ -493,33 +556,48 @@
 		"/Users/collin/Desktop/cpp/tutorial/res",
 		"/Users/collin/Desktop/cpp/tutorial/res/pic",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader",
-		"/Users/collin/Desktop/cpp/tutorial/src",
-		"/Users/collin/Desktop/cpp/tutorial/src/vendor"
+		"/Users/collin/Desktop/cpp/tutorial/src"
 	],
 	"file_history":
 	[
+		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader.c",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/lamp.shader.c",
+		"/Users/collin/Desktop/cpp/tutorial/Makefile",
+		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Texture.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/lamp.shader",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/Basic.shader",
+		"/Users/collin/Desktop/cpp/tutorial/src/ResourceManager.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/ResourceManager.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Texture.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Shader.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Render.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Game.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Game.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/detail/type_mat.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/matrix.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/gtc/matrix_transform.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/sky.shader",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/obj.shader",
+		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/SublimeAStyleFormatter.sublime-settings",
+		"/Users/collin/Desktop/cpp/tutorial/res/shader/light.shader",
+		"/Users/collin/Desktop/cpp/tutorial/src/Render.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/res/shader/Basic.shader",
-		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Shader.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Texture.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Texture.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.hpp",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/TypeScriptReact.sublime-settings",
-		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/SublimeAStyleFormatter.sublime-settings",
-		"/Users/collin/Desktop/cpp/tutorial/Makefile",
-		"/Users/collin/Desktop/cpp/tutorial/src/Render.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Render.hpp",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
-		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/gtc/matrix_transform.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/Basic.shader",
 		"/Users/collin/Desktop/cpp/tutorial/src/vendor/stb_image/stb_image.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/deps/glfw/examples/gears.c",
@@ -527,7 +605,6 @@
 		"/Users/collin/Desktop/cpp/tutorial/deps/stb_image.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Input.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Input.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/OpenGL.sublime-project",
 		"/Users/collin/Desktop/cpp/tutorial/res/Basic.shader.c",
 		"/Users/collin/Desktop/cpp/tutorial/deps/glfw/deps/glad/glad.h",
@@ -610,22 +687,7 @@
 		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/Word/WinningDialog.js",
 		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Data/WordscapeDataHandler.js",
 		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Data/WordGameData.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/settings/settingDialogUI.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/Level/LevelDialogUI.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Service/LayoutManager.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Base/loadingProgress.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/LoadingPage.meta",
-		"/Users/duolikun/Desktop/untitled.js",
-		"/Users/duolikun/Desktop/WordscapeData500.js",
-		"/Users/duolikun/Desktop/WordscapeData1.js",
-		"/Users/duolikun/Desktop/testDataSet.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Base/UI/DialogManager.js.meta",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Data/DailyChallengeData.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/Bonus/bonusGoldCoinLight.js",
-		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/DailyChallenge/DailyChallengeManager.js",
-		"/Users/duolikun/Library/Application Support/Sublime Text 3/Packages/Javascript Beautify/Default (OSX).sublime-keymap",
-		"/Users/duolikun/Desktop/testbeautifier.js",
-		"/Users/duolikun/Desktop/WDATA.bak"
+		"/Users/duolikun/Desktop/app/App_Word_JS/assets/Script/Components/settings/settingDialogUI.js"
 	],
 	"find":
 	{
@@ -644,6 +706,126 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			", x,",
+			"x,",
+			"u_view",
+			"material.diffuse",
+			"u_diffuse",
+			"light",
+			"material",
+			"light.",
+			"light",
+			"shader_box",
+			"viewPosition",
+			"Position",
+			"layout",
+			"vb",
+			"va",
+			"layout",
+			" ",
+			"box",
+			"Texture",
+			"texture",
+			"// ",
+			"//",
+			"// ",
+			"vec3",
+			"out",
+			"ResourceManager",
+			"ResourceManager::",
+			"unsigned int*",
+			"static",
+			"ResourceManager::",
+			"ResourceManager",
+			"clear",
+			"ResourceManager",
+			"Render",
+			";",
+			"static",
+			"void",
+			"static",
+			"v2",
+			"v1",
+			"v0",
+			"v",
+			"v3",
+			"v2",
+			"v1",
+			"v0",
+			"GLfloat",
+			"GLuint",
+			"GLfloat",
+			"GLboolean",
+			"unsigned int",
+			"// ",
+			"u_Texture",
+			"texture",
+			"Texture",
+			"texture",
+			"texture1",
+			"Front",
+			"front",
+			"Front",
+			"front",
+			"Front",
+			"MovementSpeed",
+			"MouseSensitivity",
+			"Camera",
+			"camera",
+			"Camera",
+			"camera",
+			"Camera",
+			"camera",
+			"Camera",
+			"camera",
+			"Camera",
+			"camera",
+			"Camera",
+			"camera",
+			"ProcessKeyboard",
+			"camera",
+			"yaw",
+			"YAW",
+			"yaw",
+			"Yaw",
+			"Up",
+			"_light",
+			"m",
+			"1",
+			"4",
+			"VEC3",
+			"vec3",
+			"shader",
+			"layout_l",
+			"vb_l",
+			"va_l",
+			"layout",
+			"vb",
+			"va",
+			"shader_l",
+			"_l",
+			"obj",
+			"light",
+			"obj",
+			"layout",
+			"vb",
+			"va",
+			"layout",
+			"vb",
+			"va",
+			"FOV",
+			"Camera_Movement::",
+			"ZOOm",
+			"GLCall",
+			"FORWARD",
+			"//",
+			"Fov",
+			"Zoom",
+			"ZOOM",
+			"Zoom",
+			"ZOOM",
+			"Zoom",
+			"ZOOM",
 			"        shader.setUniformMat4f(\"projection\", projection);\n        shader.setUniformMat4f(\"view\", view);\n        shader.setUniformMat4f(\"model\", model);",
 			"trans",
 			"vec",
@@ -651,46 +833,7 @@
 			"TexCoord",
 			"unBind",
 			"recIndices",
-			"verticesAndTexture",
-			"getWidth",
-			"Renderer",
-			"GLCall",
-			"VertexBuffer",
-			"GLCall",
-			"VertexBuffer",
-			"GLCall",
-			"Shader",
-			"GLCall",
-			"Renderer",
-			"\"",
-			"r",
-			"GLCall",
-			"GL::Call",
-			"gl",
-			"GL",
-			"gl",
-			"GL",
-			"gl",
-			"GL",
-			"gl",
-			"GL",
-			"gl",
-			"GL",
-			"GLCall",
-			"Renderer",
-			"Application",
-			"\\0;",
-			"\\n",
-			"\"",
-			"0.00f",
-			"message",
-			"ERROR",
-			"!status",
-			"vertex",
-			"VERTEX",
-			"vertex",
-			"VERTEX",
-			"vertex"
+			"verticesAndTexture"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -718,15 +861,175 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6819,
+						"buffer_size": 9549,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5776,
-								5776
+								6465,
+								6465
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 56.0,
+						"translation.y": 2970.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3319,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										192,
+										208
+									],
+									[
+										451,
+										467
+									],
+									[
+										653,
+										669
+									],
+									[
+										957,
+										973
+									],
+									[
+										1308,
+										1324
+									],
+									[
+										1561,
+										1567
+									],
+									[
+										1653,
+										1659
+									],
+									[
+										1811,
+										1817
+									],
+									[
+										2106,
+										2112
+									],
+									[
+										2224,
+										2230
+									],
+									[
+										2477,
+										2483
+									],
+									[
+										2876,
+										2882
+									],
+									[
+										3168,
+										3174
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								2479,
+								2479
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1241.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/vendor/glm/gtc/matrix_transform.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 45555,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2261,
+								2261
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 737.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "res/shader/box.shader.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								238,
+								238
 							]
 						],
 						"settings":
@@ -736,10 +1039,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2585.0,
+						"translation.y": 5.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -762,11 +1065,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.637472709443,
 			1.0
 		],
 		"rows":
@@ -809,6 +1119,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"ca",
+				"src/Camera.hpp"
+			],
+			[
+				"sha",
+				"src/Shader.cpp"
+			],
+			[
+				"m",
+				"Makefile"
+			],
 			[
 				"mian",
 				"assets/Script/MainPlayground.ts"

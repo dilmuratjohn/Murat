@@ -42,7 +42,6 @@ ShaderProgramSource Shader::parseShader(const std::string& filePath)
                 type = ShaderType::FRAGMENT;
             if (line.find("geometry") != std::string::npos)
                 type = ShaderType::GEOMETRY;
-
         }
         else
         {
@@ -69,8 +68,8 @@ unsigned int Shader::compileShader(unsigned int type, const std::string & source
         GLCall(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
         char* message = (char*)alloca(length * sizeof(char));
         GLCall(glGetShaderInfoLog(id, length, &length, message));
-        std::cout << "Failed to compile <" << (type == GL_VERTEX_SHADER ? "Vetex" : "Fragment") << " Shader>" << std::endl;
-        std::cout << message << std::endl;
+        std::cout << "Failed to compile <" << (type == GL_VERTEX_SHADER ? "Vetex" : "Fragment")
+                  << " Shader>" << std::endl << message << std::endl;
         GLCall(glDeleteShader(id));
         return 0;
     }
@@ -161,8 +160,8 @@ int Shader::getUniformLocation(const std::string& name)
         return m_UniformLocationCache[name];
     GLCall(int location = glGetUniformLocation(m_RendererID, name.c_str()));
     if (location == -1)
-        std::cout << "[Warring]: uniform <" << name << "> doesn't exist!";
-
+        std::cout << "[Warring]: uniform <" << name << "> doesn't exist." << std::endl
+                  << "[FilePath]: " << m_FilePath << std::endl;
     m_UniformLocationCache[name] = location;
     return location;
 }
