@@ -45,12 +45,12 @@ const float vertices_cube[] =
     0.5f, 0.5f, 0.5f, 1.00f,    1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 1.0f,       0.0f, 0.0f, 1.0f, 1.0f,
     -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 1.0f,       0.0f, 0.0f, 1.0f, 1.0f,
     -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f, 1.00f,   1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 1.00f, 0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
     0.5f, 0.5f, 0.5f, 1.00f,    1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
     0.5f, 0.5f, -0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
     0.5f, -0.5f, -0.5f, 1.00f,  0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
@@ -237,6 +237,8 @@ int main()
         glm::vec3(  9.0f,  2.0f,  0.0f),
     };
 
+
+    glm::vec3 lightPosition(1.0f, 3.0f, 2.0f);
     /* loop */
     while (!glfwWindowShouldClose(window))
     {
@@ -251,11 +253,24 @@ int main()
 
             Render::clear();
 
+            /* lamp */
+            shader_color.bind();
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, lightPosition);
+            model = glm::scale(model, glm::vec3(0.1f));
+            shader_color.setUniformMat4f("u_model", model);
+            shader_color.setUniformMat4f("u_view", view);
+            shader_color.setUniformMat4f("u_projection", projection);
+            va_box.addBuffer(vb_box, layout_box);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+
             /* floor */
             shader_texture.bind();
             shader_texture.setUniform1i("u_Texture", 0);
             for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
             {
+                if (i == 38)
+                    break;
                 model = glm::mat4(1.0f);
                 model = glm::translate(model, translatePositions[i]);
                 model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0));
@@ -280,6 +295,8 @@ int main()
                 shader_basic.setUniformMat4f("model", model);
                 shader_basic.setUniformMat4f("view", view);
                 shader_basic.setUniformMat4f("projection", projection);
+                shader_basic.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+
                 if (i % 2 == 0)
                     wall.bind(0);
                 else
@@ -287,17 +304,6 @@ int main()
                 va_box.addBuffer(vb_box, layout_box);
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }
-
-            /* lamp */
-            shader_color.bind();
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(1.0f, 3.0f, 2.0f));
-            model = glm::scale(model, glm::vec3(0.1f));
-            shader_color.setUniformMat4f("u_model", model);
-            shader_color.setUniformMat4f("u_view", view);
-            shader_color.setUniformMat4f("u_projection", projection);
-            va_box.addBuffer(vb_box, layout_box);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
         glfwSwapBuffers(window);
