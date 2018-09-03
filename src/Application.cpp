@@ -30,8 +30,9 @@ const unsigned int SCR_HEIGHT = 768;
 const float ASPECT_RATIO = (float)SCR_WIDTH / (float)SCR_HEIGHT;
 const float NEAR_PLANE = 0.1f;
 const float FAR_PLANE = 100.0f;
+
 const float vertices_cube[] =
-    /* Position  .X.Y.Z.W.      Color.R.G.B.A.               TexCoord .S.T.    Normal .X.Y.Z.  */
+    /* Position  [X.Y.Z.W]      Color  [R.G.B.A]             TexCoord  [S.T]   Normal  [X.Y.Z.W]  */
 {
     -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, -1.0f, 1.0f,
     0.5f, -0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 0.0f,       0.0f, 0.0f, -1.0f, 1.0f,
@@ -75,17 +76,16 @@ const float vertices_cube[] =
 const float vertices_flat[] =
     /* Position  .X.Y.Z.W.        TexCoord .S.T. */
 {
-    0.50f,  0.50f, 1.00f, 1.00f,  1.0f, 1.0f,
-    0.50f, -0.50f, 1.00f, 1.00f,  1.0f, 0.0f,
-    -0.50f, -0.50f, 1.00f, 1.00f,   0.0f, 0.0f,
-    -0.50f,  0.50f, 1.00f, 1.00f,   0.0f, 1.0f
+    0.50f,  0.50f, 1.00f, 1.00f,  1.0f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,
+    0.50f, -0.50f, 1.00f, 1.00f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
+    -0.50f, -0.50f, 1.00f, 1.00f,   0.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
+    -0.50f,  0.50f, 1.00f, 1.00f,   0.0f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,
 };
 
 const unsigned int indices_flat[] =
 {
     0, 1, 2,
     2, 3, 0,
-
 };
 
 /* timing */
@@ -169,13 +169,16 @@ int main()
     IndexBuffer ib_floor(indices_flat, sizeof(indices_flat));
     layout_floor.push<float>(4);
     layout_floor.push<float>(2);
+    layout_floor.push<float>(4);
+
 
 
     /* transformation initialization */
-
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
+    glm::vec3 lightPosition(1.0f, 3.0f, 2.0f);
+    glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec3 translatePositions[] =
     {
         glm::vec3( -1.0f,  0.0f,  0.0f),
@@ -238,7 +241,6 @@ int main()
     };
 
 
-    glm::vec3 lightPosition(1.0f, 3.0f, 2.0f);
     /* loop */
     while (!glfwWindowShouldClose(window))
     {
@@ -254,62 +256,68 @@ int main()
             Render::clear();
 
             /* lamp */
-            shader_color.bind();
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, lightPosition);
-            model = glm::scale(model, glm::vec3(0.1f));
-            shader_color.setUniformMat4f("u_model", model);
-            shader_color.setUniformMat4f("u_view", view);
-            shader_color.setUniformMat4f("u_projection", projection);
-            va_box.addBuffer(vb_box, layout_box);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-
-            /* floor */
-            shader_texture.bind();
-            shader_texture.setUniform1i("u_Texture", 0);
-            for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
             {
-                if (i == 38)
-                    break;
+                shader_color.bind();
                 model = glm::mat4(1.0f);
-                model = glm::translate(model, translatePositions[i]);
-                model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0));
-                model = glm::translate(model, glm::vec3(.0f, -1.0f, -1.5001f));
-                shader_texture.setUniformMat4f("u_model", model);
-                shader_texture.setUniformMat4f("u_view", view);
-                shader_texture.setUniformMat4f("u_projection", projection);
-                floor.bind();
-                va_floor.addBuffer(vb_floor, layout_floor);
-
-
-                Render::draw(va_floor, ib_floor, shader_texture);
-            }
-
-            /* box */
-            shader_basic.bind();
-            shader_basic.setUniform1i("u_Texture", 0);
-            for (unsigned int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
-            {
-                model = glm::mat4(1.0f);
-                model = glm::translate(model, translatePositions[i]);
-                shader_basic.setUniformMat4f("model", model);
-                shader_basic.setUniformMat4f("view", view);
-                shader_basic.setUniformMat4f("projection", projection);
-                shader_basic.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
-
-                if (i % 2 == 0)
-                    wall.bind(0);
-                else
-                    box.bind(0);
+                model = glm::translate(model, lightPosition);
+                model = glm::scale(model, glm::vec3(0.1f));
+                shader_color.setUniformMat4f("u_model", model);
+                shader_color.setUniformMat4f("u_view", view);
+                shader_color.setUniformMat4f("u_projection", projection);
                 va_box.addBuffer(vb_box, layout_box);
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }
-        }
 
+            /* floor */
+            {
+                shader_texture.bind();
+                shader_texture.setUniform1i("u_Texture", 0);
+                for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
+                {
+                    if (i == 38)
+                        break;
+                    model = glm::mat4(1.0f);
+                    model = glm::translate(model, translatePositions[i]);
+                    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+                    model = glm::translate(model, glm::vec3(0.0f, -1.0f, -1.5001f));
+                    shader_texture.setUniformMat4f("u_model", model);
+                    shader_texture.setUniformMat4f("u_view", view);
+                    shader_texture.setUniformMat4f("u_projection", projection);
+                    shader_texture.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+                    floor.bind();
+                    va_floor.addBuffer(vb_floor, layout_floor);
+                    Render::draw(va_floor, ib_floor, shader_texture);
+                }
+            }
+
+            /* box */
+            {
+                shader_basic.bind();
+                shader_basic.setUniform1i("u_Texture", 0);
+                for (unsigned int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
+                {
+                    model = glm::mat4(1.0f);
+                    model = glm::translate(model, translatePositions[i]);
+                    shader_basic.setUniformMat4f("model", model);
+                    shader_basic.setUniformMat4f("view", view);
+                    shader_basic.setUniformMat4f("projection", projection);
+                    shader_basic.setUniform4f("u_lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+                    shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
+                    shader_basic.setUniform4f("u_lightColor", lightColor);
+
+
+                    if (i % 2 == 0)
+                        wall.bind(0);
+                    else
+                        box.bind(0);
+                    va_box.addBuffer(vb_box, layout_box);
+                    glDrawArrays(GL_TRIANGLES, 0, 36);
+                }
+            }
+        }
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
     glfwTerminate();
     return 0;
 }

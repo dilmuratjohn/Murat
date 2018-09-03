@@ -66,6 +66,8 @@ public:
     void processMouseScroll(float yoffset);
 
     inline float getFov() const { return m_Fov; }
+    inline glm::vec3 getPosition() const { return m_Position; }
+
 
 private:
     /* Calculates the front vector from the Camera's (updated) Euler Angles */

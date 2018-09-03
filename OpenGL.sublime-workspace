@@ -343,7 +343,7 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 15005,
+				"buffer_size": 15011,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -729,7 +729,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -899,15 +899,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15005,
+						"buffer_size": 15011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11433,
-								11433
+								3037,
+								3037
 							]
 						],
 						"settings":
@@ -917,7 +917,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4359.0,
+						"translation.y": 618.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

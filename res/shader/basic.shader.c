@@ -25,7 +25,7 @@ void main()
     v_FragPosition = model * Position;
     v_Color = Color;
     v_TexCoord = TexCoord;
-    v_Normal = Normal;
+    v_Normal = (transpose(inverse(model))) * Normal;
 }
 
 #shader fragment
@@ -40,12 +40,30 @@ in vec4 v_FragPosition;
 
 
 uniform sampler2D u_Texture;
-uniform vec4 lightPosition;
+uniform vec4 u_lightPosition;
+uniform vec4 u_lightColor;
+uniform vec4 u_viewPosition;
 
 
 void main()
 {
-    Color = (0.1 * vec4(1.0) + max(dot(normalize(v_Normal), normalize(lightPosition - v_FragPosition)), 0.0) * vec4(1.0)) * texture(u_Texture, v_TexCoord);
+    vec4 diffuse = max(
+                       dot(
+                           normalize(v_Normal), normalize(u_lightPosition - v_FragPosition)),
+                       0.0) *  u_lightColor;
+    vec4 ambient = 0.1 * u_lightColor;
+    vec4 specular = 0.5 * u_lightColor *
+                    pow(
+                        max(
+                            dot(
+                                normalize(u_viewPosition - v_FragPosition),
+                                reflect(normalize(v_FragPosition - u_lightPosition),
+                                        normalize(v_Normal)
+                                       )
+                            ),
+                            0.0),
+                        32);
+    Color = (ambient + diffuse + specular) * texture(u_Texture, v_TexCoord);
 }
 
 
