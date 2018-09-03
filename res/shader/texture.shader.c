@@ -1,8 +1,9 @@
 #shader vertex
 #version 330 core
 layout (location = 0) in vec4 l_Position;
-layout (location = 1) in vec2 l_TexCoord;
-layout (location = 2) in vec4 l_Normal;
+layout (location = 1) in vec4 l_Normal;
+layout (location = 2) in vec2 l_TexCoord;
+
 
 out vec2 v_TexCoord;
 out vec4 v_Normal;

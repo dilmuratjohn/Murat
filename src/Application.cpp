@@ -32,46 +32,45 @@ const float NEAR_PLANE = 0.1f;
 const float FAR_PLANE = 100.0f;
 
 const float vertices_cube[] =
-    /* Position  [X.Y.Z.W]      Color  [R.G.B.A]             TexCoord  [S.T]   Normal  [X.Y.Z.W]  */
 {
-    -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 0.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.00f,   0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 1.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.00f,   1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 1.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 1.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, -1.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 1.00f,  1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 1.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 1.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 1.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       -1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.00f,  0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.00f,  1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.00f,   0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.00f,   1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 1.00f,  0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.00f, 0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       0.0f, -1.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 1.00f,  1.0f, 0.0f, 0.0f, 0.50f,     0.0f, 1.0f,       0.0f, 1.0f,  0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     1.0f, 1.0f,       0.0f, 1.0f,  0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    0.0f, 0.0f, 1.0f, 0.50f,     1.0f, 0.0f,       0.0f, 1.0f,  0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.00f,    1.0f, 0.0f, 0.0f, 0.50f,     1.0f, 0.0f,       0.0f, 1.0f,  0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 1.00f,   0.0f, 1.0f, 0.0f, 0.50f,     0.0f, 0.0f,       0.0f, 1.0f,  0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 1.00f,  0.0f, 0.0f, 1.0f, 0.50f,     0.0f, 1.0f,       0.0f, 1.0f,  0.0f, 1.0f
+    // positions          // normals           // texture coords
+    -0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 0.0f,
+    0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 0.0f,
+    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 1.0f,
+    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 0.0f,
+    0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 1.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    0.5f,  0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    0.5f, -0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 0.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 1.0f,
+    0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 1.0f,
+    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 1.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 1.0f
 };
-
 
 const float vertices_flat[] =
     /* Position  .X.Y.Z.W.        TexCoord .S.T. */
@@ -143,15 +142,23 @@ int main()
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
     /* shader */
-    Shader shader_basic("res/shader/basic.shader.c");
+    Shader shader_basic("res/shader/lighting_map.shader.c");
     Shader shader_color("res/shader/color.shader.c");
     Shader shader_texture("res/shader/texture.shader.c");
+
+
+
 
 
     /* texture */
     Texture::Texture2D wall("res/pic/wall.png", false);
     Texture::Texture2D floor("res/pic/floor.png", false);
     Texture::Texture2D box("res/pic/box.png", true);
+    Texture::Texture2D container("res/pic/container.png", true);
+    Texture::Texture2D matrix("res/pic/matrix.png", false);
+
+
+
 
     /* cube */
     VertexArray va_box;
@@ -160,7 +167,7 @@ int main()
     layout_box.push<float>(4);
     layout_box.push<float>(4);
     layout_box.push<float>(2);
-    layout_box.push<float>(4);
+
 
     /* squre */
     VertexArray va_floor;
@@ -168,8 +175,8 @@ int main()
     VertexBufferLayout layout_floor;
     IndexBuffer ib_floor(indices_flat, sizeof(indices_flat));
     layout_floor.push<float>(4);
-    layout_floor.push<float>(2);
     layout_floor.push<float>(4);
+    layout_floor.push<float>(2);
 
 
 
@@ -177,70 +184,8 @@ int main()
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    glm::vec3 lightPosition(1.0f, 3.0f, 2.0f);
+    glm::vec3 lightPosition(1.2f, 1.0f, 2.0f);
     glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-
-    glm::vec3 translatePositions[] =
-    {
-        // glm::vec3( -1.0f,  0.0f,  0.0f),
-        // glm::vec3( -2.0f,  0.0f,  0.0f),
-        // glm::vec3( -3.0f,  0.0f,  0.0f),
-        // glm::vec3( -4.0f,  0.0f,  0.0f),
-        // glm::vec3( -5.0f,  0.0f,  0.0f),
-        // glm::vec3( -6.0f,  0.0f,  0.0f),
-        // glm::vec3( -7.0f,  0.0f,  0.0f),
-        // glm::vec3( -8.0f,  0.0f,  0.0f),
-        // glm::vec3( -9.0f,  0.0f,  0.0f),
-        // glm::vec3(  0.0f,  0.0f,  0.0f),
-        // glm::vec3(  1.0f,  0.0f,  0.0f),
-        // glm::vec3(  2.0f,  0.0f,  0.0f),
-        // glm::vec3(  3.0f,  0.0f,  0.0f),
-        // glm::vec3(  4.0f,  0.0f,  0.0f),
-        // glm::vec3(  5.0f,  0.0f,  0.0f),
-        // glm::vec3(  6.0f,  0.0f,  0.0f),
-        // glm::vec3(  7.0f,  0.0f,  0.0f),
-        // glm::vec3(  8.0f,  0.0f,  0.0f),
-        // glm::vec3(  9.0f,  0.0f,  0.0f),
-        // glm::vec3( -1.0f,  1.0f,  0.0f),
-        // glm::vec3( -2.0f,  1.0f,  0.0f),
-        // glm::vec3( -3.0f,  1.0f,  0.0f),
-        // glm::vec3( -4.0f,  1.0f,  0.0f),
-        // glm::vec3( -5.0f,  1.0f,  0.0f),
-        // glm::vec3( -6.0f,  1.0f,  0.0f),
-        // glm::vec3( -7.0f,  1.0f,  0.0f),
-        // glm::vec3( -8.0f,  1.0f,  0.0f),
-        // glm::vec3( -9.0f,  1.0f,  0.0f),
-        // glm::vec3(  0.0f,  1.0f,  0.0f),
-        // glm::vec3(  1.0f,  1.0f,  0.0f),
-        glm::vec3(  2.0f,  1.0f,  0.0f),
-        // glm::vec3(  3.0f,  1.0f,  0.0f),
-        // glm::vec3(  4.0f,  1.0f,  0.0f),
-        // glm::vec3(  5.0f,  1.0f,  0.0f),
-        // glm::vec3(  6.0f,  1.0f,  0.0f),
-        // glm::vec3(  7.0f,  1.0f,  0.0f),
-        // glm::vec3(  8.0f,  1.0f,  0.0f),
-        // glm::vec3(  9.0f,  1.0f,  0.0f),
-        // glm::vec3( -1.0f,  2.0f,  0.0f),
-        // glm::vec3( -2.0f,  2.0f,  0.0f),
-        // glm::vec3( -3.0f,  2.0f,  0.0f),
-        // glm::vec3( -4.0f,  2.0f,  0.0f),
-        // glm::vec3( -5.0f,  2.0f,  0.0f),
-        // glm::vec3( -6.0f,  2.0f,  0.0f),
-        // glm::vec3( -7.0f,  2.0f,  0.0f),
-        // glm::vec3( -8.0f,  2.0f,  0.0f),
-        // glm::vec3( -9.0f,  2.0f,  0.0f),
-        // glm::vec3(  0.0f,  2.0f,  0.0f),
-        // glm::vec3(  1.0f,  2.0f,  0.0f),
-        // glm::vec3(  2.0f,  2.0f,  0.0f),
-        // glm::vec3(  3.0f,  2.0f,  0.0f),
-        // glm::vec3(  4.0f,  2.0f,  0.0f),
-        // glm::vec3(  5.0f,  2.0f,  0.0f),
-        // glm::vec3(  6.0f,  2.0f,  0.0f),
-        // glm::vec3(  7.0f,  2.0f,  0.0f),
-        // glm::vec3(  8.0f,  2.0f,  0.0f),
-        // glm::vec3(  9.0f,  2.0f,  0.0f),
-    };
 
 
     /* loop */
@@ -257,22 +202,15 @@ int main()
 
             Render::clear();
 
-
-            lightColor.x = sin(glfwGetTime() * 2.0f);
-            lightColor.y = sin(glfwGetTime() * 0.7f);
-            lightColor.z = sin(glfwGetTime() * 1.3f);
-
-            glm::vec4 light_diffuseColor = lightColor   * glm::vec4(0.5f);
-            glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
+            glm::vec4 light_diffuseColor =  glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);//lightColor   * glm::vec4(0.5f);
+            glm::vec4 light_ambientColor =  glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);//light_diffuseColor * glm::vec4(0.2f);
 
             /* lamp */
             {
-
-
                 shader_color.bind();
                 model = glm::mat4(1.0f);
                 model = glm::translate(model, lightPosition);
-                model = glm::scale(model, glm::vec3(0.1f));
+                model = glm::scale(model, glm::vec3(0.2f));
                 shader_color.setUniformMat4f("u_model", model);
                 shader_color.setUniformMat4f("u_view", view);
                 shader_color.setUniformMat4f("u_projection", projection);
@@ -280,59 +218,29 @@ int main()
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }
 
-            /* floor */
-            // {
-            //     shader_texture.bind();
-            //     shader_texture.setUniform1i("u_Texture", 0);
-            //     for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
-            //     {
-            //         if (i == 38)
-            //             break;
-            //         model = glm::mat4(1.0f);
-            //         model = glm::translate(model, translatePositions[i]);
-            //         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-            //         model = glm::translate(model, glm::vec3(0.0f, -1.0f, -1.5001f));
-            //         shader_texture.setUniformMat4f("u_model", model);
-            //         shader_texture.setUniformMat4f("u_view", view);
-            //         shader_texture.setUniformMat4f("u_projection", projection);
-            //         shader_texture.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
-            //         floor.bind();
-            //         va_floor.addBuffer(vb_floor, layout_floor);
-            //         Render::draw(va_floor, ib_floor, shader_texture);
-            //     }
-            // }
-
             /* box */
             {
                 shader_basic.bind();
-                shader_basic.setUniform1i("u_Texture", 0);
-                for (unsigned int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
-                {
-                    model = glm::mat4(1.0f);
-                    model = glm::translate(model, translatePositions[i]);
-                    shader_basic.setUniformMat4f("model", model);
-                    shader_basic.setUniformMat4f("view", view);
-                    shader_basic.setUniformMat4f("projection", projection);
+                box.bind(0);
+                container.bind(1);
+                matrix.bind(2);
 
-                    shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
+                shader_basic.setUniform1i("u_material.diffuse", 0);
+                shader_basic.setUniform1i("u_material.specular", 1);
+                shader_basic.setUniform1i("u_material.emission", 2);
 
-                    shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
-                    shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
-                    shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
-                    shader_basic.setUniform4f("u_light.position", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
-
-                    shader_basic.setUniform4f("u_material.ambient",  1.0f, 0.5f, 0.31f, 1.0f);
-                    shader_basic.setUniform4f("u_material.diffuse",  1.0f, 0.5f, 0.31f, 1.0f);
-                    shader_basic.setUniform4f("u_material.specular", 0.5f, 0.5f, 0.5f, 1.0f);
-                    shader_basic.setUniform1f("u_material.shininess", 32.0f);
-
-                    if (i % 2 == 0)
-                        wall.bind(0);
-                    else
-                        box.bind(0);
-                    va_box.addBuffer(vb_box, layout_box);
-                    glDrawArrays(GL_TRIANGLES, 0, 36);
-                }
+                shader_basic.setUniform1f("u_material.shininess", 64.0f);
+                model = glm::mat4(1.0f);
+                shader_basic.setUniformMat4f("model", model);
+                shader_basic.setUniformMat4f("view", view);
+                shader_basic.setUniformMat4f("projection", projection);
+                shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
+                shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
+                shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
+                shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
+                shader_basic.setUniform4f("u_light.position", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+                va_box.addBuffer(vb_box, layout_box);
+                glDrawArrays(GL_TRIANGLES, 0, 36);
             }
         }
         glfwSwapBuffers(window);
@@ -342,7 +250,7 @@ int main()
     return 0;
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void key_callback(GLFWwindow * window, int key, int scancode, int action, int mods)
 {
     /* close window */
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -371,12 +279,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         camera.processKeyboard(Camera_Movement::DOWN, deltaTime);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void framebuffer_size_callback(GLFWwindow * window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+void mouse_callback(GLFWwindow * window, double xpos, double ypos)
 {
     if (firstMouse)
     {
@@ -394,7 +302,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     camera.processMouseMovement(xoffset, yoffset);
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
     camera.processMouseScroll(yoffset);
 }
