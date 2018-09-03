@@ -179,6 +179,8 @@ int main()
     glm::mat4 projection = glm::mat4(1.0f);
     glm::vec3 lightPosition(1.0f, 3.0f, 2.0f);
     glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+
     glm::vec3 translatePositions[] =
     {
         // glm::vec3( -1.0f,  0.0f,  0.0f),
@@ -255,8 +257,18 @@ int main()
 
             Render::clear();
 
+
+            lightColor.x = sin(glfwGetTime() * 2.0f);
+            lightColor.y = sin(glfwGetTime() * 0.7f);
+            lightColor.z = sin(glfwGetTime() * 1.3f);
+
+            glm::vec4 light_diffuseColor = lightColor   * glm::vec4(0.5f);
+            glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
+
             /* lamp */
             {
+
+
                 shader_color.bind();
                 model = glm::mat4(1.0f);
                 model = glm::translate(model, lightPosition);
@@ -304,8 +316,8 @@ int main()
 
                     shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
 
-                    shader_basic.setUniform4f("u_light.ambient",  0.2f, 0.2f, 0.2f, 1.0f);
-                    shader_basic.setUniform4f("u_light.diffuse",  0.5f, 0.5f, 0.5f, 1.0f);
+                    shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
+                    shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
                     shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
                     shader_basic.setUniform4f("u_light.position", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
 
