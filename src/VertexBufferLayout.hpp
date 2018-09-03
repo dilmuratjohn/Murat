@@ -38,7 +38,4 @@ public:
     inline unsigned int getStride() const { return m_Stride; }
 };
 
-
-
-
 #endif

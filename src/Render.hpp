@@ -18,12 +18,4 @@ namespace Render
     void draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader);
 }
 
-
-
-
-
-
-
-
-
 #endif

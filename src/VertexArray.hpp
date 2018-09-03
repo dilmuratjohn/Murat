@@ -9,6 +9,7 @@ class VertexArray
 {
 private:
     unsigned int m_RendererID;
+
 public:
     VertexArray();
     ~VertexArray();
@@ -17,8 +18,5 @@ public:
     void bind() const;
     void unbind() const;
 };
-
-
-
 
 #endif
