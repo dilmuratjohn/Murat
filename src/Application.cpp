@@ -181,63 +181,63 @@ int main()
     glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec3 translatePositions[] =
     {
-        glm::vec3( -1.0f,  0.0f,  0.0f),
-        glm::vec3( -2.0f,  0.0f,  0.0f),
-        glm::vec3( -3.0f,  0.0f,  0.0f),
-        glm::vec3( -4.0f,  0.0f,  0.0f),
-        glm::vec3( -5.0f,  0.0f,  0.0f),
-        glm::vec3( -6.0f,  0.0f,  0.0f),
-        glm::vec3( -7.0f,  0.0f,  0.0f),
-        glm::vec3( -8.0f,  0.0f,  0.0f),
-        glm::vec3( -9.0f,  0.0f,  0.0f),
-        glm::vec3(  0.0f,  0.0f,  0.0f),
-        glm::vec3(  1.0f,  0.0f,  0.0f),
-        glm::vec3(  2.0f,  0.0f,  0.0f),
-        glm::vec3(  3.0f,  0.0f,  0.0f),
-        glm::vec3(  4.0f,  0.0f,  0.0f),
-        glm::vec3(  5.0f,  0.0f,  0.0f),
-        glm::vec3(  6.0f,  0.0f,  0.0f),
-        glm::vec3(  7.0f,  0.0f,  0.0f),
-        glm::vec3(  8.0f,  0.0f,  0.0f),
-        glm::vec3(  9.0f,  0.0f,  0.0f),
-        glm::vec3( -1.0f,  1.0f,  0.0f),
-        glm::vec3( -2.0f,  1.0f,  0.0f),
-        glm::vec3( -3.0f,  1.0f,  0.0f),
-        glm::vec3( -4.0f,  1.0f,  0.0f),
-        glm::vec3( -5.0f,  1.0f,  0.0f),
-        glm::vec3( -6.0f,  1.0f,  0.0f),
-        glm::vec3( -7.0f,  1.0f,  0.0f),
-        glm::vec3( -8.0f,  1.0f,  0.0f),
-        glm::vec3( -9.0f,  1.0f,  0.0f),
-        glm::vec3(  0.0f,  1.0f,  0.0f),
-        glm::vec3(  1.0f,  1.0f,  0.0f),
+        // glm::vec3( -1.0f,  0.0f,  0.0f),
+        // glm::vec3( -2.0f,  0.0f,  0.0f),
+        // glm::vec3( -3.0f,  0.0f,  0.0f),
+        // glm::vec3( -4.0f,  0.0f,  0.0f),
+        // glm::vec3( -5.0f,  0.0f,  0.0f),
+        // glm::vec3( -6.0f,  0.0f,  0.0f),
+        // glm::vec3( -7.0f,  0.0f,  0.0f),
+        // glm::vec3( -8.0f,  0.0f,  0.0f),
+        // glm::vec3( -9.0f,  0.0f,  0.0f),
+        // glm::vec3(  0.0f,  0.0f,  0.0f),
+        // glm::vec3(  1.0f,  0.0f,  0.0f),
+        // glm::vec3(  2.0f,  0.0f,  0.0f),
+        // glm::vec3(  3.0f,  0.0f,  0.0f),
+        // glm::vec3(  4.0f,  0.0f,  0.0f),
+        // glm::vec3(  5.0f,  0.0f,  0.0f),
+        // glm::vec3(  6.0f,  0.0f,  0.0f),
+        // glm::vec3(  7.0f,  0.0f,  0.0f),
+        // glm::vec3(  8.0f,  0.0f,  0.0f),
+        // glm::vec3(  9.0f,  0.0f,  0.0f),
+        // glm::vec3( -1.0f,  1.0f,  0.0f),
+        // glm::vec3( -2.0f,  1.0f,  0.0f),
+        // glm::vec3( -3.0f,  1.0f,  0.0f),
+        // glm::vec3( -4.0f,  1.0f,  0.0f),
+        // glm::vec3( -5.0f,  1.0f,  0.0f),
+        // glm::vec3( -6.0f,  1.0f,  0.0f),
+        // glm::vec3( -7.0f,  1.0f,  0.0f),
+        // glm::vec3( -8.0f,  1.0f,  0.0f),
+        // glm::vec3( -9.0f,  1.0f,  0.0f),
+        // glm::vec3(  0.0f,  1.0f,  0.0f),
+        // glm::vec3(  1.0f,  1.0f,  0.0f),
         glm::vec3(  2.0f,  1.0f,  0.0f),
-        glm::vec3(  3.0f,  1.0f,  0.0f),
-        glm::vec3(  4.0f,  1.0f,  0.0f),
-        glm::vec3(  5.0f,  1.0f,  0.0f),
-        glm::vec3(  6.0f,  1.0f,  0.0f),
-        glm::vec3(  7.0f,  1.0f,  0.0f),
-        glm::vec3(  8.0f,  1.0f,  0.0f),
-        glm::vec3(  9.0f,  1.0f,  0.0f),
-        glm::vec3( -1.0f,  2.0f,  0.0f),
-        glm::vec3( -2.0f,  2.0f,  0.0f),
-        glm::vec3( -3.0f,  2.0f,  0.0f),
-        glm::vec3( -4.0f,  2.0f,  0.0f),
-        glm::vec3( -5.0f,  2.0f,  0.0f),
-        glm::vec3( -6.0f,  2.0f,  0.0f),
-        glm::vec3( -7.0f,  2.0f,  0.0f),
-        glm::vec3( -8.0f,  2.0f,  0.0f),
-        glm::vec3( -9.0f,  2.0f,  0.0f),
-        glm::vec3(  0.0f,  2.0f,  0.0f),
-        glm::vec3(  1.0f,  2.0f,  0.0f),
-        glm::vec3(  2.0f,  2.0f,  0.0f),
-        glm::vec3(  3.0f,  2.0f,  0.0f),
-        glm::vec3(  4.0f,  2.0f,  0.0f),
-        glm::vec3(  5.0f,  2.0f,  0.0f),
-        glm::vec3(  6.0f,  2.0f,  0.0f),
-        glm::vec3(  7.0f,  2.0f,  0.0f),
-        glm::vec3(  8.0f,  2.0f,  0.0f),
-        glm::vec3(  9.0f,  2.0f,  0.0f),
+        // glm::vec3(  3.0f,  1.0f,  0.0f),
+        // glm::vec3(  4.0f,  1.0f,  0.0f),
+        // glm::vec3(  5.0f,  1.0f,  0.0f),
+        // glm::vec3(  6.0f,  1.0f,  0.0f),
+        // glm::vec3(  7.0f,  1.0f,  0.0f),
+        // glm::vec3(  8.0f,  1.0f,  0.0f),
+        // glm::vec3(  9.0f,  1.0f,  0.0f),
+        // glm::vec3( -1.0f,  2.0f,  0.0f),
+        // glm::vec3( -2.0f,  2.0f,  0.0f),
+        // glm::vec3( -3.0f,  2.0f,  0.0f),
+        // glm::vec3( -4.0f,  2.0f,  0.0f),
+        // glm::vec3( -5.0f,  2.0f,  0.0f),
+        // glm::vec3( -6.0f,  2.0f,  0.0f),
+        // glm::vec3( -7.0f,  2.0f,  0.0f),
+        // glm::vec3( -8.0f,  2.0f,  0.0f),
+        // glm::vec3( -9.0f,  2.0f,  0.0f),
+        // glm::vec3(  0.0f,  2.0f,  0.0f),
+        // glm::vec3(  1.0f,  2.0f,  0.0f),
+        // glm::vec3(  2.0f,  2.0f,  0.0f),
+        // glm::vec3(  3.0f,  2.0f,  0.0f),
+        // glm::vec3(  4.0f,  2.0f,  0.0f),
+        // glm::vec3(  5.0f,  2.0f,  0.0f),
+        // glm::vec3(  6.0f,  2.0f,  0.0f),
+        // glm::vec3(  7.0f,  2.0f,  0.0f),
+        // glm::vec3(  8.0f,  2.0f,  0.0f),
+        // glm::vec3(  9.0f,  2.0f,  0.0f),
     };
 
 
@@ -269,26 +269,26 @@ int main()
             }
 
             /* floor */
-            {
-                shader_texture.bind();
-                shader_texture.setUniform1i("u_Texture", 0);
-                for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
-                {
-                    if (i == 38)
-                        break;
-                    model = glm::mat4(1.0f);
-                    model = glm::translate(model, translatePositions[i]);
-                    model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-                    model = glm::translate(model, glm::vec3(0.0f, -1.0f, -1.5001f));
-                    shader_texture.setUniformMat4f("u_model", model);
-                    shader_texture.setUniformMat4f("u_view", view);
-                    shader_texture.setUniformMat4f("u_projection", projection);
-                    shader_texture.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
-                    floor.bind();
-                    va_floor.addBuffer(vb_floor, layout_floor);
-                    Render::draw(va_floor, ib_floor, shader_texture);
-                }
-            }
+            // {
+            //     shader_texture.bind();
+            //     shader_texture.setUniform1i("u_Texture", 0);
+            //     for (int i = 0; i < sizeof(translatePositions) / sizeof(translatePositions[0]); i++)
+            //     {
+            //         if (i == 38)
+            //             break;
+            //         model = glm::mat4(1.0f);
+            //         model = glm::translate(model, translatePositions[i]);
+            //         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+            //         model = glm::translate(model, glm::vec3(0.0f, -1.0f, -1.5001f));
+            //         shader_texture.setUniformMat4f("u_model", model);
+            //         shader_texture.setUniformMat4f("u_view", view);
+            //         shader_texture.setUniformMat4f("u_projection", projection);
+            //         shader_texture.setUniform4f("lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+            //         floor.bind();
+            //         va_floor.addBuffer(vb_floor, layout_floor);
+            //         Render::draw(va_floor, ib_floor, shader_texture);
+            //     }
+            // }
 
             /* box */
             {
@@ -301,10 +301,18 @@ int main()
                     shader_basic.setUniformMat4f("model", model);
                     shader_basic.setUniformMat4f("view", view);
                     shader_basic.setUniformMat4f("projection", projection);
-                    shader_basic.setUniform4f("u_lightPosition", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
-                    shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
-                    shader_basic.setUniform4f("u_lightColor", lightColor);
 
+                    shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
+
+                    shader_basic.setUniform4f("u_light.ambient",  0.2f, 0.2f, 0.2f, 1.0f);
+                    shader_basic.setUniform4f("u_light.diffuse",  0.5f, 0.5f, 0.5f, 1.0f);
+                    shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
+                    shader_basic.setUniform4f("u_light.position", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+
+                    shader_basic.setUniform4f("u_material.ambient",  1.0f, 0.5f, 0.31f, 1.0f);
+                    shader_basic.setUniform4f("u_material.diffuse",  1.0f, 0.5f, 0.31f, 1.0f);
+                    shader_basic.setUniform4f("u_material.specular", 0.5f, 0.5f, 0.5f, 1.0f);
+                    shader_basic.setUniform1f("u_material.shininess", 32.0f);
 
                     if (i % 2 == 0)
                         wall.bind(0);

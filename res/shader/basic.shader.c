@@ -31,6 +31,22 @@ void main()
 #shader fragment
 #version 330 core
 
+struct Material
+{
+    vec4 ambient;
+    vec4 diffuse;
+    vec4 specular;
+    float shininess;
+};
+
+struct Light
+{
+    vec4 position;
+    vec4 ambient;
+    vec4 diffuse;
+    vec4 specular;
+};
+
 out vec4 Color;
 
 in vec4 v_Color;
@@ -40,30 +56,35 @@ in vec4 v_FragPosition;
 
 
 uniform sampler2D u_Texture;
-uniform vec4 u_lightPosition;
-uniform vec4 u_lightColor;
 uniform vec4 u_viewPosition;
+uniform Material u_material;
+uniform Light u_light;
+
 
 
 void main()
 {
-    vec4 diffuse = max(
-                       dot(
-                           normalize(v_Normal), normalize(u_lightPosition - v_FragPosition)),
-                       0.0) *  u_lightColor;
-    vec4 ambient = 0.1 * u_lightColor;
-    vec4 specular = 0.5 * u_lightColor *
-                    pow(
-                        max(
-                            dot(
-                                normalize(u_viewPosition - v_FragPosition),
-                                reflect(normalize(v_FragPosition - u_lightPosition),
-                                        normalize(v_Normal)
-                                       )
-                            ),
-                            0.0),
-                        32);
-    Color = (ambient + diffuse + specular) * texture(u_Texture, v_TexCoord);
+    vec4 ambient = u_light.ambient * u_material.ambient;
+
+    vec4 diffuse = u_light.diffuse * (max(
+                                          dot(
+                                                  normalize(v_Normal), normalize(u_light.position - v_FragPosition)),
+                                          0.0)
+                                      * u_material.diffuse);
+
+    vec4 specular = u_light.specular * (pow(
+                                            max(
+                                                    dot(
+                                                            normalize(u_viewPosition - v_FragPosition),
+                                                            reflect(normalize(v_FragPosition - u_light.position),
+                                                                    normalize(v_Normal)
+                                                                   )
+                                                    ),
+                                                    0.0),
+                                            u_material.shininess)
+                                        * u_material.specular);
+
+    Color = (ambient + diffuse + specular) ;//* texture(u_Texture, v_TexCoord);
 }
 
 
