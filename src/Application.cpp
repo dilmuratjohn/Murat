@@ -99,7 +99,7 @@ bool firstMouse = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 
-int main()
+int main(int argc, char* argv[])
 {
     /* glfw: initialize and configure */
     glfwInit();
@@ -146,19 +146,12 @@ int main()
     Shader shader_color("res/shader/color.shader.c");
     Shader shader_texture("res/shader/texture.shader.c");
 
-
-
-
-
     /* texture */
     Texture::Texture2D wall("res/pic/wall.png", false);
     Texture::Texture2D floor("res/pic/floor.png", false);
     Texture::Texture2D box("res/pic/box.png", true);
     Texture::Texture2D container("res/pic/container.png", true);
     Texture::Texture2D matrix("res/pic/matrix.png", false);
-
-
-
 
     /* cube */
     VertexArray va_box;
@@ -167,7 +160,6 @@ int main()
     layout_box.push<float>(4);
     layout_box.push<float>(4);
     layout_box.push<float>(2);
-
 
     /* squre */
     VertexArray va_floor;
@@ -178,15 +170,16 @@ int main()
     layout_floor.push<float>(4);
     layout_floor.push<float>(2);
 
-
-
     /* transformation initialization */
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    glm::vec3 lightPosition(1.2f, 1.0f, 2.0f);
-    glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+    /* light */
+    glm::vec4 lightPosition(1.2f, 1.0f, 2.0f, 1.0f);
+    glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glm::vec4 light_diffuseColor = lightColor * glm::vec4(0.5f);
+    glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
 
     /* loop */
     while (!glfwWindowShouldClose(window))
@@ -202,14 +195,11 @@ int main()
 
             Render::clear();
 
-            glm::vec4 light_diffuseColor =  glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);//lightColor   * glm::vec4(0.5f);
-            glm::vec4 light_ambientColor =  glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);//light_diffuseColor * glm::vec4(0.2f);
-
             /* lamp */
             {
                 shader_color.bind();
                 model = glm::mat4(1.0f);
-                model = glm::translate(model, lightPosition);
+                model = glm::translate(model, glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
                 model = glm::scale(model, glm::vec3(0.2f));
                 shader_color.setUniformMat4f("u_model", model);
                 shader_color.setUniformMat4f("u_view", view);
@@ -224,21 +214,19 @@ int main()
                 box.bind(0);
                 container.bind(1);
                 matrix.bind(2);
-
+                model = glm::mat4(1.0f);
+                shader_basic.setUniformMat4f("u_model", model);
+                shader_basic.setUniformMat4f("u_view", view);
+                shader_basic.setUniformMat4f("u_projection", projection);
                 shader_basic.setUniform1i("u_material.diffuse", 0);
                 shader_basic.setUniform1i("u_material.specular", 1);
                 shader_basic.setUniform1i("u_material.emission", 2);
-
                 shader_basic.setUniform1f("u_material.shininess", 64.0f);
-                model = glm::mat4(1.0f);
-                shader_basic.setUniformMat4f("model", model);
-                shader_basic.setUniformMat4f("view", view);
-                shader_basic.setUniformMat4f("projection", projection);
                 shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
                 shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
                 shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
                 shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
-                shader_basic.setUniform4f("u_light.position", lightPosition.x, lightPosition.y, lightPosition.z, 1.0f);
+                shader_basic.setUniform4f("u_light.position", lightPosition);
                 va_box.addBuffer(vb_box, layout_box);
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }

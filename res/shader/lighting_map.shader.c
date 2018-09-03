@@ -11,19 +11,19 @@ out vec4 v_Normal;
 out vec4 v_FragPosition;
 
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_projection;
 
 
 
 
 void main()
 {
-    gl_Position = projection * view * model * Position;
-    v_FragPosition = model * Position;
+    gl_Position = u_projection * u_view * u_model * Position;
+    v_FragPosition = u_model * Position;
     v_TexCoord = TexCoord;
-    v_Normal = (transpose(inverse(model))) * Normal;
+    v_Normal = (transpose(inverse(u_model))) * Normal;
 }
 
 #shader fragment
