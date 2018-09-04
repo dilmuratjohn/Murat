@@ -1,13 +1,16 @@
 #include <iostream>
+#include <ctime>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-#include "GLCall.hpp"
 #include "Shader.hpp"
 #include "Render.hpp"
 #include "IndexBuffer.hpp"
@@ -17,19 +20,6 @@
 #include "Texture.hpp"
 #include "Camera.hpp"
 
-/* event */
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
-/* settings */
-const char * TITLE = "Sun Sep 2 2018";
-const unsigned int SCR_WIDTH = 1024;
-const unsigned int SCR_HEIGHT = 768;
-const float ASPECT_RATIO = (float)SCR_WIDTH / (float)SCR_HEIGHT;
-const float NEAR_PLANE = 0.1f;
-const float FAR_PLANE = 100.0f;
 
 const float vertices_cube[] =
 {
@@ -86,20 +76,34 @@ const unsigned int indices_flat[] =
     0, 1, 2,
     2, 3, 0,
 };
-/* timing */
+
+
+const unsigned int SCR_WIDTH = 1024;
+const unsigned int SCR_HEIGHT = 768;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
-
-/* camera */
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
+const float ASPECT_RATIO = (float)SCR_WIDTH / (float)SCR_HEIGHT;
+const float NEAR_PLANE = 0.1f;
+const float FAR_PLANE = 100.0f;
 bool firstMouse = true;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 
 int main(int argc, char* argv[])
 {
+
+    time_t now = time(0);
+    char* TITLE = ctime(&now);
+    std::cout << "Local" << TITLE << std::endl;
+
     /* glfw: initialize and configure */
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -131,14 +135,14 @@ int main(int argc, char* argv[])
     }
 
     /* window settings */
-    GLCall(glfwSetFramebufferSizeCallback(window, framebuffer_size_callback));
-    GLCall(glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED));
-    GLCall(glfwSetCursorPosCallback(window, mouse_callback));
-    GLCall(glfwSetScrollCallback(window, scroll_callback));
-    GLCall(glfwSetKeyCallback(window, key_callback));
-    GLCall(glfwSwapInterval(1));
-    GLCall(glEnable(GL_DEPTH_TEST));
-    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetKeyCallback(window, key_callback);
+    glfwSwapInterval(1);
+    glEnable(GL_DEPTH_TEST);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     /* shader */
     Shader shader_basic("res/shader/lighting_map.shader.c");

@@ -2,72 +2,77 @@
 #Created by Collin Thu/Aug/30 2018
 
 
-Prog = app/Application
-CXX = g++
+CXX = g++ -std=c++11
 CC = gcc
-Objs = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
+
+Program = app/Application
+Objects = Application.o Mesh.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
+
 Source_Dir = src
-CFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor
-CPPFLAG = -g -Wall -Ideps/glfw/include -Ideps/glfw/deps -Isrc/vendor -std=c++11
+GLAD_Dir = deps/glfw/deps
 
+Include_Flag = -g -Wall -Ideps/glfw/include -Ideps/assimp/include/ -Ideps/glfw/deps -Isrc/vendor
+Link_Flag = bin/*.o deps/glfw/src/libglfw3.a deps/assimp/lib/libassimp.dylib
 
-GLFW_FLAG = bin/*.o deps/glfw/bin/src/libglfw3.a 
-GLAD_FLAG = deps/glfw/deps
 
 Platform = ${shell uname}
 
 ifeq ($(Platform), Linux)
-	GLFW_FLAG += -lGL -lGLU  -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl
+	Link_Flag += -lGL -lGLU  -lX11 -lXxf86vm -lXrandr -lpthread -lXi -ldl
 endif
 ifeq ($(Platform), Darwin)
-	GLFW_FLAG += -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+	Link_Flag += -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 endif
 
 
-$(Prog) : $(Objs)
-	$(CXX) $(Lib_GLFW) -o $(Prog)  $(GLFW_FLAG)
+$(Program) : $(Objects)
+	$(CXX)  -o $(Program)  $(Link_Flag)
 
 Application.o : Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Application.cpp -o bin/Application.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Application.cpp -o bin/Application.o
+
+Mesh.o: Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Mesh.cpp -o bin/Mesh.o
 
 Render.o: VertexArray.o IndexBuffer.o Shader.o GLCall.o glad.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Render.cpp -o bin/Render.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Render.cpp -o bin/Render.o
 
 Shader.o : GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Shader.cpp -o bin/Shader.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Shader.cpp -o bin/Shader.o
 
 VertexArray.o : VertexBuffer.o VertexBufferLayout.o GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/VertexArray.cpp -o bin/VertexArray.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexArray.cpp -o bin/VertexArray.o
 
 VertexBuffer.o : GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/VertexBuffer.cpp -o bin/VertexBuffer.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexBuffer.cpp -o bin/VertexBuffer.o
 
 IndexBuffer.o : GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/IndexBuffer.cpp -o bin/IndexBuffer.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/IndexBuffer.cpp -o bin/IndexBuffer.o
 
 VertexBufferLayout.o : GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/VertexBufferLayout.cpp -o bin/VertexBufferLayout.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexBufferLayout.cpp -o bin/VertexBufferLayout.o
 
 Texture.o : stb_image.o GLCall.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Texture.cpp -o bin/Texture.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Texture.cpp -o bin/Texture.o
 
 stb_image.o : 
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/vendor/stb_image/stb_image.cpp -o bin/stb_image.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/vendor/stb_image/stb_image.cpp -o bin/stb_image.o
 
 Camera.o : glad.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/Camera.cpp -o bin/Camera.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Camera.cpp -o bin/Camera.o
 
 GLCall.o : glad.o
-	$(CXX) $(CPPFLAG) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
 
 glad.o :
-	$(CC) $(CFLAG) -c ${GLAD_FLAG}/glad.c -o bin/glad.o
-
-
+	$(CC)  $(Include_Flag) -c ${GLAD_Dir}/glad.c -o bin/glad.o
 
 
 init:
-	mkdir deps/glfw/bin && cd deps/glfw/bin && cmake ../. && make && cd - && mkdir -p bin app
+	cd deps/glfw && cmake . && make 
+	cd deps/assimp && cmake . && make
+	mkdir -p bin app 
+
 
 clean:
-	rm -rf deps/glfw/bin && rm -rf bin && rm -rf app
+	rm -rf bin && rm -rf app
