@@ -94,6 +94,19 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+void processNode(aiNode *node, const aiScene *scene)
+{
+    for (unsigned int i = 0; i < node->mNumMeshes; i++)
+    {
+        std::cout << "mesh" << std::endl;
+    }
+    for (unsigned int i = 0; i < node->mNumChildren; i++)
+    {
+        processNode(node->mChildren[i], scene);
+        std::cout << "sub node" << std::endl;
+    }
+}
+
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 
@@ -102,7 +115,6 @@ int main(int argc, char* argv[])
 
     time_t now = time(0);
     char* TITLE = ctime(&now);
-    std::cout << "Local" << TITLE << std::endl;
 
     /* glfw: initialize and configure */
     glfwInit();
@@ -143,6 +155,19 @@ int main(int argc, char* argv[])
     glfwSwapInterval(1);
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    const char* modelPath = "res/model/nanosuit/nanosuit.obj";
+
+    Assimp::Importer importer;
+    const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+    {
+        std::cout << "[Assimp] Error: " << importer.GetErrorString() << std::endl;
+        return -1;
+    }
+    processNode(scene->mRootNode, scene);
+
 
     /* shader */
     Shader shader_basic("res/shader/lighting_map.shader.c");
