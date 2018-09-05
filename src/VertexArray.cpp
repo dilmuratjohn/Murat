@@ -1,5 +1,4 @@
 #include "VertexArray.hpp"
-#include "GLCall.hpp"
 
 
 VertexArray::VertexArray()

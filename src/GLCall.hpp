@@ -1,9 +1,9 @@
 #ifndef GLCall_hpp
 #define GLCall_hpp
 
-#include <iostream>
-
 #include <glad/glad.h>
+
+#include <iostream>
 
 
 #ifdef _WIN32

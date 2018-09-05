@@ -1,9 +1,9 @@
 #ifndef VertexBufferLayout_hpp
 #define VertexBufferLayout_hpp
 
-#include <vector>
-
 #include "GLCall.hpp"
+
+#include <vector>
 
 
 struct VertexBufferElement

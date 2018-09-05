@@ -1,7 +1,7 @@
 #ifndef Texture_hpp
 #define Texture_hpp
 
-#include "GLCall.hpp"
+#include <string>
 
 namespace Texture
 {

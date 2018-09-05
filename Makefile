@@ -27,8 +27,12 @@ endif
 
 $(Program) : $(Objects)
 	$(CXX)  -o $(Program)  $(Link_Flag)
-Application.o : Render.o Texture.o Camera.o
+Application.o : Model.o Texture.o Camera.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Application.cpp -o bin/Application.o
+Model.o: Mesh.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Model.cpp -o bin/Model.o
+Mesh.o: Render.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/Mesh.cpp -o bin/Mesh.o
 Render.o: VertexArray.o IndexBuffer.o Shader.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Render.cpp -o bin/Render.o
 VertexArray.o : VertexBuffer.o VertexBufferLayout.o

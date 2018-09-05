@@ -1,26 +1,10 @@
-#include <iostream>
-#include <ctime>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-#include "Shader.hpp"
-#include "Render.hpp"
-#include "IndexBuffer.hpp"
-#include "VertexArray.hpp"
-#include "VertexBufferLayout.hpp"
-#include "VertexBuffer.hpp"
-#include "Texture.hpp"
+#include "Model.hpp"
 #include "Camera.hpp"
+#include "Texture.hpp"
 
+#include <GLFW/glfw3.h>
 
+#include <ctime>
 const float vertices_cube[] =
 {
     // positions          // normals           // texture coords
@@ -88,26 +72,12 @@ const float ASPECT_RATIO = (float)SCR_WIDTH / (float)SCR_HEIGHT;
 const float NEAR_PLANE = 0.1f;
 const float FAR_PLANE = 100.0f;
 bool firstMouse = true;
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
-void processNode(aiNode *node, const aiScene *scene)
-{
-    for (unsigned int i = 0; i < node->mNumMeshes; i++)
-    {
-        std::cout << "mesh" << std::endl;
-    }
-    for (unsigned int i = 0; i < node->mNumChildren; i++)
-    {
-        processNode(node->mChildren[i], scene);
-        std::cout << "sub node" << std::endl;
-    }
-}
-
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 
 int main(int argc, char* argv[])
@@ -156,19 +126,6 @@ int main(int argc, char* argv[])
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    const char* modelPath = "res/model/nanosuit/nanosuit.obj";
-
-    Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
-    {
-        std::cout << "[Assimp] Error: " << importer.GetErrorString() << std::endl;
-        return -1;
-    }
-    processNode(scene->mRootNode, scene);
-
-
     /* shader */
     Shader shader_basic("res/shader/lighting_map.shader.c");
     Shader shader_color("res/shader/color.shader.c");
@@ -198,6 +155,7 @@ int main(int argc, char* argv[])
     layout_floor.push<float>(4);
     layout_floor.push<float>(2);
 
+
     /* transformation initialization */
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
@@ -209,57 +167,55 @@ int main(int argc, char* argv[])
     glm::vec4 light_diffuseColor = lightColor * glm::vec4(0.5f);
     glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
 
+
     /* loop */
     while (!glfwWindowShouldClose(window))
     {
+        /* per-frame time logic */
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
 
+        projection = glm::perspective(glm::radians(camera.getFov()), ASPECT_RATIO, NEAR_PLANE, FAR_PLANE);
+        view = camera.getViewMatrix();
+
+        Render::clear();
+        /* lamp */
         {
-            /* per-frame time logic */
-            float currentFrame = glfwGetTime();
-            deltaTime = currentFrame - lastFrame;
-            lastFrame = currentFrame;
-
-            projection = glm::perspective(glm::radians(camera.getFov()), ASPECT_RATIO, NEAR_PLANE, FAR_PLANE);
-            view = camera.getViewMatrix();
-
-            Render::clear();
-
-            /* lamp */
-            {
-                shader_color.bind();
-                model = glm::mat4(1.0f);
-                model = glm::translate(model, glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
-                model = glm::scale(model, glm::vec3(0.2f));
-                shader_color.setUniformMat4f("u_model", model);
-                shader_color.setUniformMat4f("u_view", view);
-                shader_color.setUniformMat4f("u_projection", projection);
-                va_box.addBuffer(vb_box, layout_box);
-                glDrawArrays(GL_TRIANGLES, 0, 36);
-            }
-
-            /* box */
-            {
-                shader_basic.bind();
-                box.bind(0);
-                container.bind(1);
-                matrix.bind(2);
-                model = glm::mat4(1.0f);
-                shader_basic.setUniformMat4f("u_model", model);
-                shader_basic.setUniformMat4f("u_view", view);
-                shader_basic.setUniformMat4f("u_projection", projection);
-                shader_basic.setUniform1i("u_material.diffuse", 0);
-                shader_basic.setUniform1i("u_material.specular", 1);
-                shader_basic.setUniform1i("u_material.emission", 2);
-                shader_basic.setUniform1f("u_material.shininess", 64.0f);
-                shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
-                shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
-                shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
-                shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
-                shader_basic.setUniform4f("u_light.position", lightPosition);
-                va_box.addBuffer(vb_box, layout_box);
-                glDrawArrays(GL_TRIANGLES, 0, 36);
-            }
+            shader_color.bind();
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
+            model = glm::scale(model, glm::vec3(0.2f));
+            shader_color.setUniformMat4f("u_model", model);
+            shader_color.setUniformMat4f("u_view", view);
+            shader_color.setUniformMat4f("u_projection", projection);
+            va_box.addBuffer(vb_box, layout_box);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+
+        /* box */
+        {
+            shader_basic.bind();
+            box.bind(0);
+            container.bind(1);
+            matrix.bind(2);
+            model = glm::mat4(1.0f);
+            shader_basic.setUniformMat4f("u_model", model);
+            shader_basic.setUniformMat4f("u_view", view);
+            shader_basic.setUniformMat4f("u_projection", projection);
+            shader_basic.setUniform1i("u_material.diffuse", 0);
+            shader_basic.setUniform1i("u_material.specular", 1);
+            shader_basic.setUniform1i("u_material.emission", 2);
+            shader_basic.setUniform1f("u_material.shininess", 64.0f);
+            shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
+            shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
+            shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
+            shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
+            shader_basic.setUniform4f("u_light.position", lightPosition);
+            va_box.addBuffer(vb_box, layout_box);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"mes",
+				"meshes"
+			],
+			[
 				"New",
 				"NewShader"
 			],
@@ -351,16 +355,8 @@
 			"file": "src/Application.cpp",
 			"settings":
 			{
-				"buffer_size": 11820,
+				"buffer_size": 10778,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/VertexBufferLayout.hpp",
-			"settings":
-			{
-				"buffer_size": 943,
 				"line_ending": "Unix"
 			}
 		}
@@ -572,53 +568,53 @@
 	],
 	"file_history":
 	[
-		"/Users/collin/Desktop/cpp/tutorial/Makefile",
+		"/Users/collin/Desktop/cpp/tutorial/src/Texture.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Shader.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Texture.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Camera.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Model.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Mesh.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Mesh.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Render.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Model.hpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.cpp",
+		"/Users/collin/Desktop/cpp/tutorial/Makefile",
 		"/Users/collin/Desktop/cpp/tutorial/src/NewShader.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/NewMesh.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/NewModel.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/fs",
 		"/Users/collin/Desktop/cpp/tutorial/src/vs",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/model.shader.c",
-		"/Users/collin/Desktop/cpp/tutorial/src/Model.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Shader.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Application.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Model.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/texture.shader.c",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/basic.shader.c",
-		"/Users/collin/Desktop/cpp/tutorial/src/Shader.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Render.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/color.shader.c",
-		"/Users/collin/Desktop/cpp/tutorial/src/Texture.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/gtc/matrix_transform.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader.c",
-		"/Users/collin/Desktop/cpp/tutorial/src/Camera.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Camera.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/lamp.shader.c",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/lamp.shader",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/box.shader",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/Basic.shader",
 		"/Users/collin/Desktop/cpp/tutorial/src/ResourceManager.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/ResourceManager.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Texture.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/Render.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Game.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/Game.hpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexBuffer.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/VertexArray.cpp",
-		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/detail/type_mat.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/vendor/glm/matrix.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/sky.shader",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/obj.shader",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/SublimeAStyleFormatter.sublime-settings",
 		"/Users/collin/Desktop/cpp/tutorial/res/shader/light.shader",
-		"/Users/collin/Desktop/cpp/tutorial/src/GLCall.hpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/IndexBuffer.cpp",
 		"/Users/collin/Desktop/cpp/tutorial/src/VertexBufferLayout.cpp",
 		"/Users/collin/Library/Application Support/Sublime Text 3/Packages/User/TypeScriptReact.sublime-settings",
@@ -703,7 +699,7 @@
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -718,6 +714,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"vertex",
+			"Vertex",
+			"Render",
+			"DrawModel",
+			"vector",
+			"-o ",
+			"bin/",
+			"node",
 			"Mesh",
 			"res",
 			" ",
@@ -837,15 +841,7 @@
 			"texture",
 			"Texture",
 			"texture",
-			"texture1",
-			"Front",
-			"front",
-			"Front",
-			"front",
-			"Front",
-			"MovementSpeed",
-			"MouseSensitivity",
-			"Camera"
+			"texture1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -873,15 +869,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11820,
+						"buffer_size": 10778,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5644,
-								5644
+								7020,
+								7020
 							]
 						],
 						"settings":
@@ -891,46 +887,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2894.0,
+						"translation.y": 3947.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 1,
-					"file": "src/VertexBufferLayout.hpp",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 943,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								297,
-								297
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -938,7 +898,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 33.0
 	},
 	"input":
 	{
@@ -953,18 +913,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.945192236531,
 			1.0
 		],
 		"rows":
@@ -998,7 +951,7 @@
 	"project": "OpenGL.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1007,6 +960,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"mes",
+				"src/Mesh.hpp"
+			],
 			[
 				"mo",
 				"src/Model.hpp"
@@ -1394,7 +1351,7 @@
 		[
 			[
 				"",
-				"~/Desktop/app/sublimeSettings/Word.sublime-project"
+				"~/Desktop/app/sublimeSettings/Cross.sublime-project"
 			]
 		],
 		"width": 380.0
