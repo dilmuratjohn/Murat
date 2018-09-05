@@ -6,12 +6,6 @@ Model::Model(std::string const &path)
     init(path);
 }
 
-void Model::draw(Shader &shader)
-{
-    for (unsigned int i = 0; i < meshes.size(); i++)
-        meshes[i].draw(shader);
-}
-
 void Model::init(std::string const &path)
 {
     Assimp::Importer importer;
@@ -24,9 +18,14 @@ void Model::init(std::string const &path)
     processNode(scene->mRootNode, scene);
 }
 
+void Model::draw(Shader &shader)
+{
+    for (unsigned int i = 0; i < meshes.size(); i++)
+        meshes[i]->draw(shader);
+}
+
 void Model::processNode(aiNode *node, const aiScene *scene)
 {
-
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
@@ -38,7 +37,7 @@ void Model::processNode(aiNode *node, const aiScene *scene)
     }
 }
 
-Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
+Mesh* Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
 
     std::vector<struct_Vertex> vertices;
@@ -48,17 +47,14 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     {
         struct_Vertex vertex;
         glm::vec3 vector;
-
         vector.x = mesh->mVertices[i].x;
         vector.y = mesh->mVertices[i].y;
         vector.z = mesh->mVertices[i].z;
         vertex.position = vector;
-
         vector.x = mesh->mNormals[i].x;
         vector.y = mesh->mNormals[i].y;
         vector.z = mesh->mNormals[i].z;
         vertex.normal = vector;
-
         vertices.push_back(vertex);
     }
 
@@ -69,5 +65,5 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
             indices.push_back(face.mIndices[j]);
     }
 
-    return Mesh(vertices, indices);
+    return new Mesh(vertices, indices);
 }

@@ -9,6 +9,13 @@ Mesh::Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indice
 	init();
 }
 
+Mesh::~Mesh()
+{
+	delete m_va;
+	delete m_vb;
+	delete m_ib;
+}
+
 void Mesh::draw(Shader &shader)
 {
 	m_va->bind();
@@ -17,14 +24,11 @@ void Mesh::draw(Shader &shader)
 
 void Mesh::init()
 {
-	VertexArray _va;
-	VertexBuffer _vb(&m_vertices[0], m_vertices.size() * sizeof(struct_Vertex));
+	m_va = new VertexArray();
+	m_vb = new VertexBuffer(&m_vertices[0], m_vertices.size() * sizeof(struct_Vertex));
 	VertexBufferLayout _layout;
-	IndexBuffer _ib(&m_indices[0], m_indices.size() * sizeof(unsigned int));
+	m_ib = new IndexBuffer(&m_indices[0], m_indices.size() * sizeof(unsigned int));
 	_layout.push<float>(3);
 	_layout.push<float>(3);
-	_va.addBuffer(_vb, _layout);
-	m_va = &_va;
-	m_vb = &_vb;
-	m_ib = &_ib;
+	m_va->addBuffer(*m_vb, _layout);
 }

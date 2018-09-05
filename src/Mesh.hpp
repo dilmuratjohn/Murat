@@ -26,6 +26,7 @@ private:
 public:
 
 	Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices);
+	~Mesh();
 	void draw(Shader &shader);
 
 private:

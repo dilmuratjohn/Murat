@@ -12,7 +12,7 @@ class Model
 {
 public:
 
-    std::vector<Mesh> meshes;
+    std::vector<Mesh*> meshes;
 
 public:
 
@@ -23,7 +23,8 @@ private:
 
     void init(std::string const &path);
     void processNode(aiNode *node, const aiScene *scene);
-    Mesh processMesh(aiMesh *mesh, const aiScene *scene);
+    Mesh* processMesh(aiMesh *mesh, const aiScene *scene);
+
 };
 
 #endif

@@ -5,65 +5,9 @@
 #include <GLFW/glfw3.h>
 
 #include <ctime>
-const float vertices_cube[] =
-{
-    // positions          // normals           // texture coords
-    -0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 0.0f,
-    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 1.0f,
-    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.0,  0.0f,  0.0f, -1.0f, 1.0,  0.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 0.0f,
-    0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 0.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 1.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f, 1.0,  0.0f,  0.0f, 1.0f, 1.0,   0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f, 1.0, -1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    0.5f,  0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    0.5f, -0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  0.0f, 0.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  1.0f,  0.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 1.0f,
-    0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 1.0,  0.0f, -1.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 1.0f,
-    0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 1.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f, 1.0,  0.0f,  1.0f,  0.0f, 1.0,  0.0f, 1.0f
-};
 
-const float vertices_flat[] =
-    /* Position  .X.Y.Z.W.        TexCoord .S.T. */
-{
-    0.50f,  0.50f, 1.00f, 1.00f,  1.0f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-    0.50f, -0.50f, 1.00f, 1.00f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-    -0.50f, -0.50f, 1.00f, 1.00f,   0.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-    -0.50f,  0.50f, 1.00f, 1.00f,   0.0f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-};
-
-const unsigned int indices_flat[] =
-{
-    0, 1, 2,
-    2, 3, 0,
-};
-
-
-const unsigned int SCR_WIDTH = 1024;
-const unsigned int SCR_HEIGHT = 768;
+const unsigned int SCR_WIDTH = 1920;
+const unsigned int SCR_HEIGHT = 1080;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 float lastX = SCR_WIDTH / 2.0f;
@@ -180,42 +124,10 @@ int main(int argc, char* argv[])
         view = camera.getViewMatrix();
 
         Render::clear();
-        /* lamp */
-        {
-            shader_color.bind();
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
-            model = glm::scale(model, glm::vec3(0.2f));
-            shader_color.setUniformMat4f("u_model", model);
-            shader_color.setUniformMat4f("u_view", view);
-            shader_color.setUniformMat4f("u_projection", projection);
-            va_box.addBuffer(vb_box, layout_box);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-
-        /* box */
-        {
-            shader_basic.bind();
-            box.bind(0);
-            container.bind(1);
-            matrix.bind(2);
-            model = glm::mat4(1.0f);
-            shader_basic.setUniformMat4f("u_model", model);
-            shader_basic.setUniformMat4f("u_view", view);
-            shader_basic.setUniformMat4f("u_projection", projection);
-            shader_basic.setUniform1i("u_material.diffuse", 0);
-            shader_basic.setUniform1i("u_material.specular", 1);
-            shader_basic.setUniform1i("u_material.emission", 2);
-            shader_basic.setUniform1f("u_material.shininess", 64.0f);
-            shader_basic.setUniform4f("u_viewPosition", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, 1.0f);
-            shader_basic.setUniform4f("u_light.ambient",  light_ambientColor);
-            shader_basic.setUniform4f("u_light.diffuse",  light_diffuseColor);
-            shader_basic.setUniform4f("u_light.specular", 1.0f, 1.0f, 1.0f, 1.0f);
-            shader_basic.setUniform4f("u_light.position", lightPosition);
-            va_box.addBuffer(vb_box, layout_box);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-
+        imodel.draw(shader_color);
+        shader_color.setUniformMat4f("u_model", model);
+        shader_color.setUniformMat4f("u_view", view);
+        shader_color.setUniformMat4f("u_projection", projection);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -226,7 +138,7 @@ int main(int argc, char* argv[])
 void key_callback(GLFWwindow * window, int key, int scancode, int action, int mods)
 {
     /* close window */
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    if (key == GLFW_KEY_ESCAPE && action != GLFW_RELEASE)
         glfwSetWindowShouldClose(window, true);
 
     /* polygon mode */
@@ -238,17 +150,17 @@ void key_callback(GLFWwindow * window, int key, int scancode, int action, int mo
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     /* camera */
-    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    if (key == GLFW_KEY_W && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::FORWARD, deltaTime);
-    if (key == GLFW_KEY_S && action == GLFW_PRESS)
+    if (key == GLFW_KEY_S && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::BACKWARD, deltaTime);
-    if (key == GLFW_KEY_A && action == GLFW_PRESS)
+    if (key == GLFW_KEY_A && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::LEFT, deltaTime);
-    if (key == GLFW_KEY_D && action == GLFW_PRESS)
+    if (key == GLFW_KEY_D && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::RIGHT, deltaTime);
-    if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+    if (key == GLFW_KEY_UP && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::UP, deltaTime);
-    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+    if (key == GLFW_KEY_DOWN && action != GLFW_RELEASE)
         camera.processKeyboard(Camera_Movement::DOWN, deltaTime);
 }
 
