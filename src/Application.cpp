@@ -75,31 +75,6 @@ int main(int argc, char* argv[])
     Shader shader_color("res/shader/color.shader.c");
     Shader shader_texture("res/shader/texture.shader.c");
 
-    /* texture */
-    Texture::Texture2D wall("res/pic/wall.png", false);
-    Texture::Texture2D floor("res/pic/floor.png", false);
-    Texture::Texture2D box("res/pic/box.png", true);
-    Texture::Texture2D container("res/pic/container.png", true);
-    Texture::Texture2D matrix("res/pic/matrix.png", false);
-
-    /* cube */
-    VertexArray va_box;
-    VertexBuffer vb_box(vertices_cube, sizeof(vertices_cube));
-    VertexBufferLayout layout_box;
-    layout_box.push<float>(4);
-    layout_box.push<float>(4);
-    layout_box.push<float>(2);
-
-    /* squre */
-    VertexArray va_floor;
-    VertexBuffer vb_floor(vertices_flat, sizeof(vertices_flat));
-    VertexBufferLayout layout_floor;
-    IndexBuffer ib_floor(indices_flat, sizeof(indices_flat));
-    layout_floor.push<float>(4);
-    layout_floor.push<float>(4);
-    layout_floor.push<float>(2);
-
-
     /* transformation initialization */
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
@@ -110,7 +85,7 @@ int main(int argc, char* argv[])
     glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec4 light_diffuseColor = lightColor * glm::vec4(0.5f);
     glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
-
+    Model imodel("res/1.obj");
 
     /* loop */
     while (!glfwWindowShouldClose(window))
