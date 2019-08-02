@@ -6,7 +6,7 @@ CXX = g++ -std=c++11
 CC = gcc
 
 Program = app/Application
-Objects = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
+Objects = bin/Application.o bin/Render.o bin/Shader.o bin/VertexArray.o bin/VertexBuffer.o bin/IndexBuffer.o bin/VertexBufferLayout.o bin/Texture.o bin/stb_image.o bin/Camera.o bin/GLCall.o bin/glad.o
 
 Source_Dir = src
 GLAD_Dir = deps/glad/src
@@ -27,33 +27,33 @@ endif
 
 $(Program) : $(Objects)
 	$(CXX)  -o $(Program)  $(Link_Flag)
-Application.o : Model.o Texture.o Camera.o
+bin/Application.o : bin/Model.o bin/Texture.o bin/Camera.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Application.cpp -o bin/Application.o
-Model.o: Mesh.o
+bin/Model.o: bin/Mesh.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Model.cpp -o bin/Model.o
-Mesh.o: Render.o
+bin/Mesh.o: bin/Render.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Mesh.cpp -o bin/Mesh.o
-Render.o: VertexArray.o IndexBuffer.o Shader.o
+bin/Render.o: bin/VertexArray.o bin/IndexBuffer.o bin/Shader.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Render.cpp -o bin/Render.o
-VertexArray.o : VertexBuffer.o VertexBufferLayout.o
+bin/VertexArray.o : bin/VertexBuffer.o bin/VertexBufferLayout.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexArray.cpp -o bin/VertexArray.o
-Texture.o : stb_image.o GLCall.o
+bin/Texture.o : bin/stb_image.o bin/GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Texture.cpp -o bin/Texture.o
-VertexBufferLayout.o : GLCall.o
+bin/VertexBufferLayout.o : bin/GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexBufferLayout.cpp -o bin/VertexBufferLayout.o
-Shader.o : GLCall.o
+bin/Shader.o : bin/GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Shader.cpp -o bin/Shader.o
-VertexBuffer.o : GLCall.o
+bin/VertexBuffer.o : bin/GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexBuffer.cpp -o bin/VertexBuffer.o
-IndexBuffer.o : GLCall.o
+bin/IndexBuffer.o : bin/GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/IndexBuffer.cpp -o bin/IndexBuffer.o
-Camera.o : glad.o
+bin/Camera.o : bin/glad.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Camera.cpp -o bin/Camera.o
-GLCall.o : glad.o
+bin/GLCall.o : bin/glad.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/GLCall.cpp -o bin/GLCall.o
-stb_image.o : 
+bin/stb_image.o : 
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/vendor/stb_image/stb_image.cpp -o bin/stb_image.o
-glad.o :
+bin/glad.o :
 	$(CC)  $(Include_Flag) -c ${GLAD_Dir}/glad.c -o bin/glad.o
 
 
