@@ -1,5 +1,5 @@
-#Makefile for "Application" -- A C++ OpenGL Project
-#Created by Collin Thu/Aug/30 2018
+#Makefile for "Application" -- A OpenGL Project
+#Created by Murat Thu/Aug/30 2018
 
 
 CXX = g++ -std=c++11
