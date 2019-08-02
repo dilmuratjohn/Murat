@@ -1,5 +1,4 @@
-#ifndef Renderer_hpp
-#define Renderer_hpp
+#pragma once
 
 #include "GLCall.hpp"
 
@@ -7,6 +6,9 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 
@@ -49,5 +51,3 @@ private:
     unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader, const std::string& geometryShader);
     int getUniformLocation(const std::string& name);
 };
-
-#endif

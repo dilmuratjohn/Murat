@@ -1,10 +1,10 @@
-#ifndef RESOURCE_MANAGER_H
-#define RESOURCE_MANAGER_H
+#pragma once
+
 
 #include <map>
 #include <string>
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 #include "Texture.hpp"
 #include "Shader.hpp"
@@ -20,5 +20,3 @@ namespace ResourceManager
     Texture::Texture2D getTexture(std::string name);
     void clear();
 };
-
-#endif

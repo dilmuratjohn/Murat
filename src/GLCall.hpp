@@ -1,5 +1,4 @@
-#ifndef GLCall_hpp
-#define GLCall_hpp
+#pragma once
 
 #include <glad/glad.h>
 
@@ -19,5 +18,3 @@
 
 void GLClearError();
 bool GLLogCall(const char* function, const char* file, int line);
-
-#endif

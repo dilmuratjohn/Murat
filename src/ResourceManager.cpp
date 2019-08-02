@@ -1,10 +1,4 @@
-#ifndef RESOURCE_MANAGER_H
-#define RESOURCE_MANAGER_H
-
-#include <map>
-#include <string>
-
-#include <GL/glew.h>
+#pragma once
 
 #include "ResourceManager.hpp"
 
@@ -38,6 +32,3 @@ void ResourceManager::clear()
     for (auto iter : Textures)
         glDeleteTextures(1, &iter.second.ID);
 }
-
-
-#endif

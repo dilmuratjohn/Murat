@@ -1,9 +1,7 @@
-#ifndef VertexArray_hpp
-#define VertexArray_hpp
+#pragma once
 
 #include "VertexBuffer.hpp"
 #include "VertexBufferLayout.hpp"
-
 
 class VertexArray
 {
@@ -18,5 +16,3 @@ public:
     void bind() const;
     void unbind() const;
 };
-
-#endif

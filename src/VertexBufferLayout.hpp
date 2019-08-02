@@ -1,5 +1,4 @@
-#ifndef VertexBufferLayout_hpp
-#define VertexBufferLayout_hpp
+#pragma once
 
 #include "GLCall.hpp"
 
@@ -37,5 +36,3 @@ public:
     inline const std::vector<VertexBufferElement> getElements() const { return m_Elements; }
     inline unsigned int getStride() const { return m_Stride; }
 };
-
-#endif

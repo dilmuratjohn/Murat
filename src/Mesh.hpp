@@ -1,5 +1,4 @@
-#ifndef MESH_H
-#define MESH_H
+#pragma once
 
 #include "Render.hpp"
 
@@ -33,5 +32,3 @@ private:
 
 	void init();
 };
-
-#endif

@@ -1,5 +1,7 @@
-#ifndef Texture_hpp
-#define Texture_hpp
+#pragma once
+
+#include "GLCall.hpp"
+#include "stb_image/stb_image.hpp"
 
 #include <string>
 
@@ -32,25 +34,3 @@ namespace Texture
     };
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif

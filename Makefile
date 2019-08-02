@@ -9,9 +9,9 @@ Program = app/Application
 Objects = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuffer.o VertexBufferLayout.o Texture.o stb_image.o Camera.o GLCall.o glad.o
 
 Source_Dir = src
-GLAD_Dir = deps/glfw/deps
+GLAD_Dir = deps/glad/src
 
-Include_Flag = -g -Wall -Ideps/glfw/include -Ideps/assimp/include/ -Ideps/glfw/deps -Isrc/vendor
+Include_Flag = -g -Wall -Ideps/glfw/include -Ideps/assimp/include/ -Ideps/glad/include/ -Ideps/glfw/deps -Isrc/vendor
 Link_Flag = bin/*.o deps/glfw/src/libglfw3.a deps/assimp/lib/libassimp.dylib
 
 

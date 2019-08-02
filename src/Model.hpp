@@ -1,5 +1,4 @@
-#ifndef MODEL_H
-#define MODEL_H
+#pragma once
 
 #include "Mesh.hpp"
 
@@ -26,5 +25,3 @@ private:
     Mesh* processMesh(aiMesh *mesh, const aiScene *scene);
 
 };
-
-#endif

@@ -1,8 +1,5 @@
 #include "Shader.hpp"
 
-#include <fstream>
-#include <sstream>
-
 
 Shader::Shader(const std::string& filePath)
     : m_RendererID(0), m_FilePath(filePath)

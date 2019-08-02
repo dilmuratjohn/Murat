@@ -1,5 +1,4 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#pragma once
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -72,5 +71,3 @@ private:
     /* Calculates the front vector from the Camera's (updated) Euler Angles */
     void updateCameraVectors();
 };
-
-#endif

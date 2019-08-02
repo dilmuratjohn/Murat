@@ -1,8 +1,4 @@
 #include "Texture.hpp"
-#include "GLCall.hpp"
-
-#include "stb_image/stb_image.hpp"
-
 
 Texture::Texture2D::Texture2D(const std::string& filePath, bool transparency)
     :

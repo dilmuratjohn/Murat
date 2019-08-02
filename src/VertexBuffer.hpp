@@ -1,6 +1,6 @@
-#ifndef VertexBuffer_hpp
-#define VertexBuffer_hpp
+#pragma once
 
+#include "GLCall.hpp"
 
 class VertexBuffer
 {
@@ -14,5 +14,3 @@ public:
     void bind() const;
     void unbind() const;
 };
-
-#endif
