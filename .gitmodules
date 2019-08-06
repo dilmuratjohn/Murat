@@ -4,3 +4,9 @@
 [submodule "Murat/vendor/assimp"]
 	path = Murat/vendor/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "Murat/vendor/imgui"]
+	path = Murat/vendor/imgui
+	url = https://github.com/TheCherno/imgui.git
+[submodule "Murat/vendor/spdlog"]
+	path = Murat/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git

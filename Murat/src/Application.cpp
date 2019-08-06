@@ -1,13 +1,18 @@
 #include "Model.hpp"
 #include "Camera.hpp"
 #include "Texture.hpp"
+#include "imgui/imgui.h"
+#include "imgui/examples/imgui_impl_glfw.h"
+#include "imgui/examples/imgui_impl_opengl3.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 #include <GLFW/glfw3.h>
 
 #include <ctime>
 
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
+const unsigned int SCR_WIDTH = 750;
+const unsigned int SCR_HEIGHT = 1334;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 float lastX = SCR_WIDTH / 2.0f;
@@ -26,6 +31,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 int main(int argc, char* argv[])
 {
+
+    spdlog::info("Welcome to spdlog!");
 
     time_t now = time(0);
     char* TITLE = ctime(&now);
