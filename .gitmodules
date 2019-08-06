@@ -1,6 +1,6 @@
-[submodule "deps/glfw"]
-	path = deps/glfw
+[submodule "Murat/vendor/glfw"]
+	path = Murat/vendor/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "deps/assimp"]
-	path = deps/assimp
+[submodule "Murat/vendor/assimp"]
+	path = Murat/vendor/assimp
 	url = https://github.com/assimp/assimp.git
