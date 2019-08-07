@@ -1,5 +1,4 @@
 #include "MyImGuiClearColor.hpp"
-#include "imgui/imgui.h"
 
 namespace MyImGui {
 

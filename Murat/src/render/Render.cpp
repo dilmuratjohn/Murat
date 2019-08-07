@@ -1,5 +1,4 @@
-#include "Render.hpp"
-
+#include "render/Render.hpp"
 
 void Render::clear()
 {
@@ -7,7 +6,7 @@ void Render::clear()
     GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 
-void Render::draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader)
+void Render::draw(const VertexArray &va, const IndexBuffer &ib, const Shader &shader)
 {
     shader.bind();
     va.bind();
@@ -15,7 +14,8 @@ void Render::draw(const VertexArray& va, const IndexBuffer& ib, const Shader& sh
     GLCall(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
 }
 
-void draw(const FrameBuffer& fb, const VertexArray& va, const IndexBuffer& ib, const Shader& shader){
+void Render::draw(const FrameBuffer &fb, const VertexArray &va, const IndexBuffer &ib, const Shader &shader)
+{
     fb.bind();
     Render::draw(va, ib, shader);
     fb.unbind();

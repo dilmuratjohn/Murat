@@ -1,5 +1,5 @@
-#include "IndexBuffer.hpp"
 #include "GLCall.hpp"
+#include "render/IndexBuffer.hpp"
 
 
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)

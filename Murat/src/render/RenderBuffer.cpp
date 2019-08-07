@@ -1,4 +1,4 @@
-#include "RenderBuffer.hpp"
+#include "render/RenderBuffer.hpp"
 
 RenderBuffer::RenderBuffer(unsigned int attachment,unsigned int width, unsigned int height)
 {

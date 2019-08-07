@@ -1,5 +1,4 @@
 #include "MyImGui.hpp"
-#include "imgui/imgui.h"
 
 MyImGui::MyImGuiMenu::MyImGuiMenu(MyImGui *& currentMyImGuiPointer)
     : m_CurrentMyImGui(currentMyImGuiPointer)

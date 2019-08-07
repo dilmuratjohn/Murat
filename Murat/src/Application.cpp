@@ -1,10 +1,7 @@
-#include "Model.hpp"
-#include "Camera.hpp"
-#include "Texture.hpp"
-#include "imgui/imgui.h"
-#include "imgui/examples/imgui_impl_glfw.h"
-#include "imgui/examples/imgui_impl_opengl3.h"
+#include "model/Model.hpp"
+#include "render/Render.hpp"
 #include "imgui/MyImGuiClearColor.hpp"
+#include "Camera.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -89,7 +86,8 @@ int main(int argc, char *argv[])
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
 
@@ -99,7 +97,7 @@ int main(int argc, char *argv[])
 
     // Setup Platform/Renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    const char* glsl_version = "#version 330";
+    const char *glsl_version = "#version 330";
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     MyImGui::MyImGui *currentMyImGui = nullptr;
@@ -122,8 +120,8 @@ int main(int argc, char *argv[])
         shader_color.setUniformMat4f("u_model", model);
         shader_color.setUniformMat4f("u_view", view);
         shader_color.setUniformMat4f("u_projection", projection);
-        
-           // Start the Dear ImGui frame
+
+        // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();

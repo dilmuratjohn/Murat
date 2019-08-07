@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ResourceManager.hpp"
+#include "render/ResourceManager.hpp"
 
 
 Shader ResourceManager::loadShader(const std::string& filePath, const std::string& name)

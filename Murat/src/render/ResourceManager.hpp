@@ -6,8 +6,8 @@
 
 #include <glad/glad.h>
 
-#include "Texture.hpp"
-#include "Shader.hpp"
+#include "render/Texture.hpp"
+#include "render/Shader.hpp"
 
 
 namespace ResourceManager

@@ -1,10 +1,8 @@
 #include "Mesh.hpp"
 
-
 Mesh::Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices)
-	:
-	m_vertices(vertices),
-	m_indices(indices)
+	: m_vertices(vertices),
+	  m_indices(indices)
 {
 	init();
 }
