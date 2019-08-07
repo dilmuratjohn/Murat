@@ -13,10 +13,10 @@ bool GLLogCall(const char* function, const char* file, int line)
 {
     while (GLenum error = glGetError())
     {
-        std::cout << "[OpenGL Error] <" << error    << ">" << std::endl;
-        std::cout << "Function:      <" << function << ">" << std::endl;
-        std::cout << "File:          <" << file     << ">" << std::endl;
-        std::cout << "Line:          <" << line     << ">" << std::endl;
+        spdlog::debug("[OpenGL Error]", error);
+        spdlog::debug("Function: ", function);
+        spdlog::debug("File: ", file);
+        spdlog::debug("Line: ", line);
         return false;
     }
     return true;

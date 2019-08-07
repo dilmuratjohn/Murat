@@ -1,8 +1,9 @@
 #pragma once
 
-#include <glad/glad.h>
-
 #include <iostream>
+#include <glad/glad.h>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 
 #ifdef _WIN32

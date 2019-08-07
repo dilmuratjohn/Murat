@@ -4,8 +4,6 @@
 #include "imgui/imgui.h"
 #include "imgui/examples/imgui_impl_glfw.h"
 #include "imgui/examples/imgui_impl_opengl3.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
 
 #include <GLFW/glfw3.h>
 
@@ -32,7 +30,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 int main(int argc, char* argv[])
 {
 
-    spdlog::info("Welcome to spdlog!");
+    spdlog::info("welcome to Murat Engine!");
 
     time_t now = time(0);
     char* TITLE = ctime(&now);
@@ -52,7 +50,7 @@ int main(int argc, char* argv[])
 
     if (window == NULL)
     {
-        std::cout << "Failed to create GLFW window" << std::endl;
+        spdlog::error("Failed to create GLFW window");
         glfwTerminate();
         return -1;
     }
@@ -63,13 +61,13 @@ int main(int argc, char* argv[])
     /* glad: load all OpenGL function pointers */
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
+        spdlog::error("Failed to initialize GLAD");
         return -1;
     }
 
     /* window settings */
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetKeyCallback(window, key_callback);
@@ -77,22 +75,10 @@ int main(int argc, char* argv[])
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    /* shader */
-    Shader shader_basic("res/shader/lighting_map.shader.c");
-    Shader shader_color("res/shader/color.shader.c");
-    Shader shader_texture("res/shader/texture.shader.c");
-
     /* transformation initialization */
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-
-    /* light */
-    glm::vec4 lightPosition(1.2f, 1.0f, 2.0f, 1.0f);
-    glm::vec4 lightColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glm::vec4 light_diffuseColor = lightColor * glm::vec4(0.5f);
-    glm::vec4 light_ambientColor = light_diffuseColor * glm::vec4(0.2f);
-    Model imodel("res/1.obj");
 
     /* loop */
     while (!glfwWindowShouldClose(window))
@@ -106,10 +92,6 @@ int main(int argc, char* argv[])
         view = camera.getViewMatrix();
 
         Render::clear();
-        imodel.draw(shader_color);
-        shader_color.setUniformMat4f("u_model", model);
-        shader_color.setUniformMat4f("u_view", view);
-        shader_color.setUniformMat4f("u_projection", projection);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

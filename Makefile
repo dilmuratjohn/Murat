@@ -33,7 +33,7 @@ Model.o: Mesh.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Model.cpp -o Model.o
 Mesh.o: Render.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Mesh.cpp -o Mesh.o
-Render.o: VertexArray.o IndexBuffer.o Shader.o
+Render.o: VertexArray.o IndexBuffer.o Shader.o FrameBuffer.o RenderBuffer.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Render.cpp -o Render.o
 VertexArray.o : VertexBuffer.o VertexBufferLayout.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexArray.cpp -o VertexArray.o
@@ -47,6 +47,10 @@ VertexBuffer.o : GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/VertexBuffer.cpp -o VertexBuffer.o
 IndexBuffer.o : GLCall.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/IndexBuffer.cpp -o IndexBuffer.o
+FrameBuffer.o : GLCall.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/FrameBuffer.cpp -o FrameBuffer.o
+RenderBuffer.o : GLCall.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/RenderBuffer.cpp -o RenderBuffer.o
 Camera.o : glad.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Camera.cpp -o Camera.o
 GLCall.o : glad.o

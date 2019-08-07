@@ -14,3 +14,9 @@ void Render::draw(const VertexArray& va, const IndexBuffer& ib, const Shader& sh
     ib.bind();
     GLCall(glDrawElements(GL_TRIANGLES, ib.getCount(), GL_UNSIGNED_INT, nullptr));
 }
+
+void draw(const FrameBuffer& fb, const VertexArray& va, const IndexBuffer& ib, const Shader& shader){
+    fb.bind();
+    Render::draw(va, ib, shader);
+    fb.unbind();
+}
