@@ -2,7 +2,7 @@
 
 Run following code to build demo app
 ```shell
-make init && make
+make install && make
 ```
 
 [Learn OpenGL from this site](https://learnopengl.com/)
