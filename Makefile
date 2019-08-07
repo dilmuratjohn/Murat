@@ -11,7 +11,7 @@ Objects = Application.o Render.o Shader.o VertexArray.o VertexBuffer.o IndexBuff
 Source_Dir = Murat/src
 Vendor_Dir = Murat/vendor
 
-Include_Flag = -g -Wall -I$(Vendor_Dir)/glfw/include -I$(Vendor_Dir)/assimp/include/ -I$(Vendor_Dir)/glad/include/ -I$(Vendor_Dir)/glfw/deps -I$(Vendor_Dir)/spdlog/include -I$(Vendor_Dir) -I$(Vendor_Dir)/imgui
+Include_Flag = -g -Wall -I$(Vendor_Dir)/glfw/include -I$(Vendor_Dir)/assimp/include/ -I$(Vendor_Dir)/glad/include/ -I$(Vendor_Dir)/glfw/deps -I$(Vendor_Dir)/spdlog/include -I$(Source_Dir) -I$(Vendor_Dir) -I$(Vendor_Dir)/imgui
 Link_Flag = *.o $(Vendor_Dir)/glfw/src/libglfw3.a $(Vendor_Dir)/assimp/lib/libassimp.dylib
 
 
@@ -27,12 +27,16 @@ endif
 
 $(Program) : $(Objects)
 	$(CXX)  -o $(Program)  $(Link_Flag)
-Application.o : Model.o Texture.o Camera.o imgui.o imgui_draw.o imgui_widgets.o imgui_demo.o imgui_impl_opengl3.o imgui_impl_glfw.o
+Application.o : Model.o Texture.o Camera.o MyImGuiClearColor.o imgui.o imgui_draw.o imgui_widgets.o imgui_demo.o imgui_impl_opengl3.o imgui_impl_glfw.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Application.cpp -o Application.o
 Model.o: Mesh.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Model.cpp -o Model.o
 Mesh.o: Render.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Mesh.cpp -o Mesh.o
+MyImGuiClearColor.o: MyImGui.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/imgui/MyImGuiClearColor.cpp -o MyImGuiClearColor.o
+MyImGui.o: Render.o imgui.o
+	$(CXX) $(Include_Flag) -c $(Source_Dir)/imgui/MyImGui.cpp -o MyImGui.o
 Render.o: VertexArray.o IndexBuffer.o Shader.o FrameBuffer.o RenderBuffer.o
 	$(CXX) $(Include_Flag) -c $(Source_Dir)/Render.cpp -o Render.o
 VertexArray.o : VertexBuffer.o VertexBufferLayout.o

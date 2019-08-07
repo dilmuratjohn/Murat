@@ -4,6 +4,7 @@
 #include "imgui/imgui.h"
 #include "imgui/examples/imgui_impl_glfw.h"
 #include "imgui/examples/imgui_impl_opengl3.h"
+#include "imgui/MyImGuiClearColor.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -21,19 +22,18 @@ const float FAR_PLANE = 100.0f;
 bool firstMouse = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void mouse_callback(GLFWwindow *window, double xpos, double ypos);
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 
     spdlog::info("welcome to Murat Engine!");
 
     time_t now = time(0);
-    char* TITLE = ctime(&now);
+    char *TITLE = ctime(&now);
 
     /* glfw: initialize and configure */
     glfwInit();
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 #endif
 
     /* glfw window creation */
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, TITLE, NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, TITLE, NULL, NULL);
 
     if (window == NULL)
     {
@@ -79,7 +79,33 @@ int main(int argc, char* argv[])
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
+    /* shader */
+    Shader shader_basic("res/shader/lighting_map.shader.c");
+    Shader shader_color("res/shader/color.shader.c");
+    Shader shader_texture("res/shader/texture.shader.c");
 
+    Model imodel("res/1.obj");
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsClassic();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    const char* glsl_version = "#version 330";
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
+    MyImGui::MyImGui *currentMyImGui = nullptr;
+    MyImGui::MyImGuiMenu *myImGuiMenu = new MyImGui::MyImGuiMenu(currentMyImGui);
+    currentMyImGui = myImGuiMenu;
+    myImGuiMenu->RegisterMyImGui<MyImGui::MyImGuiClearColor>("clear color");
     /* loop */
     while (!glfwWindowShouldClose(window))
     {
@@ -90,16 +116,46 @@ int main(int argc, char* argv[])
 
         projection = glm::perspective(glm::radians(camera.getFov()), ASPECT_RATIO, NEAR_PLANE, FAR_PLANE);
         view = camera.getViewMatrix();
-
         Render::clear();
+
+        imodel.draw(shader_color);
+        shader_color.setUniformMat4f("u_model", model);
+        shader_color.setUniformMat4f("u_view", view);
+        shader_color.setUniformMat4f("u_projection", projection);
+        
+           // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        if (currentMyImGui)
+        {
+            currentMyImGui->OnUpdate(0.0f);
+            currentMyImGui->OnRender();
+            ImGui::Begin("Test");
+            if (currentMyImGui != myImGuiMenu && ImGui::Button("<-"))
+            {
+                delete currentMyImGui;
+                currentMyImGui = myImGuiMenu;
+            }
+            currentMyImGui->OnImGuiRender();
+            ImGui::End();
+        }
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
     glfwTerminate();
     return 0;
 }
 
-void key_callback(GLFWwindow * window, int key, int scancode, int action, int mods)
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     /* close window */
     if (key == GLFW_KEY_ESCAPE && action != GLFW_RELEASE)
@@ -128,12 +184,12 @@ void key_callback(GLFWwindow * window, int key, int scancode, int action, int mo
         camera.processKeyboard(Camera_Movement::DOWN, deltaTime);
 }
 
-void framebuffer_size_callback(GLFWwindow * window, int width, int height)
+void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
-void mouse_callback(GLFWwindow * window, double xpos, double ypos)
+void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
     if (firstMouse)
     {
@@ -151,7 +207,7 @@ void mouse_callback(GLFWwindow * window, double xpos, double ypos)
     camera.processMouseMovement(xoffset, yoffset);
 }
 
-void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
     camera.processMouseScroll(yoffset);
 }
