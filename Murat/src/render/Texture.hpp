@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GLCall.hpp"
+#include "Core.hpp"
 #include "stb_image/stb_image.hpp"
 
 #include <string>

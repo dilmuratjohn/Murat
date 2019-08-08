@@ -29,40 +29,14 @@ int main(int argc, char *argv[]) {
     time_t now = time(0);
     char *TITLE = ctime(&now);
 
-    /* glfw: initialize and configure */
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    Murat::WindowProps props = Murat::WindowProps("Murat Engine", SCR_WIDTH, SCR_HEIGHT);
+    Murat::Window window = Murat::Window(props);
 
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    /* glfw window creation */
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, TITLE, NULL, NULL);
-
-    if (window == NULL) {
-        spdlog::error("Failed to create GLFW window");
-        glfwTerminate();
-        return -1;
-    }
-
-    /* glfw settings */
-    glfwMakeContextCurrent(window);
-
-    /* glad: load all OpenGL function pointers */
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        spdlog::error("Failed to initialize GLAD");
-        return -1;
-    }
-
-    /* window settings */
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_size_callback);
+    // glfwSetInputMode(window.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window.getWindow(), mouse_callback);
+    glfwSetScrollCallback(window.getWindow(), scroll_callback);
+    glfwSetKeyCallback(window.getWindow(), key_callback);
     glfwSwapInterval(1);
     glEnable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -92,16 +66,16 @@ int main(int argc, char *argv[]) {
     //ImGui::StyleColorsClassic();
 
     // Setup Platform/Renderer bindings
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    const char *glsl_version = "#version 330";
-    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui_ImplGlfw_InitForOpenGL(window.getWindow(), true);
+    const char *Version = "#version 330";
+    ImGui_ImplOpenGL3_Init(Version);
 
     MyImGui::MyImGui *currentMyImGui = nullptr;
     MyImGui::MyImGuiMenu *myImGuiMenu = new MyImGui::MyImGuiMenu(currentMyImGui);
     currentMyImGui = myImGuiMenu;
     myImGuiMenu->RegisterMyImGui<MyImGui::MyImGuiClearColor>("clear color");
     /* loop */
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window.getWindow())) {
         /* per-frame time logic */
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
@@ -133,8 +107,7 @@ int main(int argc, char *argv[]) {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        window.onUpdate();
     }
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
