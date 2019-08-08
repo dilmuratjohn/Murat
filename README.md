@@ -1,8 +1,5 @@
 # OpenGL Tutorial
 
-Run following code to build demo app
-```shell
-make init && make
-```
+A light weight OpenGL Engine
 
 [Learn OpenGL from this site](https://learnopengl.com/)
