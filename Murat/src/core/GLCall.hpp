@@ -18,4 +18,5 @@
 #define GLCall(function) GLClearError(); function; ASSERT(GLLogCall(#function, __FILE__, __LINE__))
 
 void GLClearError();
-bool GLLogCall(const char* function, const char* file, int line);
+
+bool GLLogCall(const char *function, const char *file, int line);

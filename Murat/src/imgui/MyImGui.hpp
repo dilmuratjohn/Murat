@@ -1,6 +1,5 @@
 #pragma once
 
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
 #include "render/Render.hpp"
 #include "imgui/imgui.h"
@@ -9,34 +8,33 @@
 #include <functional>
 #include <vector>
 
-namespace MyImGui
-{
-class MyImGui
-{
-public:
-    MyImGui(){};
-    virtual ~MyImGui(){};
+namespace MyImGui {
+    class MyImGui {
+    public:
+        MyImGui() {};
 
-    virtual void OnUpdate(float deltaTime) {}
-    virtual void OnRender() {}
-    virtual void OnImGuiRender() {}
-};
+        virtual ~MyImGui() {};
 
-class MyImGuiMenu : public MyImGui
-{
-public:
-    MyImGuiMenu(MyImGui *&currentMyImGuiPointer);
+        virtual void OnUpdate(float deltaTime) {}
 
-    void OnImGuiRender() override;
+        virtual void OnRender() {}
 
-    template <typename T>
-    void RegisterMyImGui(const std::string &name)
-    {
-        m_MyImGuis.push_back(std::make_pair(name, []() { return new T(); }));
-    }
+        virtual void OnImGuiRender() {}
+    };
 
-private:
-    MyImGui *&m_CurrentMyImGui;
-    std::vector<std::pair<std::string, std::function<MyImGui *()>>> m_MyImGuis;
-};
+    class MyImGuiMenu : public MyImGui {
+    public:
+        MyImGuiMenu(MyImGui *&currentMyImGuiPointer);
+
+        void OnImGuiRender() override;
+
+        template<typename T>
+        void RegisterMyImGui(const std::string &name) {
+            m_MyImGuis.push_back(std::make_pair(name, []() { return new T(); }));
+        }
+
+    private:
+        MyImGui *&m_CurrentMyImGui;
+        std::vector<std::pair<std::string, std::function<MyImGui *()>>> m_MyImGuis;
+    };
 } // namespace MyImGui
