@@ -4,9 +4,9 @@
 
 #pragma once
 
+#include "Event.hpp"
 #include <string>
 #include <sstream>
-#include "Event.hpp"
 
 namespace Murat {
     class KeyEvent : public Event {

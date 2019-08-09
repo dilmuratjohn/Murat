@@ -1,11 +1,11 @@
 #pragma once
 
-#include "render/FrameBuffer.hpp"
-#include "render/RenderBuffer.hpp"
-#include "render/VertexArray.hpp"
-#include "render/IndexBuffer.hpp"
-#include "render/Shader.hpp"
-#include "render/Texture.hpp"
+#include "FrameBuffer.hpp"
+#include "RenderBuffer.hpp"
+#include "VertexArray.hpp"
+#include "IndexBuffer.hpp"
+#include "Shader.hpp"
+#include "Texture.hpp"
 
 namespace Render {
     void clear();

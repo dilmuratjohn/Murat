@@ -2,7 +2,7 @@
 // Created by murat on 2019-08-09.
 //
 
-#include <glfw/include/GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 #include <Application.hpp>
 #include "Input.hpp"
 

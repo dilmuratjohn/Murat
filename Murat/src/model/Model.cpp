@@ -1,3 +1,4 @@
+#include <core/Log.hpp>
 #include "Model.hpp"
 
 Model::Model(std::string const &path) {
@@ -9,24 +10,24 @@ void Model::init(std::string const &path) {
     const aiScene *scene = importer.ReadFile(path,
                                              aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        std::cout << "[Assimp Error] " << importer.GetErrorString() << std::endl;
+        Log_Error("[Assimp Error] ", importer.GetErrorString());
         return;
     }
     processNode(scene->mRootNode, scene);
 }
 
 void Model::draw(Shader &shader) {
-    for (unsigned int i = 0; i < meshes.size(); i++)
-        meshes[i]->draw(shader);
+    for (auto &mesh : meshes)
+        mesh->draw(shader);
 }
 
 void Model::processNode(aiNode *node, const aiScene *scene) {
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
-        aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
+        aiMesh *mesh = scene->mMeshes[ node->mMeshes[ i ]];
         meshes.push_back(processMesh(mesh, scene));
     }
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
-        processNode(node->mChildren[i], scene);
+        processNode(node->mChildren[ i ], scene);
     }
 }
 
@@ -36,23 +37,23 @@ Mesh *Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     std::vector<unsigned int> indices;
 
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
-        struct_Vertex vertex;
+        struct_Vertex vertex{};
         glm::vec3 vector;
-        vector.x = mesh->mVertices[i].x;
-        vector.y = mesh->mVertices[i].y;
-        vector.z = mesh->mVertices[i].z;
+        vector.x = mesh->mVertices[ i ].x;
+        vector.y = mesh->mVertices[ i ].y;
+        vector.z = mesh->mVertices[ i ].z;
         vertex.position = vector;
-        vector.x = mesh->mNormals[i].x;
-        vector.y = mesh->mNormals[i].y;
-        vector.z = mesh->mNormals[i].z;
+        vector.x = mesh->mNormals[ i ].x;
+        vector.y = mesh->mNormals[ i ].y;
+        vector.z = mesh->mNormals[ i ].z;
         vertex.normal = vector;
         vertices.push_back(vertex);
     }
 
     for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
-        aiFace face = mesh->mFaces[i];
+        aiFace face = mesh->mFaces[ i ];
         for (unsigned int j = 0; j < face.mNumIndices; j++)
-            indices.push_back(face.mIndices[j]);
+            indices.push_back(face.mIndices[ j ]);
     }
 
     return new Mesh(vertices, indices);

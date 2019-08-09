@@ -2,12 +2,12 @@
 // Created by murat on 2019-08-08.
 //
 
-#include <Application.hpp>
-#include <ImGuiLayer.hpp>
+#include <GLFW/glfw3.h>
 #include <imgui/imgui.h>
 #include <imgui/examples/imgui_impl_opengl3.h>
 #include <imgui/examples/imgui_impl_glfw.h>
-#include <GLFW/glfw3.h>
+#include <Application.hpp>
+#include "ImGuiLayer.hpp"
 
 namespace Murat{
 

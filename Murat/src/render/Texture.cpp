@@ -1,5 +1,6 @@
-#include "render/Texture.hpp"
 #include <glad/glad.h>
+#include <core/Log.hpp>
+#include "Texture.hpp"
 
 Texture::Texture2D::Texture2D(const std::string &filePath, bool transparency)
         :
@@ -15,7 +16,7 @@ Texture::Texture2D::Texture2D(const std::string &filePath, bool transparency)
     m_LocalBuffer = stbi_load(m_FilePath.c_str(), &m_Width, &m_Height, &m_BPP, 0);
 
     if (!m_LocalBuffer)
-        std::cout << "[Error] " << "Failed to load texture." << std::endl;
+        Log_Error("[Error] ", "Failed to load texture.");
 
     glGenTextures(1, &m_RendererID);
     glBindTexture(GL_TEXTURE_2D, m_RendererID);

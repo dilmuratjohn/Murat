@@ -3,10 +3,10 @@
 //
 
 
-#include "Application.hpp"
-#include <core/Core.hpp>
 #include <core/LayerStack.hpp>
 #include <GLFW/glfw3.h>
+#include <core/Log.hpp>
+#include "Application.hpp"
 
 
 namespace Murat {
@@ -16,7 +16,7 @@ namespace Murat {
 
     Application::Application() {
         Log::init();
-        ASSERT(!s_Instance, "Application already created.");
+        assert(!s_Instance);
         s_Instance = this;
         m_Window = std::unique_ptr<Window>(Window::create());
         m_Window->setEventCallback(BIND_EVENT_FN(onEvent));

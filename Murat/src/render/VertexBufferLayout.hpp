@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Core.hpp"
-
+#include <glad/glad.h>
 #include <vector>
 
-#include <glad/glad.h>
 struct VertexBufferElement {
     unsigned int count;
     unsigned int type;
@@ -12,11 +10,14 @@ struct VertexBufferElement {
 
     static unsigned int getSizeOfType(unsigned int type) {
         switch (type) {
-            case GL_FLOAT:          return sizeof(GLfloat);
-            case GL_UNSIGNED_INT:   return sizeof(GLuint);
-            case GL_UNSIGNED_BYTE:  return sizeof(GLubyte);
+            case GL_FLOAT:
+                return sizeof(GLfloat);
+            case GL_UNSIGNED_INT:
+                return sizeof(GLuint);
+            case GL_UNSIGNED_BYTE:
+                return sizeof(GLubyte);
         }
-        ASSERT(false, "unknown type");
+        assert(false);
         return 0;
     }
 };

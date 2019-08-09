@@ -1,5 +1,5 @@
-#include "render/RenderBuffer.hpp"
 #include <glad/glad.h>
+#include "RenderBuffer.hpp"
 
 RenderBuffer::RenderBuffer(unsigned int attachment, unsigned int width, unsigned int height) {
     glGenRenderbuffers(1, &m_RendererID);

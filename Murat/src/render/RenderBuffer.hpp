@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Core.hpp"
-
 class RenderBuffer {
 private:
     unsigned int m_RendererID;

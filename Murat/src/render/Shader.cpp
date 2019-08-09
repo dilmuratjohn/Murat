@@ -1,6 +1,6 @@
-#include "render/Shader.hpp"
 #include <glad/glad.h>
 #include <core/Log.hpp>
+#include "Shader.hpp"
 
 Shader::Shader(const std::string &filePath)
         : m_RendererID(0), m_FilePath(filePath) {

@@ -1,14 +1,14 @@
-#include "render/VertexBufferLayout.hpp"
+#include "VertexBufferLayout.hpp"
 
 
 VertexBufferLayout::VertexBufferLayout()
-        : m_Stride(0) {}
+        : m_Stride(0) { }
 
-VertexBufferLayout::~VertexBufferLayout() {}
+VertexBufferLayout::~VertexBufferLayout() { }
 
 template<typename T>
 void VertexBufferLayout::push(unsigned int count) {
-    ASSERT(false, "template");
+    assert(false);
 }
 
 template<>

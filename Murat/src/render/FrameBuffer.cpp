@@ -1,6 +1,5 @@
-#include "render/FrameBuffer.hpp"
-#include "Core.hpp"
 #include <glad/glad.h>
+#include "FrameBuffer.hpp"
 
 
 FrameBuffer::FrameBuffer() {

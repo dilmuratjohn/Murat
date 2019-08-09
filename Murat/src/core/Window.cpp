@@ -2,13 +2,13 @@
 // Created by murat on 2019-08-08.
 //
 
-#include <events/Event.hpp>
-#include <Window.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <events/Event.hpp>
 #include <events/KeyEvent.hpp>
 #include <events/MouseEvent.hpp>
-#include "Core.hpp"
+#include "Window.hpp"
+#include "Log.hpp"
 
 namespace Murat {
 
@@ -39,7 +39,7 @@ namespace Murat {
 
         if (!s_GLFWInitialized) {
             int success = glfwInit();
-            ASSERT(success, "Could not initialize GLFW.");
+            assert(success);
             s_GLFWInitialized = true;
         }
 
@@ -50,12 +50,11 @@ namespace Murat {
 
         glfwMakeContextCurrent(m_Window);
         int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        ASSERT(status, "Failed to load Glad.");
-        spdlog::info("OpenGL Info:");
-        spdlog::info("  Vendor: {0}", glGetString(GL_VENDOR));
-        spdlog::info("  Renderer: {0}", glGetString(GL_RENDERER));
-        spdlog::info("  Version: {0}", glGetString(GL_VERSION));
-
+        assert(status);
+        Log_Info("OpenGL Info:");
+        Log_Info("  Vendor: {0}", glGetString(GL_VENDOR));
+        Log_Info("  Renderer: {0}", glGetString(GL_RENDERER));
+        Log_Info("  Version: {0}", glGetString(GL_VERSION));
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -67,7 +66,6 @@ namespace Murat {
 
 
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {
-            Log_Info("glfwSetWindowSizeCallback");
             WindowData &data = *(WindowData *) glfwGetWindowUserPointer(window);
             data.width = width;
             data.height = height;
@@ -122,7 +120,7 @@ namespace Murat {
                     data.eventCallback(event);
                     break;
                 }
-                default: ;
+                default:;
             }
         });
 

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Core.hpp"
-#include "stb_image/stb_image.hpp"
-
+#include <stb_image/stb_image.hpp>
 #include <string>
 
 namespace Texture {

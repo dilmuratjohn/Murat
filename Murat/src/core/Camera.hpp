@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include <vector>
 #include <glm/glm/vec3.hpp>
 #include <glm/glm/glm.hpp>
+#include <vector>
 
 namespace Murat{
 

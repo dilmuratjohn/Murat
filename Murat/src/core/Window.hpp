@@ -4,7 +4,6 @@
 
 #pragma once
 
-//#include <render/Context.hpp>
 #include <events/Event.hpp>
 #include <utility>
 #include <string>
