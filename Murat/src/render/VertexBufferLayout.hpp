@@ -4,7 +4,7 @@
 
 #include <vector>
 
-
+#include <glad/glad.h>
 struct VertexBufferElement {
     unsigned int count;
     unsigned int type;
@@ -16,7 +16,7 @@ struct VertexBufferElement {
             case GL_UNSIGNED_INT:   return sizeof(GLuint);
             case GL_UNSIGNED_BYTE:  return sizeof(GLubyte);
         }
-        ASSERT(false);
+        ASSERT(false, "unknown type");
         return 0;
     }
 };

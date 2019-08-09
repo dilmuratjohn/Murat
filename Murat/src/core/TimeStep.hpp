@@ -9,11 +9,11 @@ namespace Murat {
 
     class TimeStep {
     public:
-        TimeStep(float time = 0.0f)
+        explicit TimeStep(float time = 0.0f)
                 : m_Time(time) {
         }
 
-        operator float() const { return m_Time; }
+        explicit operator float() const { return m_Time; }
 
         float getSeconds() const { return m_Time; }
 

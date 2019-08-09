@@ -4,12 +4,15 @@
 
 #pragma once
 
-#include <GLFW/glfw3.h>
-#include <string>
+//#include <render/Context.hpp>
+#include <events/Event.hpp>
 #include <utility>
-#include <render/Context.hpp>
+#include <string>
+
+struct GLFWwindow;
 
 namespace Murat {
+
 
     struct WindowProps {
         std::string title;
@@ -25,18 +28,23 @@ namespace Murat {
     class Window {
 
     public:
-        Window(const WindowProps &props);
+
+        using EventCallback = std::function<void(Event & )>;
+
+        explicit Window(const WindowProps &props);
 
         virtual ~Window();
 
         void onUpdate();
 
-        inline unsigned int getWidth() const { return m_Data.Width; }
+        inline unsigned int getWidth() const { return m_Data.width; }
 
-        inline unsigned int getHeight() const { return m_Data.Height; }
+        inline unsigned int getHeight() const { return m_Data.height; }
 
 
         static Window *create(const WindowProps &prop = WindowProps());
+
+        inline void setEventCallback(const EventCallback &callback) { m_Data.eventCallback = callback; }
 
         void setVSync(bool enabled);
 
@@ -50,13 +58,13 @@ namespace Murat {
         virtual void shutdown();
 
     private:
-        GLFWwindow *m_Window;
-        Context *m_Context;
+        GLFWwindow *m_Window{};
 
         struct WindowData {
-            std::string Title;
-            unsigned int Width, Height;
-            bool VSync;
+            std::string title;
+            unsigned int width, height;
+            bool vSync;
+            EventCallback eventCallback;
         };
 
         WindowData m_Data;

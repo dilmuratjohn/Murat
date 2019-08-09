@@ -2,7 +2,12 @@
 // Created by murat on 2019-08-08.
 //
 
-#include "ImGuiLayer.hpp"
+#include <Application.hpp>
+#include <ImGuiLayer.hpp>
+#include <imgui/imgui.h>
+#include <imgui/examples/imgui_impl_opengl3.h>
+#include <imgui/examples/imgui_impl_glfw.h>
+#include <GLFW/glfw3.h>
 
 namespace Murat{
 
@@ -37,11 +42,11 @@ namespace Murat{
         }
 
         Application& app = Application::get();
-        GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+        GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().getWindow());
 
         // Setup Platform/Renderer bindings
         ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init("#version 330");
+        ImGui_ImplOpenGL3_Init("#version 410");
     }
 
     void ImGuiLayer::onDetach()
@@ -49,6 +54,10 @@ namespace Murat{
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
+    }
+
+    void ImGuiLayer::onUpdate(Murat::TimeStep ts) {
+
     }
 
     void ImGuiLayer::begin()

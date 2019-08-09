@@ -53,18 +53,13 @@ add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 
 # ImGui
-add_compile_definitions(IMGUI_IMPL_OPENGL_LOADER_GLAD)
 add_library(imgui
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/examples/imgui_impl_glfw.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/examples/imgui_impl_opengl3.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imconfig.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_internal.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_rectpack.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_textedit.h"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_truetype.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/examples/imgui_impl_opengl3.cpp"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/examples/imgui_impl_glfw.cpp"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"

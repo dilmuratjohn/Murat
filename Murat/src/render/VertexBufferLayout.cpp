@@ -8,7 +8,7 @@ VertexBufferLayout::~VertexBufferLayout() {}
 
 template<typename T>
 void VertexBufferLayout::push(unsigned int count) {
-    ASSERT(false);
+    ASSERT(false, "template");
 }
 
 template<>

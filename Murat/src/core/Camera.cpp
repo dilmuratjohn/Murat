@@ -1,7 +1,8 @@
-#include "Camera.hpp"
+#include <Camera.hpp>
+#include <glm/glm/ext.hpp>
 
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
+Murat::Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
         :
         m_Front(glm::vec3(0.0f, 0.0f, -1.0f)),
         m_MovementSpeed(SPEED),
@@ -14,7 +15,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
     this->updateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
+Murat::Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
         : m_Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_Fov(FOV) {
     m_Position = glm::vec3(posX, posY, posZ);
     m_WorldUp = glm::vec3(upX, upY, upZ);
@@ -23,11 +24,11 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
     this->updateCameraVectors();
 }
 
-glm::mat4 Camera::getViewMatrix() {
+glm::mat4 Murat::Camera::getViewMatrix() {
     return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
 }
 
-void Camera::processKeyboard(Camera_Movement direction, float deltaTime) {
+void Murat::Camera::processKeyboard(Camera_Movement direction, float deltaTime) {
     float velocity = m_MovementSpeed * deltaTime;
     if (direction == FORWARD)
         m_Position += m_Front * velocity;
@@ -44,12 +45,12 @@ void Camera::processKeyboard(Camera_Movement direction, float deltaTime) {
 
 }
 
-void Camera::processMouseMovement(float xoffset, float yoffset, bool constrainPitch) {
-    xoffset *= m_MouseSensitivity;
-    yoffset *= m_MouseSensitivity;
+void Murat::Camera::processMouseMovement(float offsetX, float offsetY, bool constrainPitch) {
+    offsetX *= m_MouseSensitivity;
+    offsetY *= m_MouseSensitivity;
 
-    m_Yaw += xoffset;
-    m_Pitch += yoffset;
+    m_Yaw += offsetX;
+    m_Pitch += offsetY;
 
     /* Make sure that when pitch is out of bounds, screen doesn't get flipped */
     if (constrainPitch) {
@@ -63,16 +64,16 @@ void Camera::processMouseMovement(float xoffset, float yoffset, bool constrainPi
     this->updateCameraVectors();
 }
 
-void Camera::processMouseScroll(float yoffset) {
+void Murat::Camera::processMouseScroll(float offsetY) {
     if (m_Fov >= 1.0f && m_Fov <= 75.0f)
-        m_Fov -= yoffset;
+        m_Fov -= offsetY;
     if (m_Fov <= 1.0f)
         m_Fov = 1.0f;
     if (m_Fov >= 75.0f)
         m_Fov = 75.0f;
 }
 
-void Camera::updateCameraVectors() {
+void Murat::Camera::updateCameraVectors() {
     /* Calculate the new Front vector */
     glm::vec3 front;
     front.x = cos(glm::radians(m_Yaw)) * cos(glm::radians(m_Pitch));

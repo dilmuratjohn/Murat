@@ -5,6 +5,8 @@
 #pragma once
 
 #include <string>
+#include <events/Event.hpp>
+#include <TimeStep.hpp>
 
 namespace Murat {
 
@@ -18,7 +20,9 @@ namespace Murat {
 
         virtual void onDetach() = 0;
 
-        virtual void onUpdate();
+        virtual void onUpdate(TimeStep ts) = 0;
+
+//        virtual void onEvent(Event &event);
 
         virtual void onImGuiRender() = 0;
 

@@ -1,4 +1,5 @@
 #include "render/Texture.hpp"
+#include <glad/glad.h>
 
 Texture::Texture2D::Texture2D(const std::string &filePath, bool transparency)
         :
@@ -16,16 +17,16 @@ Texture::Texture2D::Texture2D(const std::string &filePath, bool transparency)
     if (!m_LocalBuffer)
         std::cout << "[Error] " << "Failed to load texture." << std::endl;
 
-    GLCall(glGenTextures(1, &m_RendererID));
-    GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
-    GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+    glGenTextures(1, &m_RendererID);
+    glBindTexture(GL_TEXTURE_2D, m_RendererID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    GLCall(glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_ImageFormat, GL_UNSIGNED_BYTE,
-                        m_LocalBuffer));
-    GLCall(glGenerateMipmap(GL_TEXTURE_2D));
+    glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_ImageFormat, GL_UNSIGNED_BYTE,
+                 m_LocalBuffer);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     this->unbind();
 
@@ -34,14 +35,14 @@ Texture::Texture2D::Texture2D(const std::string &filePath, bool transparency)
 }
 
 Texture::Texture2D::~Texture2D() {
-    GLCall(glDeleteTextures(1, &m_RendererID));
+    glDeleteTextures(1, &m_RendererID);
 }
 
 void Texture::Texture2D::bind(unsigned int slot) const {
-    GLCall(glActiveTexture(GL_TEXTURE0 + slot));
-    GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, m_RendererID);
 }
 
 void Texture::Texture2D::unbind() const {
-    GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

@@ -1,10 +1,12 @@
 //
 // Created by murat on 2019-08-08.
 //
-
-#include "Murat.hpp"
-
 #pragma once
+
+#include <core/Window.hpp>
+#include <events/Event.hpp>
+#include <core/LayerStack.hpp>
+#include <imgui/ImGuiLayer.hpp>
 
 namespace Murat {
     class Application {
@@ -33,12 +35,11 @@ namespace Murat {
         ImGuiLayer *m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-        float m_LastFrameTime = 0.0f;
+        double m_LastFrameTime = 0.0f;
     private:
         static Application *s_Instance;
     };
 
-    // To be defined in CLIENT
     Application *create();
 }
 

@@ -1,14 +1,12 @@
 //
 // Created by murat on 2019-08-08.
 //
-#include "Murat.hpp"
-#include "imgui/imgui.h"
-#include "imgui/examples/imgui_impl_glfw.h"
-#include "imgui/examples/imgui_impl_opengl3.h"
+#pragma once
+
+#include <core/Layer.hpp>
 #include <functional>
 #include <vector>
 
-#pragma once
 
 namespace Murat {
     class ImGuiLayer : public Layer {
@@ -20,6 +18,8 @@ namespace Murat {
         void onAttach() override;
 
         void onDetach() override;
+
+        void onUpdate(TimeStep ts) override ;
 
         void onImGuiRender() override;
 
