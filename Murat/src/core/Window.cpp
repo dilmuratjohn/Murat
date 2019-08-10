@@ -40,21 +40,9 @@ namespace Murat {
         if (!s_GLFWInitialized) {
             int success = glfwInit();
             assert(success);
+            glfwSetErrorCallback(GLFWErrorCallback);
             s_GLFWInitialized = true;
         }
-
-
-        m_Window = glfwCreateWindow((int) props.width, (int) props.height, m_Data.title.c_str(), nullptr, nullptr);
-        glfwSetWindowUserPointer(m_Window, &m_Data);
-        setVSync(true);
-
-        glfwMakeContextCurrent(m_Window);
-        int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        assert(status);
-        Log_Info("OpenGL Info:");
-        Log_Info("  Vendor: {0}", glGetString(GL_VENDOR));
-        Log_Info("  Renderer: {0}", glGetString(GL_RENDERER));
-        Log_Info("  Version: {0}", glGetString(GL_VERSION));
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -63,6 +51,20 @@ namespace Murat {
 #ifdef __APPLE__
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+
+        m_Window = glfwCreateWindow((int) props.width, (int) props.height, m_Data.title.c_str(), nullptr, nullptr);
+
+        assert(m_Window);
+        glfwSetWindowUserPointer(m_Window, &m_Data);
+        glfwMakeContextCurrent(m_Window);
+        setVSync(true);
+        int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+
+        assert(status);
+        Log_Info("OpenGL Info: \nVendor: {0} \nRenderer: {1} \nVersion: {0}\n",
+                 glGetString(GL_VENDOR),
+                 glGetString(GL_RENDERER),
+                 glGetString(GL_VERSION));
 
 
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {

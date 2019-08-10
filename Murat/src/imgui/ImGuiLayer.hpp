@@ -15,13 +15,11 @@ namespace Murat {
 
         ~ImGuiLayer() override = default;
 
-        void onAttach() override;
+        virtual void onAttach() override;
 
-        void onDetach() override;
+        virtual void onDetach() override;
 
-        void onUpdate(TimeStep ts) override ;
-
-        void onImGuiRender() override;
+        virtual void onImGuiRender() override;
 
         void begin();
 

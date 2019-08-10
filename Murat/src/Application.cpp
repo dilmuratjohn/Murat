@@ -35,15 +35,12 @@ namespace Murat {
 
     void Application::onEvent(Event &e) {
         EventDispatcher dispatcher(e);
-        Log_Info(e.toString());
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(onWindowClose));
-
-//        for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
-//        {
-//            (*--it)->onEvent(e);
-//            if (e.Handled)
-//                break;
-//        }
+        for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
+            (*--it)->onEvent(e);
+            if (e.Handled)
+                break;
+        }
     }
 
     void Application::run() {
@@ -52,13 +49,13 @@ namespace Murat {
             TimeStep timeStep(time - m_LastFrameTime);
             m_LastFrameTime = time;
 
-//            for (Layer* layer : m_LayerStack)
-//                layer->onUpdate(timeStep);
+            for (Layer *layer : m_LayerStack)
+                layer->onUpdate(timeStep);
 
-//            m_ImGuiLayer->begin();
-//            for (Layer* layer : m_LayerStack)
-//                layer->onImGuiRender();
-//            m_ImGuiLayer->end();
+            m_ImGuiLayer->begin();
+            for (Layer *layer : m_LayerStack)
+                layer->onImGuiRender();
+            m_ImGuiLayer->end();
             m_Window->onUpdate();
         }
     }

@@ -42,11 +42,11 @@ namespace Murat{
         }
 
         Application& app = Application::get();
-        GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().getWindow());
+        auto* window = app.getWindow().getWindow();
 
         // Setup Platform/Renderer bindings
         ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init("#version 410");
+        ImGui_ImplOpenGL3_Init("#version 330");
     }
 
     void ImGuiLayer::onDetach()
@@ -54,10 +54,6 @@ namespace Murat{
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
-    }
-
-    void ImGuiLayer::onUpdate(Murat::TimeStep ts) {
-
     }
 
     void ImGuiLayer::begin()
