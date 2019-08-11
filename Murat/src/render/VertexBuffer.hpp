@@ -1,7 +1,5 @@
 #pragma once
 
-#include "GLCall.hpp"
-
 class VertexBuffer {
 private:
     unsigned int m_RendererID;

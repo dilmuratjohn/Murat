@@ -1,6 +1,6 @@
 #pragma once
 
-#include "render/Render.hpp"
+#include <render/Render.hpp>
 
 struct struct_Vertex {
     glm::vec3 position;

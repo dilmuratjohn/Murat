@@ -1,12 +1,9 @@
 #pragma once
 
-#include "GLCall.hpp"
-
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-
+#include <glm/glm/vec2.hpp>
+#include <glm/glm/vec3.hpp>
+#include <glm/glm/vec4.hpp>
+#include <glm/glm/glm.hpp>
 #include <fstream>
 #include <sstream>
 #include <string>
