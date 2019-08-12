@@ -2,6 +2,8 @@
 
 void Render::clear() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Render::setClearColor(const glm::vec4 &color = glm::vec4(0.2f, 0.3f, 0.5f, 0.7f)) {
