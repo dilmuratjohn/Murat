@@ -1,4 +1,4 @@
-# OpenGL Tutorial
+# Murat Engine
 
 A light weight OpenGL Engine
 
