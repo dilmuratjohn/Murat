@@ -6,11 +6,6 @@ VertexBufferLayout::VertexBufferLayout()
 
 VertexBufferLayout::~VertexBufferLayout() { }
 
-template<typename T>
-void VertexBufferLayout::push(unsigned int count) {
-    assert(false);
-}
-
 template<>
 void VertexBufferLayout::push<float>(unsigned int count) {
     m_Elements.push_back({count, GL_FLOAT, GL_FALSE});

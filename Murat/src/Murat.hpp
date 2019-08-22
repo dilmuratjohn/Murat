@@ -10,6 +10,7 @@
 #include <core/Layer.hpp>
 #include <core/Log.hpp>
 #include <model/Model.hpp>
+#include <imgui/imgui.h>
 #include <imgui/ImGuiLayer.hpp>
 #include <render/Render.hpp>
 #include <Application.hpp>

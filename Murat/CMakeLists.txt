@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(Application)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Add source files
@@ -30,6 +30,7 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/vendor/glad/include"
         "${CMAKE_SOURCE_DIR}/vendor/spdlog/include"
         "${CMAKE_SOURCE_DIR}/vendor/assimp/include"
+        "${CMAKE_CURRENT_BINARY_DIR}/vendor/assimp/include"
 )
 
 # Define the executable

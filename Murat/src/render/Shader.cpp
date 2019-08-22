@@ -3,9 +3,15 @@
 #include "Shader.hpp"
 
 Shader::Shader(const std::string &filePath)
-        : m_RendererID(0), m_FilePath(filePath) {
+        : m_RendererID(0) {
     ShaderProgramSource source = parseShader(filePath);
     m_RendererID = createShader(source.vertexSource, source.fragmentSource, source.geometrySource);
+}
+
+Shader::Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometryShader
+)
+        : m_RendererID(0) {
+    m_RendererID = createShader(vertexShader, fragmentShader, geometryShader);
 }
 
 Shader::~Shader() {
@@ -54,7 +60,7 @@ unsigned int Shader::compileShader(unsigned int type, const std::string &source)
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
         char *message = (char *) alloca(length * sizeof(char));
         glGetShaderInfoLog(id, length, &length, message);
-        Log_Info("Failed to compile <", (type == GL_VERTEX_SHADER ? "Vetex" : "Fragment"), " Shader>\n", message);
+        Log_Info("Failed to compile <", (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment"), " Shader>\n", message);
         glDeleteShader(id);
         return 0;
     }
@@ -67,7 +73,7 @@ unsigned int Shader::createShader(const std::string &vertexShader, const std::st
 
     unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
     unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
-    unsigned int gs = compileShader(GL_GEOMETRY_SHADER, geometryShader);
+//    unsigned int gs = compileShader(GL_GEOMETRY_SHADER, geometryShader);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
@@ -78,7 +84,7 @@ unsigned int Shader::createShader(const std::string &vertexShader, const std::st
 
     glDeleteShader(vs);
     glDeleteShader(fs);
-    glDeleteShader(gs);
+//    glDeleteShader(gs);
 
     return program;
 }
@@ -141,7 +147,7 @@ int Shader::getUniformLocation(const std::string &name) {
         return m_UniformLocationCache[ name ];
     int location = glGetUniformLocation(m_RendererID, name.c_str());
     if (location == -1)
-        Log_Error("[Warring]: uniform <", "> doesn't exist.", "[FilePath]: ", m_FilePath);
+        Log_Error("uniform [{0}] doesn't exist.", name);
     m_UniformLocationCache[ name ] = location;
     return location;
 }
