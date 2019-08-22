@@ -1,4 +1,5 @@
 #include <Murat.hpp>
+#include <memory>
 #include <glm/glm/gtc/type_ptr.hpp>
 
 int main(int argc, char *argv[]) {
@@ -37,14 +38,14 @@ int main(int argc, char *argv[]) {
                     2, 3, 0
             };
 
+            m_VBO = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
+            m_VAO = std::make_unique<VertexArray>();
+            m_IBO = std::make_unique<IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
+            m_Shader = std::make_unique<Shader>(vertexShaderSource, fragmentShaderSource, "");
             VertexBufferLayout bufferLayout = VertexBufferLayout();
-            VertexBuffer vertexBuffer = VertexBuffer(vertices, sizeof(vertices));
-            m_VAO = new VertexArray();
-            m_IBO = new IndexBuffer(indices, sizeof(indices) / sizeof( unsigned int));
-            m_Shader = new Shader(vertexShaderSource, fragmentShaderSource, "");
             bufferLayout.push<float>(4);
-            m_VAO->addBuffer(vertexBuffer, bufferLayout);
-            
+            m_VAO->addBuffer(*m_VBO, bufferLayout);
+
         }
 
         void onUpdate(Murat::TimeStep ts) override {
@@ -58,18 +59,17 @@ int main(int argc, char *argv[]) {
             ImGui::Begin("Settings");
             ImGui::ColorEdit4("Background Color", glm::value_ptr(m_BackgroundColor));
             ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
-            ImGui::ColorPicker4("Color Picker", glm::value_ptr(m_ColorPicker));
             ImGui::End();
         }
 
     private:
-    
-        Shader *m_Shader;
-        VertexArray *m_VAO;
-        IndexBuffer *m_IBO;
+
+        std::unique_ptr<Shader> m_Shader;
+        std::unique_ptr<VertexArray> m_VAO;
+        std::unique_ptr<IndexBuffer> m_IBO;
+        std::unique_ptr<VertexBuffer> m_VBO;
         glm::vec4 m_BackgroundColor = {0.3f, 0.5f, 0.7f, 0.9f};
         glm::vec4 m_TriangleColor = {0.9f, 0.7f, 0.5f, 0.1f};
-        glm::vec4 m_ColorPicker = {0.0f, 0.0f, 0.0f, 0.0f};
     };
 
 
