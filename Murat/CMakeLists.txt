@@ -24,6 +24,7 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/src/imgui"
         "${CMAKE_SOURCE_DIR}/src/model"
         "${CMAKE_SOURCE_DIR}/vendor"
+        "${CMAKE_SOURCE_DIR}/vendor/glm"
         "${CMAKE_SOURCE_DIR}/vendor/imgui"
         "${CMAKE_SOURCE_DIR}/vendor/glfw/include"
         "${CMAKE_SOURCE_DIR}/vendor/glad/include"
