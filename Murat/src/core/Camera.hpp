@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef M_CAMERA_HPP
+#define M_CAMERA_HPP
 
 #include <glm/glm/vec3.hpp>
 #include <glm/glm/glm.hpp>
@@ -70,3 +70,6 @@ namespace Murat{
         void updateCameraVectors();
     };
 }
+
+
+#endif

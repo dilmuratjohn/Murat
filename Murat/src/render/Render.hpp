@@ -1,4 +1,5 @@
-#pragma once
+#ifndef M_RENDER_HPP
+#define M_RENDER_HPP
 
 #include "FrameBuffer.hpp"
 #include "RenderBuffer.hpp"
@@ -7,12 +8,19 @@
 #include "Shader.hpp"
 #include "Texture.hpp"
 
-namespace Render {
-    void clear();
+namespace Murat {
 
-    void setClearColor(const glm::vec4& color);
+    class Render {
 
-    void draw(const VertexArray &va, const IndexBuffer &ib, const Shader &shader);
+    public:
+        static void clear();
 
-    void draw(const FrameBuffer &fb, const VertexArray &va, const IndexBuffer &ib, const Shader &shader);
+        static void setClearColor(const glm::vec4 &color);
+
+        static void draw(const VertexArray &va, const IndexBuffer &ib, const Shader &shader);
+
+        static void draw(const FrameBuffer &fb, const VertexArray &va, const IndexBuffer &ib, const Shader &shader);
+    };
 }
+
+#endif

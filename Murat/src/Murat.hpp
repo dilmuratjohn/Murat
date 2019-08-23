@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-08.
 //
 
-#pragma once
+#ifndef M_MURAT_HPP
+#define M_MURAT_HPP
 
 
 #include <core/TimeStep.hpp>
@@ -17,4 +18,5 @@
 #include <GLFW/glfw3.h>
 
 
+#endif
 

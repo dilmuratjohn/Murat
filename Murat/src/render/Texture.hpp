@@ -1,9 +1,10 @@
-#pragma once
+#ifndef M_TEXTURE_HPP
+#define M_TEXTURE_HPP
 
 #include <stb_image/stb_image.hpp>
 #include <string>
 
-namespace Texture {
+namespace Murat {
 
 
     class Texture2D {
@@ -35,3 +36,5 @@ namespace Texture {
     };
 
 }
+
+#endif

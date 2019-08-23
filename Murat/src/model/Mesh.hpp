@@ -1,29 +1,36 @@
-#pragma once
+#ifndef M_MESH_HPP
+#define M_MESH_HPP
 
 #include <render/Render.hpp>
 
-struct struct_Vertex {
-    glm::vec3 position;
-    glm::vec3 normal;
-};
+namespace Murat {
 
-class Mesh {
-public:
-    std::vector<struct_Vertex> m_vertices;
-    std::vector<unsigned int> m_indices;
+    struct struct_Vertex {
+        glm::vec3 position;
+        glm::vec3 normal;
+    };
 
-private:
-    VertexArray *m_va;
-    VertexBuffer *m_vb;
-    IndexBuffer *m_ib;
+    class Mesh {
+    public:
+        std::vector<struct_Vertex> m_vertices;
+        std::vector<unsigned int> m_indices;
 
-public:
-    Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices);
+    private:
+        VertexArray *m_va;
+        VertexBuffer *m_vb;
+        IndexBuffer *m_ib;
 
-    ~Mesh();
+    public:
+        Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices);
 
-    void draw(Shader &shader);
+        ~Mesh();
 
-private:
-    void init();
-};
+        void draw(Shader &shader);
+
+    private:
+        void init();
+    };
+
+}
+
+#endif

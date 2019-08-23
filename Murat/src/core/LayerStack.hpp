@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-09.
 //
 
-#pragma once
+#ifndef M_LAYER_STACK_HPP
+#define M_LAYER_STACK_HPP
 
 
 #include "Layer.hpp"
@@ -33,4 +34,4 @@ namespace Murat {
     };
 }
 
-
+#endif

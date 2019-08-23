@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-08.
 //
 
-#pragma once
+#ifndef M_LAYER_HPP
+#define M_LAYER_HPP
 
 #include <events/Event.hpp>
 #include <string>
@@ -34,3 +35,5 @@ namespace Murat {
     };
 
 }
+
+#endif

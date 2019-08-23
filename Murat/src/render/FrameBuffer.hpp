@@ -1,19 +1,25 @@
-#pragma once
+#ifndef M_FRAMEBUFFER_HPP
+#define M_FRAMEBUFFER_HPP
 
-class FrameBuffer {
-private:
-    unsigned int m_RendererID;
+namespace Murat {
+    class FrameBuffer {
+    private:
+        unsigned int m_RendererID;
 
-public:
-    FrameBuffer();
+    public:
+        FrameBuffer();
 
-    ~FrameBuffer();
+        ~FrameBuffer();
 
-    void bufferTexture2D(unsigned int attachment, unsigned int buffer, unsigned int level);
+        void bufferTexture2D(unsigned int attachment, unsigned int buffer, unsigned int level);
 
-    void bufferRenderBuffer(unsigned int attachment, unsigned int buffer);
+        void bufferRenderBuffer(unsigned int attachment, unsigned int buffer);
 
-    void bind() const;
+        void bind() const;
 
-    void unbind() const;
-};
+        void unbind() const;
+    };
+
+}
+
+#endif

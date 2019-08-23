@@ -2,8 +2,8 @@
 // Created by murat on 2019-08-08.
 //
 
-#pragma once
-
+#ifndef M_TIME_STEP_HPP
+#define M_TIME_STEP_HPP
 
 namespace Murat {
 
@@ -24,5 +24,7 @@ namespace Murat {
     };
 
 }
+
+#endif
 
 

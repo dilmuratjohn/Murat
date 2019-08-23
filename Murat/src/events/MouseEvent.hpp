@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-09.
 //
 
-#pragma once
+#ifndef M_MOUSE_EVENT_HPP
+#define M_MOUSE_EVENT_HPP
 
 #include "Event.hpp"
 #include <string>
@@ -101,3 +102,5 @@ namespace Murat {
 
 
 }
+
+#endif

@@ -1,23 +1,30 @@
-#pragma once
+#ifndef M_MODEL_HPP
+#define M_MODEL_HPP
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "Mesh.hpp"
 
-class Model {
-public:
-    std::vector<Mesh *> meshes;
+namespace Murat {
 
-public:
-    explicit Model(std::string const &path);
 
-    void draw(Shader &shader);
+    class Model {
+    public:
+        std::vector<Mesh *> meshes;
 
-private:
-    void init(std::string const &path);
+    public:
+        explicit Model(std::string const &path);
 
-    void processNode(aiNode *node, const aiScene *scene);
+        void draw(Shader &shader);
 
-    Mesh *processMesh(aiMesh *mesh, const aiScene *scene);
-};
+    private:
+        void init(std::string const &path);
+
+        void processNode(aiNode *node, const aiScene *scene);
+
+        Mesh *processMesh(aiMesh *mesh, const aiScene *scene);
+    };
+
+}
+#endif

@@ -1,9 +1,8 @@
 //
 // Created by murat on 2019-08-09.
 //
-
-#pragma once
-
+#ifndef M_INPUT_HPP
+#define M_INPUT_HPP
 
 #include <utility>
 
@@ -23,4 +22,4 @@ namespace Murat {
     };
 }
 
-
+#endif

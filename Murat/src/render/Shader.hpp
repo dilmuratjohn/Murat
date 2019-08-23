@@ -1,4 +1,5 @@
-#pragma once
+#ifndef M_SHADER_HPP
+#define M_SHADER_HPP
 
 #include <glm/glm/vec2.hpp>
 #include <glm/glm/vec3.hpp>
@@ -9,59 +10,63 @@
 #include <string>
 #include <unordered_map>
 
+namespace Murat {
+    struct ShaderProgramSource {
+        std::string vertexSource;
+        std::string fragmentSource;
+        std::string geometrySource;
+    };
 
-struct ShaderProgramSource {
-    std::string vertexSource;
-    std::string fragmentSource;
-    std::string geometrySource;
-};
+    class Shader {
+    private:
+        unsigned int m_RendererID;
+        std::unordered_map<std::string, int> m_UniformLocationCache;
 
-class Shader {
-private:
-    unsigned int m_RendererID;
-    std::unordered_map<std::string, int> m_UniformLocationCache;
+    public:
+        Shader(const std::string &filePath);
 
-public:
-    Shader(const std::string &filePath);
-    Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometreShader);
+        Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometreShader);
 
-    ~Shader();
+        ~Shader();
 
-    void bind() const;
+        void bind() const;
 
-    void unbind() const;
+        void unbind() const;
 
-    void setUniform1i(const std::string &name, const int x);
+        void setUniform1i(const std::string &name, const int x);
 
-    void setUniform1f(const std::string &name, const float x);
+        void setUniform1f(const std::string &name, const float x);
 
-    void setUniform2f(const std::string &name, const float x, const float y);
+        void setUniform2f(const std::string &name, const float x, const float y);
 
-    void setUniform2f(const std::string &name, const glm::vec2 &matrix);
+        void setUniform2f(const std::string &name, const glm::vec2 &matrix);
 
-    void setUniform3f(const std::string &name, const float x, const float y, const float z);
+        void setUniform3f(const std::string &name, const float x, const float y, const float z);
 
-    void setUniform3f(const std::string &name, const glm::vec3 &matrix);
+        void setUniform3f(const std::string &name, const glm::vec3 &matrix);
 
-    void setUniform4f(const std::string &name, const float x, const float y, const float z, const float w);
+        void setUniform4f(const std::string &name, const float x, const float y, const float z, const float w);
 
-    void setUniform4f(const std::string &name, const glm::vec4 &matrix);
+        void setUniform4f(const std::string &name, const glm::vec4 &matrix);
 
-    void setUniformMat2f(const std::string &name, const glm::mat2 &matrix);
+        void setUniformMat2f(const std::string &name, const glm::mat2 &matrix);
 
-    void setUniformMat3f(const std::string &name, const glm::mat3 &matrix);
+        void setUniformMat3f(const std::string &name, const glm::mat3 &matrix);
 
-    void setUniformMat4f(const std::string &name, const glm::mat4 &matrix);
+        void setUniformMat4f(const std::string &name, const glm::mat4 &matrix);
 
-    inline unsigned int getId() { return m_RendererID; };
+        inline unsigned int getId() { return m_RendererID; };
 
-private:
-    ShaderProgramSource parseShader(const std::string &filePath);
+    private:
+        ShaderProgramSource parseShader(const std::string &filePath);
 
-    unsigned int compileShader(unsigned int type, const std::string &source);
+        unsigned int compileShader(unsigned int type, const std::string &source);
 
-    unsigned int
-    createShader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometryShader);
+        unsigned int
+        createShader(const std::string &vertexShader, const std::string &fragmentShader,
+                     const std::string &geometryShader);
 
-    int getUniformLocation(const std::string &name);
-};
+        int getUniformLocation(const std::string &name);
+    };
+}
+#endif

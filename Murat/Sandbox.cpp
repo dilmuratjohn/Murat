@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 
     class ExampleLayer : public Murat::Layer {
     public:
-        ExampleLayer() : Layer("Triangle") {
+        ExampleLayer() : Layer("Example") {
             const std::string vertexShaderSource = R"(
             #version 330 core
             layout (location = 0) in vec4 a_Position;
@@ -38,38 +38,38 @@ int main(int argc, char *argv[]) {
                     2, 3, 0
             };
 
-            m_VBO = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
-            m_VAO = std::make_unique<VertexArray>();
-            m_IBO = std::make_unique<IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
-            m_Shader = std::make_unique<Shader>(vertexShaderSource, fragmentShaderSource, "");
-            VertexBufferLayout bufferLayout = VertexBufferLayout();
+            m_VBO = std::make_unique<Murat::VertexBuffer>(vertices, sizeof(vertices));
+            m_VAO = std::make_unique<Murat::VertexArray>();
+            m_IBO = std::make_unique<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
+            m_Shader = std::make_unique<Murat::Shader>(vertexShaderSource, fragmentShaderSource, "");
+            Murat::VertexBufferLayout bufferLayout = Murat::VertexBufferLayout();
             bufferLayout.push<float>(4);
             m_VAO->addBuffer(*m_VBO, bufferLayout);
 
         }
 
         void onUpdate(Murat::TimeStep ts) override {
-            Render::clear();
-            Render::setClearColor(m_BackgroundColor);
-            m_Shader->setUniform4f("u_Color", m_TriangleColor);
-            Render::draw(*m_VAO, *m_IBO, *m_Shader);
+            Murat::Render::clear();
+            Murat::Render::setClearColor(m_BackgroundColor);
+            m_Shader->setUniform4f("u_Color", m_RectangleColor);
+            Murat::Render::draw(*m_VAO, *m_IBO, *m_Shader);
         }
 
         void onImGuiRender() override {
             ImGui::Begin("Settings");
             ImGui::ColorEdit4("Background Color", glm::value_ptr(m_BackgroundColor));
-            ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
+            ImGui::ColorEdit4("Rectangle Color", glm::value_ptr(m_RectangleColor));
             ImGui::End();
         }
 
     private:
 
-        std::unique_ptr<Shader> m_Shader;
-        std::unique_ptr<VertexArray> m_VAO;
-        std::unique_ptr<IndexBuffer> m_IBO;
-        std::unique_ptr<VertexBuffer> m_VBO;
+        std::unique_ptr<Murat::Shader> m_Shader;
+        std::unique_ptr<Murat::VertexArray> m_VAO;
+        std::unique_ptr<Murat::IndexBuffer> m_IBO;
+        std::unique_ptr<Murat::VertexBuffer> m_VBO;
         glm::vec4 m_BackgroundColor = {0.3f, 0.5f, 0.7f, 0.9f};
-        glm::vec4 m_TriangleColor = {0.9f, 0.7f, 0.5f, 0.1f};
+        glm::vec4 m_RectangleColor = {0.9f, 0.7f, 0.5f, 0.1f};
     };
 
 

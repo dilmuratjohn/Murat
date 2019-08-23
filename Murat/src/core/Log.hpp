@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-09.
 //
 
-#pragma once
+#ifndef M_LOG_HPP
+#define M_LOG_HPP
 
 
 #include <spdlog/spdlog.h>
@@ -30,3 +31,4 @@ namespace Murat {
 #define Log_Error(...)    ::Murat::Log::getLogger()->error(__VA_ARGS__)
 #define Log_Critical(...) ::Murat::Log::getLogger()->critical(__VA_ARGS__)
 
+#endif

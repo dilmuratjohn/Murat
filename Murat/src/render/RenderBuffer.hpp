@@ -1,15 +1,20 @@
-#pragma once
+#ifndef M_RENDER_BUFFER_HPP
+#define M_RENDER_BUFFER_HPP
 
-class RenderBuffer {
-private:
-    unsigned int m_RendererID;
+namespace Murat {
+    class RenderBuffer {
+    private:
+        unsigned int m_RendererID;
 
-public:
-    RenderBuffer(unsigned int attachment, unsigned int width, unsigned int height);
+    public:
+        RenderBuffer(unsigned int attachment, unsigned int width, unsigned int height);
 
-    ~RenderBuffer();
+        ~RenderBuffer();
 
-    void bind() const;
+        void bind() const;
 
-    void unbind() const;
-};
+        void unbind() const;
+    };
+}
+
+#endif

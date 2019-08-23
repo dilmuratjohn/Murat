@@ -1,7 +1,8 @@
 //
 // Created by murat on 2019-08-08.
 //
-#pragma once
+#ifndef M_APPLICATION_HPP
+#define M_APPLICATION_HPP
 
 #include <core/Window.hpp>
 #include <events/Event.hpp>
@@ -42,5 +43,7 @@ namespace Murat {
 
     Application *create();
 }
+
+#endif
 
 

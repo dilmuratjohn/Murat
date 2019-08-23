@@ -1,7 +1,8 @@
 //
 // Created by murat on 2019-08-08.
 //
-#pragma once
+#ifndef M_IMGUI_LAYER_HPP
+#define M_IMGUI_LAYER_HPP
 
 #include <core/Layer.hpp>
 #include <functional>
@@ -29,5 +30,7 @@ namespace Murat {
         float m_Time = 0.0f;
     };
 }
+
+#endif
 
 

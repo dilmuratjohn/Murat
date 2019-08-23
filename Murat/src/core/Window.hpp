@@ -2,7 +2,8 @@
 // Created by murat on 2019-08-08.
 //
 
-#pragma once
+#ifndef M_WINDOW_HPP
+#define M_WINDOW_HPP
 
 #include <events/Event.hpp>
 #include <utility>
@@ -69,3 +70,5 @@ namespace Murat {
         WindowData m_Data;
     };
 };
+
+#endif
