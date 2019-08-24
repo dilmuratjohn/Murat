@@ -8,23 +8,6 @@ int main(int argc, char *argv[]) {
     class ExampleLayer : public Murat::Layer {
     public:
         ExampleLayer() : Layer("Example") {
-            const std::string vertexShaderSource = R"(
-            #version 330 core
-            layout (location = 0) in vec4 a_Position;
-            void main()
-            {
-                gl_Position = a_Position;
-            }
-            )";
-            const std::string fragmentShaderSource = R"(
-            #version 330 core
-            out vec4 FragColor;
-            uniform vec4 u_Color;
-            void main()
-            {
-                FragColor = u_Color;
-            }
-            )";
 
             float vertices[4 * 4] = {
                     +0.5f, +0.5f, 0.0f, 1.0f,
@@ -37,24 +20,27 @@ int main(int argc, char *argv[]) {
                     0, 1, 2,
                     2, 3, 0
             };
-
-            m_VBO = std::make_shared<Murat::VertexBuffer>(vertices, sizeof(vertices));
-            m_VAO = std::make_shared<Murat::VertexArray>();
-            m_IBO = std::make_shared<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
-            m_Shader = std::make_shared<Murat::Shader>(vertexShaderSource, fragmentShaderSource, "");
+            std::shared_ptr<Murat::IndexBuffer> indexBuffer;
+            std::shared_ptr<Murat::VertexBuffer> vertexBuffer;
+            vertexBuffer = std::make_shared<Murat::VertexBuffer>(vertices, sizeof(vertices));
+            m_VertexArray = std::make_shared<Murat::VertexArray>();
+            indexBuffer = std::make_shared<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
+            m_Shader = std::make_shared<Murat::Shader>("res/shader/example.glsl");
             Murat::VertexBufferLayout bufferLayout = Murat::VertexBufferLayout();
             bufferLayout.push<float>(4);
-            m_VBO->setLayout(bufferLayout);
-            m_VAO->addVertexBuffer(m_VBO);
-            m_VAO->setIndexBuffer(m_IBO);
+            vertexBuffer->setLayout(bufferLayout);
+            m_VertexArray->addVertexBuffer(vertexBuffer);
+            m_VertexArray->setIndexBuffer(indexBuffer);
         }
 
         void onUpdate(Murat::TimeStep ts) override {
+            Murat::RenderCommand::clear();
+            Murat::RenderCommand::setClearColor(m_BackgroundColor);
             Murat::Renderer::beginScene(camera);
+            m_Shader->bind();
             m_Shader->setUniform4f("u_Color", m_RectangleColor);
-            Murat::Renderer::submit(m_Shader, m_VAO);
+            Murat::Renderer::submit(m_Shader, m_VertexArray);
             Murat::Renderer::endScene();
-
         }
 
         void onImGuiRender() override {
@@ -67,9 +53,7 @@ int main(int argc, char *argv[]) {
     private:
 
         std::shared_ptr<Murat::Shader> m_Shader;
-        std::shared_ptr<Murat::VertexArray> m_VAO;
-        std::shared_ptr<Murat::IndexBuffer> m_IBO;
-        std::shared_ptr<Murat::VertexBuffer> m_VBO;
+        std::shared_ptr<Murat::VertexArray> m_VertexArray;
         glm::vec4 m_BackgroundColor = {0.3f, 0.5f, 0.7f, 0.9f};
         glm::vec4 m_RectangleColor = {0.9f, 0.7f, 0.5f, 0.1f};
         Murat::Camera camera = Murat::Camera(glm::vec3(0.0f, 0.0f, 3.0f));

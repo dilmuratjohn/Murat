@@ -10,7 +10,7 @@ namespace Murat {
     }
 
     void VertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer) {
-        bind();
+        glBindVertexArray(m_RendererID);
         vertexBuffer->bind();
         const auto &elements = vertexBuffer->getLayout().getElements();
         std::size_t offset = 0;
@@ -22,6 +22,8 @@ namespace Murat {
             offset += element.count * VertexBufferElement::getSizeOfType(element.type);
             index++;
         }
+
+        m_VertexBuffers.push_back(vertexBuffer);
     }
 
     void VertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)

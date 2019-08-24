@@ -5,9 +5,9 @@ namespace Murat {
 
     Renderer::SceneData *Renderer::s_SceneData = new Renderer::SceneData;
 
+
+
     void Renderer::beginScene(Camera &camera) {
-        RenderCommand::clear();
-        RenderCommand::setClearColor(glm::vec4(0.1,0.3,0.5,0.7));
         s_SceneData->ViewProjectionMatrix = camera.getViewMatrix();
     }
 

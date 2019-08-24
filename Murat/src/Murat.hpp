@@ -14,6 +14,7 @@
 #include <imgui/imgui.h>
 #include <imgui/ImGuiLayer.hpp>
 #include <render/Renderer.hpp>
+#include <render/RenderCommand.hpp>
 #include <Application.hpp>
 #include <GLFW/glfw3.h>
 
