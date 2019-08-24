@@ -38,21 +38,23 @@ int main(int argc, char *argv[]) {
                     2, 3, 0
             };
 
-            m_VBO = std::make_unique<Murat::VertexBuffer>(vertices, sizeof(vertices));
-            m_VAO = std::make_unique<Murat::VertexArray>();
-            m_IBO = std::make_unique<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
-            m_Shader = std::make_unique<Murat::Shader>(vertexShaderSource, fragmentShaderSource, "");
+            m_VBO = std::make_shared<Murat::VertexBuffer>(vertices, sizeof(vertices));
+            m_VAO = std::make_shared<Murat::VertexArray>();
+            m_IBO = std::make_shared<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
+            m_Shader = std::make_shared<Murat::Shader>(vertexShaderSource, fragmentShaderSource, "");
             Murat::VertexBufferLayout bufferLayout = Murat::VertexBufferLayout();
             bufferLayout.push<float>(4);
-            m_VAO->addBuffer(*m_VBO, bufferLayout);
-
+            m_VBO->setLayout(bufferLayout);
+            m_VAO->addVertexBuffer(m_VBO);
+            m_VAO->setIndexBuffer(m_IBO);
         }
 
         void onUpdate(Murat::TimeStep ts) override {
-            Murat::Render::clear();
-            Murat::Render::setClearColor(m_BackgroundColor);
+            Murat::Renderer::beginScene(camera);
             m_Shader->setUniform4f("u_Color", m_RectangleColor);
-            Murat::Render::draw(*m_VAO, *m_IBO, *m_Shader);
+            Murat::Renderer::submit(m_Shader, m_VAO);
+            Murat::Renderer::endScene();
+
         }
 
         void onImGuiRender() override {
@@ -64,14 +66,14 @@ int main(int argc, char *argv[]) {
 
     private:
 
-        std::unique_ptr<Murat::Shader> m_Shader;
-        std::unique_ptr<Murat::VertexArray> m_VAO;
-        std::unique_ptr<Murat::IndexBuffer> m_IBO;
-        std::unique_ptr<Murat::VertexBuffer> m_VBO;
+        std::shared_ptr<Murat::Shader> m_Shader;
+        std::shared_ptr<Murat::VertexArray> m_VAO;
+        std::shared_ptr<Murat::IndexBuffer> m_IBO;
+        std::shared_ptr<Murat::VertexBuffer> m_VBO;
         glm::vec4 m_BackgroundColor = {0.3f, 0.5f, 0.7f, 0.9f};
         glm::vec4 m_RectangleColor = {0.9f, 0.7f, 0.5f, 0.1f};
+        Murat::Camera camera = Murat::Camera(glm::vec3(0.0f, 0.0f, 3.0f));
     };
-
 
     ExampleLayer layer = ExampleLayer();
     app->pushLayer(&layer);

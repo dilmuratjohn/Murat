@@ -3,8 +3,6 @@
 
 namespace Murat {
     class FrameBuffer {
-    private:
-        unsigned int m_RendererID;
 
     public:
         FrameBuffer();
@@ -18,6 +16,9 @@ namespace Murat {
         void bind() const;
 
         void unbind() const;
+
+    private:
+        unsigned int m_RendererID = 0;
     };
 
 }

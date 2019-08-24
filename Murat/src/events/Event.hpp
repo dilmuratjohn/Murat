@@ -5,9 +5,7 @@
 #ifndef M_EVENT_HPP
 #define M_EVENT_HPP
 
-
-#include <string>
-#include <sstream>
+#include <muratpch.hpp>
 
 namespace Murat {
 
@@ -37,11 +35,11 @@ namespace Murat {
 
         inline virtual EventCategory getCategory() { return m_EventCategory; };
 
-        inline virtual std::string toString() const = 0;
+        [[nodiscard]] inline virtual std::string toString() const = 0;
 
     protected:
-        EventType m_EventType;
-        EventCategory m_EventCategory;
+        EventType m_EventType = EventType::None;
+        EventCategory m_EventCategory = EventCategory::None;
     };
 
 
@@ -49,7 +47,7 @@ namespace Murat {
         template<typename T>
         using EventFn = std::function<bool(T &)>;
     public:
-        EventDispatcher(Event &event)
+        explicit EventDispatcher(Event &event)
                 : m_Event(event) {
         }
 
@@ -79,13 +77,13 @@ namespace Murat {
             m_EventType = EventType::WindowResize;
         }
 
-        inline unsigned int getWidth() const { return m_Width; }
+        [[nodiscard]] inline unsigned int getWidth() const { return m_Width; }
 
-        inline unsigned int getHeight() const { return m_Height; }
+        [[nodiscard]] inline unsigned int getHeight() const { return m_Height; }
 
         static EventType getStaticType() { return EventType::WindowResize; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
             return ss.str();
@@ -105,7 +103,7 @@ namespace Murat {
 
         static EventType getStaticType() { return EventType::WindowClose; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "WindowCloseEvent: ";
             return ss.str();
@@ -121,7 +119,7 @@ namespace Murat {
 
         static EventType getStaticType() { return EventType::AppTick; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "AppTickEvent: ";
             return ss.str();
@@ -137,7 +135,7 @@ namespace Murat {
 
         static EventType getStaticType() { return EventType::AppUpdate; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "AppUpdateEvent: ";
             return ss.str();
@@ -153,7 +151,7 @@ namespace Murat {
 
         static EventType getStaticType() { return EventType::AppRender; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "AppRenderEvent: ";
             return ss.str();

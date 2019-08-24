@@ -6,8 +6,7 @@
 #define M_MOUSE_EVENT_HPP
 
 #include "Event.hpp"
-#include <string>
-#include <sstream>
+#include <muratpch.hpp>
 
 namespace Murat {
     class MouseMovedEvent : public Event {
@@ -18,11 +17,11 @@ namespace Murat {
             m_EventType = EventType::MouseMoved;
         }
 
-        inline float getX() const { return m_MouseX; }
+        [[nodiscard]] inline float getX() const { return m_MouseX; }
 
-        inline float getY() const { return m_MouseY; }
+        [[nodiscard]] inline float getY() const { return m_MouseY; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
             return ss.str();
@@ -40,11 +39,11 @@ namespace Murat {
             m_EventType = EventType::MouseScrolled;
         }
 
-        inline float getXOffset() const { return m_XOffset; }
+        [[nodiscard]] inline float getXOffset() const { return m_XOffset; }
 
-        inline float getYOffset() const { return m_YOffset; }
+        [[nodiscard]] inline float getYOffset() const { return m_YOffset; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseScrolledEvent: " << getXOffset() << ", " << getYOffset();
             return ss.str();
@@ -57,7 +56,7 @@ namespace Murat {
     class MouseButtonEvent : public Event {
     public:
 
-        inline int getMouseButton() const { return m_Button; }
+        [[nodiscard]] inline int getMouseButton() const { return m_Button; }
 
     protected:
 
@@ -77,7 +76,7 @@ namespace Murat {
             m_EventType = EventType::MouseButtonPressed;
         }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseButtonPressedEvent: " << m_Button;
             return ss.str();
@@ -92,7 +91,7 @@ namespace Murat {
             m_EventType = EventType::MouseButtonReleased;
         }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseButtonReleasedEvent: " << m_Button;
             return ss.str();

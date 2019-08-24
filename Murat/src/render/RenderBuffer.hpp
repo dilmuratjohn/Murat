@@ -3,8 +3,6 @@
 
 namespace Murat {
     class RenderBuffer {
-    private:
-        unsigned int m_RendererID;
 
     public:
         RenderBuffer(unsigned int attachment, unsigned int width, unsigned int height);
@@ -14,6 +12,10 @@ namespace Murat {
         void bind() const;
 
         void unbind() const;
+
+    private:
+        unsigned int m_RendererID = 0;
+
     };
 }
 

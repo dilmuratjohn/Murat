@@ -9,18 +9,18 @@ namespace Murat {
 
     class TimeStep {
     public:
-        explicit TimeStep(float time = 0.0f)
+        explicit TimeStep(double time = 0.0f)
                 : m_Time(time) {
         }
 
-        explicit operator float() const { return m_Time; }
+        explicit operator double() const { return m_Time; }
 
-        float getSeconds() const { return m_Time; }
+        [[nodiscard]] inline double getSeconds() const { return m_Time; }
 
-        float getMilliseconds() const { return m_Time * 1000.0f; }
+        [[nodiscard]] inline double getMilliseconds() const { return m_Time * 1000.0f; }
 
     private:
-        float m_Time;
+        double m_Time;
     };
 
 }

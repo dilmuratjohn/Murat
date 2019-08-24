@@ -9,8 +9,7 @@ namespace Murat {
         m_RendererID = createShader(source.vertexSource, source.fragmentSource, source.geometrySource);
     }
 
-    Shader::Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometryShader
-    )
+    Shader::Shader(const std::string &vertexShader, const std::string &fragmentShader,const std::string &geometryShader)
             : m_RendererID(0) {
         m_RendererID = createShader(vertexShader, fragmentShader, geometryShader);
     }

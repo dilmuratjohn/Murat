@@ -9,18 +9,27 @@ namespace Murat {
         glDeleteVertexArrays(1, &m_RendererID);
     }
 
-    void VertexArray::addBuffer(const VertexBuffer &vb, const VertexBufferLayout &layout) {
+    void VertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer) {
         bind();
-        vb.bind();
-        const auto &elements = layout.getElements();
+        vertexBuffer->bind();
+        const auto &elements = vertexBuffer->getLayout().getElements();
         std::size_t offset = 0;
-        for (unsigned int i = 0; i < elements.size(); i++) {
-            const auto &element = elements[i];
-            glEnableVertexAttribArray(i);
-            glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.getStride(),
-                                  (GLvoid *) offset);
+        int index = 0;
+        for (VertexBufferElement element : elements) {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, element.count, element.type, element.normalized,
+                                  vertexBuffer->getLayout().getStride(), (GLvoid *) offset);
             offset += element.count * VertexBufferElement::getSizeOfType(element.type);
+            index++;
         }
+    }
+
+    void VertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+    {
+        glBindVertexArray(m_RendererID);
+        indexBuffer->bind();
+
+        m_IndexBuffer = indexBuffer;
     }
 
     void VertexArray::bind() const {

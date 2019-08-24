@@ -26,6 +26,7 @@ include_directories(
         "${CMAKE_SOURCE_DIR}/vendor"
         "${CMAKE_SOURCE_DIR}/vendor/glm"
         "${CMAKE_SOURCE_DIR}/vendor/imgui"
+        "${CMAKE_SOURCE_DIR}/vendor/imgui/examples"
         "${CMAKE_SOURCE_DIR}/vendor/glfw/include"
         "${CMAKE_SOURCE_DIR}/vendor/glad/include"
         "${CMAKE_SOURCE_DIR}/vendor/spdlog/include"
@@ -46,7 +47,12 @@ find_package(OpenGL REQUIRED)
 add_subdirectory("vendor/assimp")
 
 # Glad
-add_library(Glad "vendor/glad/src/glad.c")
+if (BUILD_SHARED_LIBS AND WIN32)
+    add_library(Glad STATIC "vendor/glad/src/glad.c")
+else()
+    add_library(Glad "vendor/glad/src/glad.c")
+endif()
+
 
 # GLFW
 add_subdirectory("vendor/glfw")
@@ -55,21 +61,41 @@ add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 
 # ImGui
-add_library(imgui
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imconfig.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_internal.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_rectpack.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_textedit.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_truetype.h"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"
-        "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp"
-        )
+if (BUILD_SHARED_LIBS AND WIN32)
+    add_library(imgui STATIC
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imconfig.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_internal.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_rectpack.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_textedit.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_truetype.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp"
+            )
+else()
+    add_library(imgui
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imconfig.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_internal.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_rectpack.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_textedit.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imstb_truetype.h"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp"
+            "${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp"
+            )
+endif()
+
 
 # stb_image
-add_library(stb_image "vendor/stb_image/stb_image.cpp")
+if (BUILD_SHARED_LIBS AND WIN32)
+    add_library(stb_image STATIC "vendor/stb_image/stb_image.cpp")
+else()
+    add_library(stb_image "vendor/stb_image/stb_image.cpp")
+endif()
 
 # spd_log
 add_subdirectory("vendor/spdlog")

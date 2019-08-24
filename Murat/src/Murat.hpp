@@ -13,7 +13,7 @@
 #include <model/Model.hpp>
 #include <imgui/imgui.h>
 #include <imgui/ImGuiLayer.hpp>
-#include <render/Render.hpp>
+#include <render/Renderer.hpp>
 #include <Application.hpp>
 #include <GLFW/glfw3.h>
 

@@ -18,15 +18,15 @@ namespace Murat {
         processNode(scene->mRootNode, scene);
     }
 
-    void Model::draw(Shader &shader) {
-        for (auto &mesh : meshes)
+    void Model::draw(const std::shared_ptr<Shader>& shader) {
+        for (auto &mesh : m_Meshes)
             mesh->draw(shader);
     }
 
     void Model::processNode(aiNode *node, const aiScene *scene) {
         for (unsigned int i = 0; i < node->mNumMeshes; i++) {
             aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-            meshes.push_back(processMesh(mesh, scene));
+            m_Meshes.push_back(processMesh(mesh, scene));
         }
         for (unsigned int i = 0; i < node->mNumChildren; i++) {
             processNode(node->mChildren[i], scene);

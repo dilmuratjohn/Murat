@@ -6,17 +6,16 @@
 #define M_KEY_EVENT_HPP
 
 #include "Event.hpp"
-#include <string>
-#include <sstream>
+#include <muratpch.hpp>
 
 namespace Murat {
     class KeyEvent : public Event {
     public:
-        inline unsigned int getKeyCode() const { return m_KeyCode; }
+        [[nodiscard]] inline unsigned int getKeyCode() const { return m_KeyCode; }
 
     protected:
-        explicit KeyEvent(int keyCode)
-                : m_KeyCode(keyCode) { }
+        explicit KeyEvent(unsigned int keyCode)
+                : m_KeyCode(keyCode) {}
 
         unsigned int m_KeyCode;
     };
@@ -24,11 +23,11 @@ namespace Murat {
     class KeyPressedEvent : public KeyEvent {
     public:
         KeyPressedEvent(unsigned int keyCode, int repeatCount)
-                : KeyEvent(keyCode), m_RepeatCount(repeatCount) { }
+                : KeyEvent(keyCode), m_RepeatCount(repeatCount) {}
 
-        inline int getRepeatCount() const { return m_RepeatCount; }
+        [[nodiscard]] inline int getRepeatCount() const { return m_RepeatCount; }
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
             return ss.str();
@@ -42,9 +41,9 @@ namespace Murat {
     class KeyReleasedEvent : public KeyEvent {
     public:
         explicit KeyReleasedEvent(unsigned int keyCode)
-                : KeyEvent(keyCode) { }
+                : KeyEvent(keyCode) {}
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyReleasedEvent: " << m_KeyCode;
             return ss.str();
@@ -54,9 +53,9 @@ namespace Murat {
     class KeyTypedEvent : public KeyEvent {
     public:
         explicit KeyTypedEvent(unsigned int keyCode)
-                : KeyEvent(keyCode) { }
+                : KeyEvent(keyCode) {}
 
-        std::string toString() const override {
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyTypedEvent: " << m_KeyCode;
             return ss.str();

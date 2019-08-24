@@ -1,7 +1,8 @@
 #ifndef M_MESH_HPP
 #define M_MESH_HPP
 
-#include <render/Render.hpp>
+#include <render/Renderer.hpp>
+#include <muratpch.hpp>
 
 namespace Murat {
 
@@ -15,17 +16,17 @@ namespace Murat {
         std::vector<struct_Vertex> m_vertices;
         std::vector<unsigned int> m_indices;
 
-    private:
-        VertexArray *m_va;
-        VertexBuffer *m_vb;
-        IndexBuffer *m_ib;
-
     public:
-        Mesh(std::vector<struct_Vertex> vertices, std::vector<unsigned int> indices);
+        Mesh(std::vector<struct_Vertex>& vertices, std::vector<unsigned int>& indices);
 
-        ~Mesh();
+        ~Mesh() = default;
 
-        void draw(Shader &shader);
+        void draw(const std::shared_ptr<Shader>& shader);
+
+    private:
+        std::shared_ptr<VertexArray> m_VertexArray;
+        std::shared_ptr<VertexBuffer> m_VertexBuffer;
+        std::shared_ptr<IndexBuffer> m_IndexBuffer;
 
     private:
         void init();
