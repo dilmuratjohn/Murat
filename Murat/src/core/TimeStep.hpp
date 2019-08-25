@@ -13,11 +13,11 @@ namespace Murat {
                 : m_Time(time) {
         }
 
-        explicit operator float() const { return m_Time; }
+        operator float() const { return m_Time; }
 
-        float getSeconds() const { return m_Time; }
+        [[nodiscard]] inline float getSeconds() const { return m_Time; }
 
-        float getMilliseconds() const { return m_Time * 1000.0f; }
+        [[nodiscard]] inline float getMilliseconds() const { return m_Time * 1000.0f; }
 
     private:
         float m_Time;

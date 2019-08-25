@@ -2,7 +2,7 @@
 #define M_TEXTURE_HPP
 
 #include <stb_image/stb_image.hpp>
-#include <string>
+#include <muratpch.hpp>
 
 namespace Murat {
 
@@ -28,9 +28,9 @@ namespace Murat {
 
         void unbind() const;
 
-        inline int getWidth() const { return m_Width; }
+        [[nodiscard]] inline int getWidth() const { return m_Width; }
 
-        inline int getHeight() const { return m_Height; }
+        [[nodiscard]] inline int getHeight() const { return m_Height; }
 
         inline unsigned int getId() { return m_RendererID; };
     };

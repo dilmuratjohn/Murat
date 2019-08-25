@@ -53,6 +53,10 @@ namespace Murat {
         ImGui::DestroyContext();
     }
 
+    void ImGuiLayer::onUpdate(TimeStep ts) {};
+
+    void ImGuiLayer::onEvent(Event &event) {};
+
     void ImGuiLayer::begin() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();

@@ -5,8 +5,7 @@
 #define M_IMGUI_LAYER_HPP
 
 #include <core/Layer.hpp>
-#include <functional>
-#include <vector>
+#include <muratpch.hpp>
 
 
 namespace Murat {
@@ -16,11 +15,15 @@ namespace Murat {
 
         ~ImGuiLayer() override = default;
 
-        virtual void onAttach() override;
+        void onAttach() override;
 
-        virtual void onDetach() override;
+        void onDetach() override;
 
-        virtual void onImGuiRender() override;
+        void onUpdate(TimeStep ts) override;
+
+        void onImGuiRender() override;
+
+        void onEvent(Event &event) override;
 
         void begin();
 

@@ -5,12 +5,11 @@
 namespace Murat {
     Shader::Shader(const std::string &filePath)
             : m_RendererID(0) {
-        ShaderProgramSource source = parseShader(filePath);
-        m_RendererID = createShader(source.vertexSource, source.fragmentSource, source.geometrySource);
+        auto [vertexSource, fragmentSource, geometrySource] = parseShader(filePath);
+        m_RendererID = createShader(vertexSource, fragmentSource, geometrySource);
     }
 
-    Shader::Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometryShader
-    )
+    Shader::Shader(const std::string &vertexShader, const std::string &fragmentShader,const std::string &geometryShader)
             : m_RendererID(0) {
         m_RendererID = createShader(vertexShader, fragmentShader, geometryShader);
     }
@@ -19,7 +18,7 @@ namespace Murat {
         glDeleteProgram(m_RendererID);
     }
 
-    ShaderProgramSource Shader::parseShader(const std::string &filePath) {
+    std::tuple < std::string, std::string, std::string > Shader::parseShader(const std::string& filePath) {
         std::ifstream stream(filePath);
 
         enum class ShaderType {

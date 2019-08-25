@@ -6,8 +6,7 @@
 #define M_WINDOW_HPP
 
 #include <events/Event.hpp>
-#include <utility>
-#include <string>
+#include <muratpch.hpp>
 
 struct GLFWwindow;
 

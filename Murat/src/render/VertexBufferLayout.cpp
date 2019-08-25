@@ -4,8 +4,6 @@ namespace Murat {
     VertexBufferLayout::VertexBufferLayout()
             : m_Stride(0) {}
 
-    VertexBufferLayout::~VertexBufferLayout() {}
-
     template<>
     void VertexBufferLayout::push<float>(unsigned int count) {
         m_Elements.push_back({count, GL_FLOAT, GL_FALSE});

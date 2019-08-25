@@ -3,7 +3,7 @@
 #include "Texture.hpp"
 
 namespace Murat {
-    Texture2D::Texture2D(const std::string &filePath, bool transparency)
+    Texture2D::Texture2D(const std::string& filePath, bool transparency)
             :
             m_FilePath(filePath),
             m_RendererID(0),

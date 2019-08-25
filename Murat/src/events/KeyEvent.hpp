@@ -6,29 +6,33 @@
 #define M_KEY_EVENT_HPP
 
 #include "Event.hpp"
-#include <string>
-#include <sstream>
+#include <muratpch.hpp>
 
 namespace Murat {
     class KeyEvent : public Event {
     public:
-        inline unsigned int getKeyCode() const { return m_KeyCode; }
+        [[nodiscard]] inline unsigned int getKeyCode() const { return m_KeyCode; }
 
     protected:
-        explicit KeyEvent(int keyCode)
-                : m_KeyCode(keyCode) { }
+        explicit KeyEvent(unsigned int keyCode)
+                : m_KeyCode(keyCode) {}
 
-        unsigned int m_KeyCode;
+        unsigned int m_KeyCode = 0;
     };
 
     class KeyPressedEvent : public KeyEvent {
     public:
         KeyPressedEvent(unsigned int keyCode, int repeatCount)
-                : KeyEvent(keyCode), m_RepeatCount(repeatCount) { }
+                : KeyEvent(keyCode), m_RepeatCount(repeatCount) {
+            m_EventCategory = EventCategory::EventCategoryKeyboard;
+            m_EventType = EventType::KeyPressed;
+        }
 
-        inline int getRepeatCount() const { return m_RepeatCount; }
+        [[nodiscard]] inline int getRepeatCount() const { return m_RepeatCount; }
 
-        std::string toString() const override {
+        static EventType getStaticType() { return EventType::KeyPressed; }
+
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
             return ss.str();
@@ -42,9 +46,14 @@ namespace Murat {
     class KeyReleasedEvent : public KeyEvent {
     public:
         explicit KeyReleasedEvent(unsigned int keyCode)
-                : KeyEvent(keyCode) { }
+                : KeyEvent(keyCode) {
+            m_EventCategory = EventCategory::EventCategoryKeyboard;
+            m_EventType = EventType::KeyReleased;
+        }
 
-        std::string toString() const override {
+        static EventType getStaticType() { return EventType::KeyReleased; }
+
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyReleasedEvent: " << m_KeyCode;
             return ss.str();
@@ -54,9 +63,14 @@ namespace Murat {
     class KeyTypedEvent : public KeyEvent {
     public:
         explicit KeyTypedEvent(unsigned int keyCode)
-                : KeyEvent(keyCode) { }
+                : KeyEvent(keyCode) {
+            m_EventCategory = EventCategory::EventCategoryKeyboard;
+            m_EventType = EventType::KeyTyped;
+        }
 
-        std::string toString() const override {
+        static EventType getStaticType() { return EventType::KeyTyped; }
+
+        [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "KeyTypedEvent: " << m_KeyCode;
             return ss.str();

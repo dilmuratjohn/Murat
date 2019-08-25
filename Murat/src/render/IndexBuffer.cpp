@@ -4,7 +4,7 @@
 namespace Murat {
     IndexBuffer::IndexBuffer(const unsigned int *data, unsigned int count)
             : m_Count(count) {
-        static_assert(sizeof(unsigned int) == sizeof(GLuint), "");
+        static_assert(sizeof(unsigned int) == sizeof(GLuint), "index buffer type is not correct.");
 
         glGenBuffers(1, &m_RendererID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);

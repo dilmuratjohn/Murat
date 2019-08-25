@@ -10,13 +10,11 @@ namespace Murat {
 
 
     class Model {
-    public:
-        std::vector<Mesh *> meshes;
 
     public:
         explicit Model(std::string const &path);
 
-        void draw(Shader &shader);
+        void draw(const std::shared_ptr <Shader> &shader);
 
     private:
         void init(std::string const &path);
@@ -24,6 +22,9 @@ namespace Murat {
         void processNode(aiNode *node, const aiScene *scene);
 
         Mesh *processMesh(aiMesh *mesh, const aiScene *scene);
+
+    public:
+        std::vector<Mesh *> m_Meshes;
     };
 
 }

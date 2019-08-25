@@ -2,7 +2,8 @@
 #define M_VERTEX_BUFFER_LAYOUT_HPP
 
 #include <glad/glad.h>
-#include <vector>
+#include <muratpch.hpp>
+
 
 namespace Murat {
     struct VertexBufferElement {
@@ -18,27 +19,31 @@ namespace Murat {
                     return sizeof(GLuint);
                 case GL_UNSIGNED_BYTE:
                     return sizeof(GLubyte);
+
+                default:
+                    assert(false);
             }
-            assert(false);
             return 0;
         }
     };
 
     class VertexBufferLayout {
-    private:
-        std::vector<VertexBufferElement> m_Elements;
-        unsigned int m_Stride;
+
     public:
         VertexBufferLayout();
 
-        ~VertexBufferLayout();
+        ~VertexBufferLayout() = default;
 
         template<typename T>
         void push(unsigned int count);
 
-        inline const std::vector<VertexBufferElement> getElements() const { return m_Elements; }
+        [[nodiscard]] inline std::vector<VertexBufferElement> getElements() const { return m_Elements; }
 
-        inline unsigned int getStride() const { return m_Stride; }
+        [[nodiscard]] inline unsigned int getStride() const { return m_Stride; }
+
+    private:
+        std::vector<VertexBufferElement> m_Elements;
+        unsigned int m_Stride;
     };
 }
 

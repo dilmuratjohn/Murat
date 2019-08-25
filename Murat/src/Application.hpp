@@ -6,6 +6,8 @@
 
 #include <core/Window.hpp>
 #include <events/Event.hpp>
+#include <events/KeyEvent.hpp>
+#include <events/MouseEvent.hpp>
 #include <core/LayerStack.hpp>
 #include <imgui/ImGuiLayer.hpp>
 

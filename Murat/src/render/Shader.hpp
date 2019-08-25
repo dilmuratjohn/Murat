@@ -1,29 +1,15 @@
 #ifndef M_SHADER_HPP
 #define M_SHADER_HPP
 
-#include <glm/glm/vec2.hpp>
-#include <glm/glm/vec3.hpp>
-#include <glm/glm/vec4.hpp>
-#include <glm/glm/glm.hpp>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <unordered_map>
+#include <glm/glm.hpp>
+#include <muratpch.hpp>
 
 namespace Murat {
-    struct ShaderProgramSource {
-        std::string vertexSource;
-        std::string fragmentSource;
-        std::string geometrySource;
-    };
 
     class Shader {
-    private:
-        unsigned int m_RendererID;
-        std::unordered_map<std::string, int> m_UniformLocationCache;
 
     public:
-        Shader(const std::string &filePath);
+        explicit Shader(const std::string &filePath);
 
         Shader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometreShader);
 
@@ -33,19 +19,19 @@ namespace Murat {
 
         void unbind() const;
 
-        void setUniform1i(const std::string &name, const int x);
+        void setUniform1i(const std::string &name, int x);
 
-        void setUniform1f(const std::string &name, const float x);
+        void setUniform1f(const std::string &name, float x);
 
-        void setUniform2f(const std::string &name, const float x, const float y);
+        void setUniform2f(const std::string &name, float x, float y);
 
         void setUniform2f(const std::string &name, const glm::vec2 &matrix);
 
-        void setUniform3f(const std::string &name, const float x, const float y, const float z);
+        void setUniform3f(const std::string &name, float x, float y, float z);
 
         void setUniform3f(const std::string &name, const glm::vec3 &matrix);
 
-        void setUniform4f(const std::string &name, const float x, const float y, const float z, const float w);
+        void setUniform4f(const std::string &name, float x, float y, float z, float w);
 
         void setUniform4f(const std::string &name, const glm::vec4 &matrix);
 
@@ -58,13 +44,16 @@ namespace Murat {
         inline unsigned int getId() { return m_RendererID; };
 
     private:
-        ShaderProgramSource parseShader(const std::string &filePath);
+        unsigned int m_RendererID;
+        std::unordered_map<std::string, int> m_UniformLocationCache;
+
+
+    private:
+        std::tuple < std::string, std::string, std::string > parseShader(const std::string &filePath);
 
         unsigned int compileShader(unsigned int type, const std::string &source);
 
-        unsigned int
-        createShader(const std::string &vertexShader, const std::string &fragmentShader,
-                     const std::string &geometryShader);
+        unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &geometryShader);
 
         int getUniformLocation(const std::string &name);
     };
