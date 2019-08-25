@@ -19,8 +19,8 @@ namespace Sandbox {
                 0, 1, 2,
                 2, 3, 0
         };
-        std::shared_ptr <Murat::IndexBuffer> indexBuffer;
-        std::shared_ptr <Murat::VertexBuffer> vertexBuffer;
+        Murat::Ref <Murat::IndexBuffer> indexBuffer;
+        Murat::Ref <Murat::VertexBuffer> vertexBuffer;
         vertexBuffer = std::make_shared<Murat::VertexBuffer>(vertices, sizeof(vertices));
         m_VertexArray = std::make_shared<Murat::VertexArray>();
         indexBuffer = std::make_shared<Murat::IndexBuffer>(indices, sizeof(indices) / sizeof(unsigned int));
