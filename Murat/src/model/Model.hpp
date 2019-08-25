@@ -14,7 +14,7 @@ namespace Murat {
     public:
         explicit Model(std::string const &path);
 
-        void draw(const std::shared_ptr<Shader>& shader);
+        void draw(const std::shared_ptr <Shader> &shader);
 
     private:
         void init(std::string const &path);

@@ -18,7 +18,7 @@ namespace Murat {
         processNode(scene->mRootNode, scene);
     }
 
-    void Model::draw(const std::shared_ptr<Shader>& shader) {
+    void Model::draw(const std::shared_ptr <Shader> &shader) {
         for (auto &mesh : m_Meshes)
             mesh->draw(shader);
     }
@@ -35,7 +35,7 @@ namespace Murat {
 
     Mesh *Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 
-        std::vector<struct_Vertex> vertices;
+        std::vector <struct_Vertex> vertices;
         std::vector<unsigned int> indices;
 
         for (unsigned int i = 0; i < mesh->mNumVertices; i++) {

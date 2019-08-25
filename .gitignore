@@ -1,4 +1,6 @@
 .idea
+out
+.vs
 cmake-build-*/
 
 *_i.c

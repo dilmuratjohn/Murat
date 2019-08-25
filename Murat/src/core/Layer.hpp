@@ -17,18 +17,18 @@ namespace Murat {
 
         virtual ~Layer() = default;
 
-        virtual void onAttach() { };
+        virtual void onAttach() = 0;
 
-        virtual void onDetach() { };
+        virtual void onDetach() = 0;
 
-        virtual void onUpdate(TimeStep ts) { };
+        virtual void onUpdate(TimeStep ts) = 0;
 
-        virtual void onImGuiRender() { };
+        virtual void onImGuiRender() = 0;
 
-        virtual void onEvent(Event &event) { };
+        virtual void onEvent(Event &event) = 0;
 
 
-        inline const std::string &getName() const { return m_Name; };
+        [[nodiscard]] inline const std::string &getName() const { return m_Name; };
 
     private:
         const std::string &m_Name;

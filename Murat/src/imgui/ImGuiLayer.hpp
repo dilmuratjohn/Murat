@@ -19,7 +19,11 @@ namespace Murat {
 
         void onDetach() override;
 
+        void onUpdate(TimeStep ts) override;
+
         void onImGuiRender() override;
+
+        void onEvent(Event &event) override;
 
         void begin();
 

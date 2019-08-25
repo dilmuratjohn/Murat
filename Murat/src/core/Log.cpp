@@ -5,7 +5,7 @@
 #include "Log.hpp"
 
 namespace Murat {
-    std::shared_ptr<spdlog::logger> Log::s_Logger;
+    std::shared_ptr <spdlog::logger> Log::s_Logger;
 
     void Log::init() {
         spdlog::set_pattern("%^[%T] %n: %v%$");

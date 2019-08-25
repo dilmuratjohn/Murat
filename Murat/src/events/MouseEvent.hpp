@@ -21,6 +21,8 @@ namespace Murat {
 
         [[nodiscard]] inline float getY() const { return m_MouseY; }
 
+        static EventType getStaticType() { return EventType::MouseMoved; }
+
         [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
@@ -42,6 +44,8 @@ namespace Murat {
         [[nodiscard]] inline float getXOffset() const { return m_XOffset; }
 
         [[nodiscard]] inline float getYOffset() const { return m_YOffset; }
+
+        static EventType getStaticType() { return EventType::MouseScrolled; }
 
         [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
@@ -76,6 +80,8 @@ namespace Murat {
             m_EventType = EventType::MouseButtonPressed;
         }
 
+        static EventType getStaticType() { return EventType::MouseButtonPressed; }
+
         [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
             ss << "MouseButtonPressedEvent: " << m_Button;
@@ -90,6 +96,8 @@ namespace Murat {
             m_EventCategory = EventCategory::EventCategoryMouseButton;
             m_EventType = EventType::MouseButtonReleased;
         }
+
+        static EventType getStaticType() { return EventType::MouseButtonReleased; }
 
         [[nodiscard]] std::string toString() const override {
             std::stringstream ss;
