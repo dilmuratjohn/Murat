@@ -5,11 +5,6 @@
 #include <muratpch.hpp>
 
 namespace Murat {
-    struct ShaderProgramSource {
-        std::string vertexSource;
-        std::string fragmentSource;
-        std::string geometrySource;
-    };
 
     class Shader {
 
@@ -54,7 +49,7 @@ namespace Murat {
 
 
     private:
-        ShaderProgramSource parseShader(const std::string &filePath);
+        std::tuple < std::string, std::string, std::string > parseShader(const std::string &filePath);
 
         unsigned int compileShader(unsigned int type, const std::string &source);
 
