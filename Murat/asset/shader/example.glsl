@@ -1,8 +1,14 @@
 #shader vertex
 #version 330 core
+
 layout (location = 0) in vec4 a_Position;
+layout (location = 1) in vec2 a_TexCoord;
+
 uniform mat4 u_ProjectionView;
 uniform mat4 u_Transform;
+
+out vec2 v_TexCoord;
+
 void main()
 {
     gl_Position = u_ProjectionView * u_Transform * a_Position;
@@ -10,9 +16,15 @@ void main()
 
 #shader fragment
 #version 330 core
-out vec4 FragColor;
+
+in vec2 v_TexCoord;
+
 uniform vec4 u_Color;
+uniform sampler2D  u_Texture;
+
+out vec4 FragColor;
+
 void main()
 {
-    FragColor = u_Color;
+    FragColor = u_Color * texture(u_Texture, v_TexCoord);
 }
