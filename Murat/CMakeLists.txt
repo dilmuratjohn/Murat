@@ -59,6 +59,7 @@ endif()
 add_subdirectory("vendor/glfw")
 
 # GLM
+set(GLM_TEST_ENABLE off)
 add_subdirectory("vendor/glm")
 
 # ImGui

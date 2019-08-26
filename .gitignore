@@ -1,6 +1,8 @@
 .idea
 out
 .vs
+build
+Debug
 cmake-build-*/
 
 *_i.c
