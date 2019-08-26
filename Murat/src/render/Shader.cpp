@@ -60,7 +60,7 @@ namespace Murat {
             glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
             char *message = (char *) alloca(length * sizeof(char));
             glGetShaderInfoLog(id, length, &length, message);
-            Log_Info("Failed to compile <", (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment"), " Shader>\n", message);
+            Log_Info("Failed to compile <{0}Shader>\n {1}", (type == GL_VERTEX_SHADER ? "Vertex" : "Fragment"), message);
             glDeleteShader(id);
             return 0;
         }
